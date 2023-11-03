@@ -1,0 +1,46 @@
+.fixedWidget {
+  position: fixed;
+  right: 40px;
+  bottom: 33%;
+  z-index: 998;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.25));
+  transition: all 0.5s;
+
+  &.collapsed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 202px;
+    height: 48px;
+  }
+
+  &.open {
+    width: 348px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: 500;
+    font-size: 18px;
+
+    .headerLeft {
+      display: flex;
+      align-items: center;
+    }
+
+    .headerRight {
+      font-size: 22px;
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    margin-top: 20px;
+  }
+}

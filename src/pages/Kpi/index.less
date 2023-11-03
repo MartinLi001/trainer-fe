@@ -1,0 +1,31 @@
+.KpiLayout {
+  .tabsWrap {
+    :global(.ant-tabs-tab) {
+      padding-right: 4px;
+      padding-left: 4px;
+      :global(.ant-tabs-tab-btn) {
+        color: #42526e;
+        font-weight: 500 !important;
+      }
+    }
+    :global(.ant-tabs-tab-active) {
+      :global(.ant-tabs-tab-btn) {
+        color: #0e1e25;
+        font-weight: 600 !important;
+      }
+    }
+    :global(.ant-tabs-ink-bar) {
+      background: #8fce28;
+    }
+    :global(.ant-tabs-nav::before) {
+      border: none;
+    }
+  }
+  .confirmModalButton {
+    color: #0e1e25;
+    font-weight: 700;
+    background-color: #fad764;
+    border: none;
+    border-radius: 3px;
+  }
+}

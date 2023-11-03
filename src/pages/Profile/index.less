@@ -1,0 +1,42 @@
+.profileWrap {
+  // margin-top: 32px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.tabs {
+  padding-top: 12px;
+  :global(.ant-tabs-nav::before) {
+    border-bottom: none;
+  }
+
+  :global(.ant-tabs-ink-bar) {
+    border: 1px solid #8fce28;
+  }
+
+  :global(.ant-tabs-nav .ant-tabs-nav-wrap) {
+    justify-content: center;
+  }
+  :global(.ant-tabs-tab + .ant-tabs-tab) {
+    margin-left: 85px;
+  }
+
+  :global(.ant-tabs-tab) {
+    display: block;
+    width: 110px;
+    text-align: center;
+  }
+
+  .tabsTitle {
+    color: #0e1e25;
+    font-weight: 400;
+    font-size: 18px;
+    font-family: 'Mulish';
+    font-style: normal;
+    line-height: 23px;
+  }
+}

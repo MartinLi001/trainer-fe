@@ -1,0 +1,42 @@
+.gradingCardBox {
+  padding: 24px 24px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  .rowClassName {
+    :global {
+      .ant-table-thead > tr > th {
+        padding: 6px 16px;
+        background-color: #fff;
+        border-bottom: none;
+      }
+
+      .ant-table-thead
+        > tr
+        > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+        width: 0;
+      }
+
+      .ant-table-tbody > tr > td {
+        padding: 6px 16px;
+        border-bottom: none;
+
+        .ant-form-item {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .form {
+    :global {
+      .ant-form-item {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  .scoreInput {
+    min-width: 100px;
+  }
+}

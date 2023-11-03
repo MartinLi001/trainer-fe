@@ -1,0 +1,141 @@
+.historySubscription {
+  .historySubscriptionTag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .historySubscriptionSelect {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 48px;
+      margin-top: 15px; // 搜索input有margin-bottom15px，这里是为了中和
+    }
+  }
+
+  .historySubscriptionTable {
+    margin-top: 20px;
+    overflow: hidden;
+
+    .totalCount {
+      color: #2875d0;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .blueText {
+      color: #2875d0;
+    }
+    .italicText {
+      font-style: italic;
+    }
+
+    :global(.ant-table-row-expand-icon-cell) {
+      padding: 25px; // 与expand偏移的50px抵消
+    }
+
+    :global(.ant-table-wrapper) {
+      max-width: 105%;
+      margin-left: -50px;
+    }
+
+    :global(.ant-table-placeholder .ant-table-cell .ant-table-expanded-row-fixed) {
+      background-color: unset;
+    }
+
+    :global(.ant-table-cell) {
+      align-items: center;
+      color: #4a585f;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      white-space: nowrap;
+      background-color: #fff;
+
+      .status {
+        padding: 0 4px;
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        background: #f4f5f7;
+        border-radius: 3px;
+        &.Success {
+          color: #76ac1e;
+          background: #f4fbea;
+        }
+        &.Failed {
+          color: #f14d4f;
+          background: #ffebe6;
+        }
+        &.PartiallyCompleted {
+          color: #ffb121;
+          background: #fffbef;
+        }
+      }
+
+      &::before {
+        width: 0 !important;
+      }
+
+      .tableName {
+        align-items: center;
+        color: #0e1e25;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      :global(.ant-table-expanded-row-fixed) {
+        position: relative !important;
+        left: 50px !important;
+        // margin-left: 50px;
+        width: 98% !important;
+        padding: 12px 12px;
+        background-color: #e0e0e0;
+      }
+
+      .sortTitle {
+        // white-space: nowrap;
+        cursor: pointer;
+
+        &:hover {
+          color: #28a0ce;
+
+          .hoverIcon {
+            visibility: visible !important;
+          }
+        }
+      }
+
+      // .ant-table-row-expand-icon-cell {
+      // }
+    }
+
+    :global(.ant-table-thead) {
+      :global(.ant-table-cell) {
+        font-weight: 700;
+      }
+    }
+
+    :global(.ant-table-tbody > tr > td) {
+      border-bottom: none;
+    }
+
+    :global(.ant-table-cell .ant-table-row-expand-icon-cell) {
+      background-color: red;
+    }
+
+    .rowShow {
+      &:nth-child(even of .rowShow) {
+        :global(.ant-table-cell) {
+          background: #f8f9fb !important;
+        }
+      }
+    }
+  }
+}
+
+.ant-table-row-expand-icon-cell {
+  display: none;
+}

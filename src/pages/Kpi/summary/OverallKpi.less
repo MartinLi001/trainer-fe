@@ -1,0 +1,167 @@
+.overallKpiWrap {
+  .ratio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #4a585f;
+    font-weight: 400;
+    font-size: 14px;
+    .adjustButton {
+      height: auto;
+      margin-right: 14px;
+      padding: 6px 12px;
+      color: #4a585f;
+      font-weight: 600;
+      background: #f8f9fc;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .tag {
+      padding: 0 4px;
+      font-weight: 400;
+      border-radius: 3px;
+      span {
+        font-weight: 600;
+      }
+      &.Project {
+        color: #1d355e;
+        background: #f3faff;
+      }
+      &.Mock {
+        color: #76ac1e;
+        background: #f4fbea;
+      }
+      &.Assignment {
+        color: #403294;
+        background: #e5e2f5;
+      }
+      &.Behavior {
+        color: #f14d4f;
+        background: #ffebe6;
+      }
+      &.Communication {
+        color: #ffb121;
+        background: #fffbef;
+      }
+    }
+  }
+  .hoverEvent {
+    cursor: pointer;
+    transition: 0.2s;
+    pointer-events: auto;
+  }
+  .tableWrap {
+    color: #4a585f; // 默认字体颜色
+    :global(.ant-table) {
+      color: #4a585f;
+    }
+    :global(.ant-table-thead > tr > th) {
+      color: #4a585f;
+      font-weight: 600;
+    }
+    :global(.ant-table-thead > tr > th::before) {
+      content: none !important; // 去除header中列之间的竖线
+    }
+    :global(.ant-table-row) {
+      // pointer-events: none;
+      > td {
+        border: none; // 去除行之间的分割线
+      }
+    }
+    :global(.ant-table-thead .ant-table-cell) {
+      background-color: #fff; // header背景色
+    }
+    :global(.ant-table-column-sorter) {
+      display: none;
+    }
+    .row {
+      font-weight: 500;
+      &:nth-child(odd) {
+        :global(.ant-table-cell) {
+          background: #f8f9fb;
+        }
+        .yellowColumns {
+          // row优先级更高，会覆盖yellowColumns的样式，所以yellowColumns在这里再写一次
+          background-color: #f8f6f2;
+        }
+      }
+      &:nth-child(even) {
+        :global(.ant-table-cell) {
+          background-color: #fff;
+        }
+        .yellowColumns {
+          // row优先级更高，会覆盖yellowColumns的样式，所以yellowColumns在这里再写一次
+          background-color: rgba(252, 229, 156, 0.1);
+        }
+      }
+    }
+    .taskHeader {
+      font-style: normal;
+      .bold {
+        font-weight: 600;
+      }
+      .light {
+        font-weight: 400;
+        &.weight {
+          padding: 2px 8px;
+          border-radius: 3px;
+          .hoverEvent();
+          &:hover {
+            background-color: #f4f5f7;
+          }
+        }
+      }
+    }
+    .sortIcon {
+      margin-left: 2px;
+      font-size: 12px;
+    }
+    .blueTextColumns {
+      color: #2875d0;
+    }
+    .greenTextColumns {
+      color: #76ac1e;
+    }
+    :global(.ant-table-cell) {
+      &.yellowColumns {
+        background-color: rgba(252, 229, 156, 0.1);
+      }
+    }
+    .lightColumns {
+      font-weight: 400;
+      font-style: italic;
+    }
+    .zero {
+      color: #f14d4f;
+    }
+    .bonus {
+      font-weight: 600;
+      .greenTextColumns();
+    }
+    .name {
+      width: fit-content;
+      max-width: 100%;
+      padding: 2px 8px;
+      overflow: hidden;
+      color: #0e1e25;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      border-radius: 3px;
+      .hoverEvent();
+      &:hover {
+        background-color: rgba(40, 117, 208, 0.1);
+      }
+    }
+    .mockSummaryScore {
+      border-radius: 3px;
+      .hoverEvent();
+      &:hover {
+        color: #0e1e25;
+        font-weight: 500;
+        background-color: rgba(40, 117, 208, 0.1);
+      }
+    }
+  }
+}

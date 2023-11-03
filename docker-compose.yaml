@@ -1,0 +1,7 @@
+services:
+  seethingx-fe-trainer:
+    restart: always
+    build: .
+    image: ${PROJECT_NAME}:${PROJECT_VERSION}
+    ports:
+      - ${PROJECT_PORT}:8089

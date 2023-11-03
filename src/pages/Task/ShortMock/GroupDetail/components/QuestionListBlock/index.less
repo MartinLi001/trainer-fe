@@ -1,0 +1,44 @@
+.questionRadioBox {
+  margin-bottom: 36px;
+
+  .questionRadioContent {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+
+    > li {
+      height: 32px;
+      margin-top: 10px;
+      margin-right: 9px;
+      line-height: 32px;
+
+      &:not(:first-child) {
+        width: 32px;
+        color: #4a585f;
+        font-weight: 600;
+        font-size: 14px;
+        text-align: center;
+        background: #f8f9fc;
+        border-radius: 100px;
+        cursor: pointer;
+
+        &.graded {
+          color: #4a585f;
+          background: #e9f5d4;
+        }
+
+        &.selected {
+          color: #fff;
+          background: #1d355e;
+        }
+      }
+
+      &:first-child {
+        color: #0e1e25;
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+  }
+}

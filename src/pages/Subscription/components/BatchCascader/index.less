@@ -1,0 +1,36 @@
+.wrap {
+  .rootbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    height: 32px;
+    padding: 6px 12px;
+    color: #4a585f;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #f8f9fc;
+    border-radius: 3px;
+    cursor: pointer;
+    .icon {
+      font-size: 12px;
+    }
+  }
+  .cascader {
+    border-radius: 3px;
+    box-shadow: 0 3px 5px rgba(9, 30, 66, 0.2), 0 0 1px rgba(9, 30, 66, 0.31);
+    [data-path-key='NoBatchAssigned'],
+    :global(.ant-cascader-menu-item-expand) {
+      // 非子节点
+      :global(.ant-cascader-checkbox) {
+        // checkbox
+        display: none;
+      }
+    }
+    :global(.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled)),
+    :global(.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover) {
+      // background-color: #f5f5f5;
+      background-color: #f4f5f7;
+    }
+  }
+}

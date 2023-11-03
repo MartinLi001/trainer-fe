@@ -1,0 +1,110 @@
+.pageHeaderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-right: 80px;
+}
+
+.pageWrapper {
+  min-height: calc(100vh - 148px); // header+title+title margin+page padding = 56+60+12+20=148px
+  margin-bottom: 20px;
+  padding: 0 80px;
+
+  .operation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .left {
+      .label {
+        margin-right: 22px;
+        color: #0e1e25;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .list {
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 54px;
+      padding: 0 22px;
+      border: 1px solid rgba(221, 221, 221, 0.8);
+      border-radius: 10px;
+
+      &.extra {
+        height: 96px;
+
+        .time {
+          font-size: 14px;
+
+          .timeLabel {
+            color: #0e1e25;
+          }
+          .timeValue {
+            color: #2875d0;
+          }
+        }
+
+        .left {
+          overflow: hidden;
+          .leftContent {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 75%;
+            max-width: 210px;
+            margin-left: 24px;
+          }
+        }
+      }
+
+      .left {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        overflow: hidden;
+        font-size: 22px;
+        cursor: pointer;
+
+        .leftContent {
+          display: flex;
+          width: 80%;
+          max-width: 210px;
+          margin-left: 10px;
+
+          .title {
+            overflow: hidden;
+            color: #0e1e25;
+            font-weight: 500;
+            font-size: 18px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+
+      .right {
+        width: 115px;
+        text-align: right;
+
+        .icon {
+          margin-right: 10px;
+          font-size: 22px;
+          cursor: pointer;
+        }
+
+        .other {
+          display: flex;
+          align-items: center;
+          color: #ffb121;
+          font-weight: 700;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

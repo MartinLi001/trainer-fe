@@ -1,0 +1,188 @@
+.questionDetail {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 30px 20px 73px;
+
+  .questionDetailLeft {
+    width: 60%;
+    padding-right: 30px;
+
+    @media screen and (max-width: 1200px) {
+      width: 100%;
+    }
+
+    .questionDetailTitle {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .TitleShow {
+        color: #0e1e25;
+        font-weight: 400;
+        font-size: 22px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 28px;
+      }
+
+      .diffculty {
+        display: flex;
+        align-items: center;
+        height: 20px;
+        margin-left: 20px;
+        padding: 0 4px;
+        font-weight: 400;
+        font-size: 14px;
+        border: 1px solid #ffb121;
+        border-radius: 3px;
+      }
+
+      .editQuestion {
+        display: flex;
+        align-items: center;
+        // width: 135px;
+        height: 32px;
+        margin-left: 15px;
+        padding: 0 15px;
+        color: #4a585f;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.084px;
+        text-align: center;
+        background: #f8f9fc;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+    }
+
+    .topicTabsShow {
+      margin-top: 22px;
+      overflow: hidden;
+
+      .TagClinkShow {
+        display: flex;
+        float: left;
+
+        .topic {
+          height: 30px;
+          margin-right: 6px;
+          padding: 5px 17px;
+          color: #1d355e;
+          font-weight: 600;
+          font-size: 12px;
+          font-family: 'Mulish';
+          font-style: normal;
+          line-height: 20px;
+          background: #f3faff;
+          border-radius: 3px;
+        }
+      }
+
+      .Client {
+        float: left;
+        height: 30px;
+        margin-left: 10px;
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 30px;
+
+        .Clients {
+          color: #0e1e25;
+        }
+      }
+    }
+
+    .Descirption {
+      margin-top: 40px;
+
+      .DescirptionName {
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 18px;
+      }
+    }
+
+    .downloadFile {
+      max-width: 500px;
+      .downloadTitle {
+        font-weight: 600;
+        font-size: 12px;
+        font-family: 'Mulish';
+        font-style: normal;
+      }
+    }
+
+    .answer {
+      margin-top: 58px;
+
+      .answerTitle {
+        margin-right: 22px;
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 18px;
+      }
+    }
+  }
+
+  .questionDetailRight {
+    width: 40%;
+
+    @media screen and (max-width: 1200px) {
+      display: none;
+    }
+
+    .RightAllTable {
+      .tableTitle {
+        color: #0e1e25;
+        font-weight: 500;
+        font-size: 18px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 23px;
+        cursor: pointer;
+      }
+
+      .tableClients {
+        display: block;
+        max-width: 200px;
+        overflow: hidden;
+        color: #4a585f;
+        font-weight: 300;
+        font-size: 18px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 23px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .RightTableList {
+      margin-top: 48px;
+    }
+  }
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  padding-left: 45px;
+  font-weight: 700;
+  font-size: 22px;
+  font-style: normal;
+  line-height: 60px;
+  background-color: #fff;
+  cursor: pointer;
+}

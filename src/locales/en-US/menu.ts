@@ -1,0 +1,16 @@
+export default {
+  'menu.summary': 'Dashboard',
+  'menu.question': 'Question',
+  'menu.batch': 'Course',
+  'menu.register': 'Register',
+  'menu.profile': 'My Profile',
+  'menu.homepage': 'Dashboard',
+  'menu.demo': 'Demo',
+  'menu.myBatch': 'My Batch',
+  'menu.allBatch': 'All Batches',
+  'menu.kpi': 'KPI',
+  'menu.myBatch.kpi': 'KPI',
+  'menu.subscription': 'Subscription',
+  'menu.coding': 'Coding Puzzles',
+  'menu.CodingLanguage': 'Coding Language',
+};

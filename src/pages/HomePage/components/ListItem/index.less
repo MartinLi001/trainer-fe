@@ -1,0 +1,50 @@
+.ListBatch {
+  .ListBatchTitle {
+    margin-bottom: 9px;
+    margin-left: 15px;
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'Mulish';
+    font-style: normal;
+    line-height: 20px;
+  }
+  .ListBatchDesc {
+    margin-left: 15px;
+    color: #0e1e25;
+    font-weight: 300;
+    font-size: 16px;
+    font-family: 'Mulish';
+    font-style: normal;
+    line-height: 20px;
+  }
+  .ListBatchright {
+    display: flex;
+    width: 170px;
+    .status {
+      font-weight: 600;
+      font-size: 18px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 23px;
+      > img {
+        margin-right: 6px;
+      }
+    }
+    .Unsubmitted {
+      color: #4a585f;
+    }
+    .Late {
+      color: #ffb121;
+    }
+    .Submitted {
+      color: #8fce28;
+    }
+  }
+  :global(.ant-list-item:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  :global(.ant-list-item) {
+    border-bottom: 1px solid #e0e0e0;
+  }
+}

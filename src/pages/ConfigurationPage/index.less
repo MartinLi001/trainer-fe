@@ -1,0 +1,182 @@
+.renderTitle {
+  margin-bottom: 8px;
+
+  .title {
+    color: var(--base-tone-darkspace, #0E1E25);
+    font-family: Mulish;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+  }
+
+  .content {
+    color: #4A585F;
+    font-family: Mulish;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 23px;
+    /* 164.286% */
+  }
+}
+
+.Corder {
+  .Argument {
+    padding: 24px;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 24px;
+    align-self: stretch;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    border: 1px solid #DDD;
+    background: #FFF;
+
+    .moveClassName {
+      visibility: visible;
+
+      .cardDndShow {
+        opacity: 0;
+      }
+    }
+
+    .cardDndShow {
+      display: flex;
+      align-items: center;
+      gap: 12px !important;
+      align-self: stretch;
+      // margin-bottom: 12px;
+
+      :global(.ant-form-item) {
+        margin-bottom: 12px;
+      }
+    }
+
+    .formInputAddButton {
+      display: flex;
+      height: 24px;
+      padding: 0px 6px;
+      align-items: center;
+      gap: 4px;
+      align-self: stretch;
+      margin-top: -5px;
+    }
+
+    .formTitleDiv {
+      // padding: 0 0 8px;
+      color: #0E1E25;
+      font-family: Mulish;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 23px;
+      /* 164.286% */
+    }
+
+    .formListIcon {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      padding: 4px;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+    }
+
+    :global(.ant-space) {
+      width: 100%;
+      padding: 0 10px;
+
+      :global(.ant-space-item:nth-child(2)) {
+        width: 100%;
+      }
+    }
+
+    .listTile {
+      text-align: right;
+    }
+
+  }
+}
+
+.CorderTestCase {
+  margin-top: 24px;
+
+  .TestCase {
+    padding: 24px;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 24px;
+    align-self: stretch;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    border: 1px solid #DDD;
+    background: #FFF;
+
+    .formTitleDiv {
+      color: #0E1E25;
+      font-family: Mulish;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 23px;
+      /* 164.286% */
+    }
+
+    .testInputList {
+      :global(.ant-form-item) {
+        margin-bottom: 12px;
+      }
+
+      :global(.ant-input-group-wrapper) {
+        height: 38px;
+
+        :global(.ant-input-wrapper) {
+          height: 100%;
+
+          :global(.ant-input) {
+            height: 100%
+          }
+        }
+
+      }
+
+
+    }
+
+    .formInputAddButton {
+      display: flex;
+      height: 24px;
+      padding: 0px 6px;
+      align-items: center;
+      gap: 4px;
+      align-self: stretch;
+      margin-top: -5px;
+    }
+
+    .codelist {
+      margin-top: 12px;
+    }
+
+    .outPutChoose {
+      margin-top: 36px;
+
+      .outPutTitle {
+        color: #0E1E25;
+        font-family: Mulish;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 23px;
+        /* 164.286% */
+      }
+
+
+    }
+  }
+
+  .listTile {
+    text-align: right;
+  }
+}

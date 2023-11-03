@@ -1,0 +1,71 @@
+.seethingx-tagNav {
+  display: flex;
+  align-content: space-between;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+  .seethingx-tagNav-labelfrom {
+    min-width: 42px;
+    margin-right: 10px;
+    overflow: hidden;
+    color: #000;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: right;
+
+    &::before {
+      display: inline-block;
+      margin-right: 4px;
+      color: #ff4d4f;
+      font-size: 14px;
+      font-family: SimSun, sans-serif;
+      line-height: 1;
+      content: '*';
+    }
+  }
+
+  .seethingx-tagNav-label {
+    min-width: 42px;
+    margin-right: 10px;
+    overflow: hidden;
+    color: #000;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .seethingx-tagNav-list {
+    // width: 100%;
+
+    // overflow: hidden;
+    &-a {
+      display: inline-flex;
+      justify-content: center;
+      margin-right: 5px;
+      margin-bottom: 10px !important;
+      padding: 0 13px;
+      overflow: hidden;
+      color: #4a585f;
+      font-weight: 600;
+      font-size: 14px;
+      font-family: 'Mulish';
+      font-style: normal;
+      white-space: nowrap;
+      text-align: center;
+      text-overflow: ellipsis;
+      background: #f8f9fc;
+      border-radius: 15px;
+    }
+
+    // a.seethingx-tagNav-list-active {
+    //   color: #fff;
+    //   background: #ef6c6d;
+    // }
+  }
+
+  .seethingx-tagNav-a {
+    width: 60px;
+  }
+}

@@ -1,0 +1,138 @@
+.wrapper {
+  margin: 0 84px;
+  color: #0e1e25;
+
+  .addButton {
+    display: inline-block;
+    height: 32px;
+    margin: 24px 0;
+    padding: 0 12px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 32px;
+    white-space: nowrap;
+    background: #fad764;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+
+  .tipText {
+    margin-left: 24px;
+    color: #ffb121;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .unselectedList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 8px;
+    margin-bottom: 12px;
+
+    .title {
+      color: #f14d4f;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
+  .traineeCard {
+    display: inline-block;
+    padding: 0 8px;
+    color: #4a585f;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    background: #f4f5f7;
+    border-radius: 3px;
+    transform: translate(0, 0);
+    cursor: move;
+    user-select: none;
+
+    &.unselected {
+      margin-left: 8px;
+      background: #fbecea;
+    }
+  }
+
+  .groupContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 24px;
+    .groupBox {
+      position: relative;
+      padding: 24px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      .deleteButton {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        width: 24px;
+        height: 24px;
+        color: #fff;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        background: #ef6c6d;
+        border-radius: 50%;
+        cursor: pointer;
+        opacity: 0;
+        transition: all 0.2s;
+      }
+
+      &:hover {
+        border-color: #ccc;
+        .deleteButton {
+          opacity: 1;
+        }
+      }
+
+      .label {
+        margin-right: 12px;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .trainer {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        .select {
+          flex: 1;
+          min-width: 200px;
+          font-size: 14px;
+          :global(.ant-select-selector) {
+            border-radius: 3px;
+          }
+        }
+      }
+
+      .trainees {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 8px;
+        margin-top: 8px;
+      }
+
+      .zoom {
+        display: flex;
+        align-items: center;
+        margin-top: 12px;
+        .input {
+          flex: 1;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 36px;
+    text-align: center;
+    > *:not(:last-child) {
+      margin-right: 24px;
+    }
+  }
+}

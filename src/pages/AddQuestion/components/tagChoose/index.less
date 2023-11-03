@@ -1,0 +1,46 @@
+.tag-navList {
+  // display: flex;
+  // align-content: space-between;
+  margin-bottom: 10px;
+  overflow: hidden;
+  .tag-nav-label {
+    min-width: 42px;
+    margin-right: 10px;
+    overflow: hidden;
+    color: #000;
+    font-weight: 600;
+    // min-width: 80px;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .tag-nav-list {
+    width: 100%;
+    overflow: hidden;
+    &-a {
+      display: inline-block;
+      justify-content: center;
+      margin-right: 5px;
+      // margin-bottom: 10px;
+      padding: 0 13px;
+      overflow: hidden;
+      color: #4a585f;
+      font-size: 14px;
+      text-align: center;
+      background: #e0e0e0;
+      border-radius: 15px;
+    }
+
+    a.tag-nav-list-active {
+      color: #fff;
+      background: #1d355e;
+      border-radius: 15px;
+    }
+  }
+  .tag-nav-a {
+    float: right;
+    width: auto;
+    height: 30px;
+    margin-right: 10px;
+  }
+}

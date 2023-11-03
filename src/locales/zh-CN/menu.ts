@@ -1,0 +1,15 @@
+export default {
+  'menu.summary': '首页',
+  'menu.question': '问题',
+  'menu.batch': '课程',
+  'menu.register': '注册',
+  'menu.profile': '个人中心',
+  'menu.homepage': '首页',
+  'menu.demo': '用例-测试',
+  'menu.myBatch': '我的课程',
+  'menu.allBatch': '所有课程',
+  'menu.kpi': 'KPI',
+  'menu.subscription': '订阅',
+  'menu.coding': 'Coding Puzzles',
+  'menu.CodingLanguage': 'Coding Language',
+};

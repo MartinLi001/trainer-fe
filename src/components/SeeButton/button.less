@@ -1,0 +1,119 @@
+@disabled-color: #e0e0e0;
+
+.changeColor(@bg, @border-color: @bg) {
+  background: @bg;
+  border-color: @border-color;
+}
+
+.beforeColor(@type) when (@type=warning) {
+  color: #0e1e25;
+}
+
+/*
+* @type 样式类型
+* @base-color 基础颜色
+* @hover-color 鼠标、focus悬浮颜色
+* @active-color 激活状态颜色 type 为link 有效
+* @selected-color 选中状态颜色 type 为link 有效
+*/
+.renderBtn(@type,@base-color, @hover-color,@active-color, @selected-color) {
+  &-@{type} {
+    .changeColor(@base-color);
+
+    &:active {
+      .changeColor(@active-color);
+    }
+
+    &:hover,
+    &:focus {
+      .changeColor(@hover-color);
+      .beforeColor(@type);
+    }
+
+    &::selection {
+      .changeColor(@selected-color);
+    }
+  }
+}
+
+.seebtn {
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'Mulish';
+  font-style: normal;
+  cursor: pointer;
+
+  &.shape {
+    &-default {
+      border-radius: 3px;
+    }
+
+    &-circle {
+      width: 32px;
+      padding: 4px;
+      border-radius: 100%;
+    }
+
+    &-round {
+      border-radius: 100px;
+    }
+  }
+
+  .renderBtn(default, #F4F5F7, #F4F5F7, #0e1e25, #1d355e);
+  .renderBtn(primary, #2875d0, #508fd9, #1d355e, #1d355e);
+  .renderBtn(warning, #FAD764, #FFC75E, #FFB121, #FFB121);
+  .renderBtn(danger, #EF6C6D, #F18283, #F14D4F, #0e1e25);
+  .renderBtn(link, transparent, transparent, transparent, #1d355e);
+
+  // subtle 比较特殊，特殊处理
+  &-ghost {
+    color: #4a585f;
+    font-weight: 500;
+    .changeColor(#fff,#e0e0e0);
+
+    &:hover,
+    &:focus {
+      .changeColor(rgba(14, 30, 37, 0.08), #95a5ac);
+
+      color: #95a5ac;
+    }
+  }
+
+  // default 比较特殊，特殊处理
+  &-default {
+    color: #4a585f;
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+      color: #0e1e25;
+    }
+  }
+
+  &-link {
+    color: #2875d0;
+    font-weight: 500;
+
+    &:active {
+      color: #174488;
+    }
+
+    &::selection {
+      color: #fff;
+      .changeColor(#1d355e);
+    }
+  }
+
+  // 所有disabled样式都一样
+  &.disabled {
+    .changeColor(@disabled-color);
+
+    color: #fff;
+    cursor: default;
+    &:hover {
+      .changeColor(@disabled-color);
+
+      color: #fff;
+    }
+  }
+}

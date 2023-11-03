@@ -1,0 +1,74 @@
+.pageAddNewWrapper {
+  padding: 24px 36px;
+  .header {
+    margin: 24px 0;
+    color: #0e1e25;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 36px; /* 163.636% */
+  }
+  .generalTitle {
+    margin-bottom: 4px;
+    color: var(--base-tone-darkspace, #0e1e25);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px; /* 160% */
+    .icon {
+      margin-right: 10px;
+    }
+  }
+  .description {
+    margin-bottom: 8px;
+    color: #4a585f;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px; /* 164.286% */
+  }
+}
+:global(.ql-editor) {
+  min-height: 140px;
+}
+
+.AddQuestion {
+  // max-width: 1050px;
+  min-height: 100vh;
+  // margin: 0 auto;
+  padding: 24px 24px 0 24px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  .FormShow {
+    display: flex;
+
+    .FormShowLeft {
+      display: flex;
+
+      .FormShowTitle {
+        margin-right: 12px;
+        color: #4a585f;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+
+    .tagShowList {
+      display: inline-block;
+      align-items: center;
+      height: 20px;
+      margin-top: 5px;
+      margin-left: 12px;
+      padding: 0 5px;
+      color: #4a585f;
+      text-align: center;
+      background: #f4f5f7;
+      border-radius: 3px;
+    }
+  }
+
+  .ButtonShow {
+    display: flex;
+    justify-content: space-between;
+  }
+}

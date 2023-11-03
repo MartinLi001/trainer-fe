@@ -1,0 +1,41 @@
+podTemplate() {
+    node('node-cdn') {
+        stage('Node Project') {
+            def scmSpec = [
+                $class: 'GitSCM',
+                branches: scm.branches,
+                extensions: [
+                    [$class: 'LocalBranch', localBranch: '**'],
+                    [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: true, reference: '', trackingSubmodules: false]
+                ],
+                userRemoteConfigs: scm.userRemoteConfigs
+            ]
+            checkout scmSpec
+            container('awscli') {
+                stage('aws-cli') {
+                    sh('aws codeartifact login --tool npm --repository beaconfire-site --domain beaconfire --domain-owner 795824851990 --region us-east-2')
+                    sh('cat ~/.npmrc > .npmrc')
+                }
+            }
+            container('node') {
+                stage('Build a Node Project') {
+                    echo 'Start to build project ...'
+                    sh('git rev-parse --abbrev-ref HEAD > GIT_BRANCH')
+                    sh('git rev-parse --short=8  HEAD > GIT_COMMIT')
+                    sh('git submodule update')
+                    sh('mkdir -p ~/.npm/${JOB_NAME%%_*}/node_modules && chown -R 1000.1000 ~/.npm/${JOB_NAME%%_*}')
+                    sh('rsync -au ~/.npm/${JOB_NAME%%_*}/node_modules ./')
+                    sh('npm install --legacy-peer-deps')
+                    sh('rsync -au ./node_modules ~/.npm/${JOB_NAME%%_*}/')
+                    sh('npm run build:$(cat GIT_BRANCH)')
+                    echo 'Finish to build Project!!!' 
+                }
+            }
+            container('awscli') {
+                stage('upload to S3') {
+                    sh('sh s3Upload.sh')
+                }
+            }
+        }
+    }
+}

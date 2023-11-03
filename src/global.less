@@ -1,0 +1,236 @@
+@import '~antd/es/style/themes/default.less';
+@import (inline) './mulish.css';
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+@media (max-width: @screen-xs) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+
+    &-thead > tr,
+    &-tbody > tr {
+      > th,
+      > td {
+        white-space: pre;
+
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// Compatible with IE11
+@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
+  body .ant-design-pro > .ant-layout {
+    min-height: 100vh;
+  }
+}
+@primary-color: #2875d0;
+
+#root {
+  font-family: 'Mulish' !important;
+
+  .ant-layout {
+    background: #fcfcfd;
+  }
+
+  .ant-pro-global-header {
+    background: #fcfcfd !important;
+    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+    box-shadow: none;
+  }
+
+  .ant-pro-global-header-logo a h1 {
+    color: #4a585f;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .ant-layout-sider.ant-layout-sider-light.ant-pro-sider {
+    background-color: #fff;
+  }
+
+  .ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+    background-color: #fff;
+    border-right: 1px solid rgba(5, 5, 5, 0.06);
+    box-shadow: none;
+  }
+
+  .ant-upload.ant-upload-drag:not(.ant-upload-disabled):hover {
+    border-color: #2875d0;
+  }
+
+  .ant-pro-sider-light {
+    background-color: #f4f5f7;
+  }
+
+  .ant-menu-inline .ant-menu-item::after {
+    border-right: none;
+  }
+
+  .ant-layout-sider-children {
+    padding: 8px;
+  }
+
+  .ant-menu.ant-pro-sider-menu {
+    // padding: 0 8px;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .ant-tabs-tab .ant-tabs-tab-btn {
+    font-weight: bold;
+  }
+
+  .ant-menu-item {
+    font-size: 14px;
+
+    :not(:last-child) {
+      margin-bottom: 0;
+    }
+
+    &-selected {
+      color: @primary-color;
+      background: #e7f2ff;
+      border-radius: 6px;
+
+      &::after {
+        border-right: none;
+      }
+    }
+
+    .ant-pro-menu-item {
+      display: flex;
+      align-items: center;
+
+      .anticon {
+        font-size: 18px;
+
+        & + span {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  .copyRight {
+    margin-bottom: 30px;
+    color: #0e1e25;
+    font-size: 12px;
+    text-align: center;
+    user-select: none;
+  }
+
+  .ant-breadcrumb {
+    li {
+      font-weight: 700;
+      font-size: 22px;
+
+      .ant-breadcrumb-separator {
+        color: #4a585f;
+      }
+
+      .ant-breadcrumb-link {
+        cursor: pointer;
+        span {
+          color: #4a585f;
+        }
+      }
+
+      &:last-child {
+        .ant-breadcrumb-link {
+          cursor: default;
+          pointer-events: none;
+          span {
+            color: #2875d0;
+          }
+        }
+      }
+    }
+  }
+
+  .ant-tabs {
+    .ant-tabs-nav::before {
+      border: none;
+    }
+
+    &.ant-tabs-top > .ant-tabs-nav {
+      margin: 0;
+    }
+
+    .ant-tabs-tab {
+      height: 33px;
+      color: #4a585f;
+
+      .ant-tabs-tab-btn {
+        font-weight: 500 !important;
+      }
+    }
+
+    .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+      color: #0e1e25;
+      font-weight: 600 !important;
+    }
+    .ant-tabs-ink-bar {
+      background: #8fce28;
+      border-radius: 1px;
+    }
+  }
+}
+
+.navMenu {
+  width: 360px;
+  min-width: 360px;
+  padding-top: 3px !important;
+}
+
+.navMenu .ant-popover-inner {
+  border-radius: 5px;
+}
+
+.ant-modal-header {
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .navMenu {
+    width: 100%;
+    padding-top: 7px !important;
+  }
+}
+
+.ant-menu-item[title='Coding Language'] {
+  letter-spacing: -0.5px;
+  word-spacing: -1px;
+}

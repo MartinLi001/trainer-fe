@@ -1,0 +1,147 @@
+.codingWrapper {
+  min-height: calc(100vh - 112px);
+  margin: 28px 36px;
+
+  .codingHeader {
+    color: #0e1e25;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 36px;
+    .icon {
+      margin-right: 10px;
+    }
+  }
+  .codingExtraDescription {
+    margin-top: 4px;
+    color: #4a585f;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .codingSourceActionBox {
+    display: flex;
+    gap: 24px;
+    height: 40px;
+    margin-top: 24px;
+    .codingAddButton {
+      height: 40px;
+      border-radius: 100px;
+    }
+  }
+  .codingTopics {
+    margin-top: 24px;
+  }
+  .codingFilterBox {
+    display: flex;
+    margin-top: 8px;
+  }
+  .codingTable {
+    margin-top: 24px;
+  }
+
+  .tagShow-nav {
+    width: 100%;
+    margin-top: 10px;
+
+    .tagShow-list {
+      display: inline-block;
+      align-items: center;
+      height: 20px;
+      margin-top: 5px;
+      margin-left: 12px;
+      padding: 0 5px;
+      color: #4a585f;
+      text-align: center;
+      background: #f4f5f7;
+      border-radius: 3px;
+    }
+    .Clear_ALl {
+      margin-right: 10px;
+      margin-left: 10px;
+      color: #2875d0;
+      cursor: pointer;
+    }
+  }
+
+  // ⬇️ copy from .QuestionList
+  .ant-table-thead {
+    .ant-table-cell {
+      color: #0e1e25;
+      font-weight: 400;
+      font-size: 18px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 23px;
+      white-space: nowrap;
+    }
+  }
+  .ant-table-cell {
+    background-color: #fff;
+
+    .columns-title {
+      color: #0e1e25;
+      font-weight: 500;
+      font-size: 18px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 23px;
+      cursor: pointer;
+    }
+
+    .tag-item {
+      display: inline-block;
+      padding: 0 4px;
+      color: var(--base-tone-calm-grey, #4a585f);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px; /* 142.857% */
+      background: var(--background-bg-grey, #f4f5f7);
+      border-radius: 3px;
+
+      & + .tag-item {
+        margin-left: 6px;
+      }
+    }
+
+    .columns-tags {
+      display: block;
+      max-width: 200px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .columns-Company {
+      display: block;
+      max-width: 200px;
+      overflow: hidden;
+      color: #4a585f;
+      font-weight: 300;
+      font-size: 18px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 23px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .colums-frequency {
+      text-align: center;
+    }
+
+    .title-Sort {
+      cursor: pointer;
+      .hoverIcon {
+        display: none;
+      }
+
+      &:hover {
+        color: #28a0ce;
+
+        .hoverIcon {
+          display: inline;
+        }
+      }
+    }
+  }
+  // ⬆️ copy from .QuestionList
+}

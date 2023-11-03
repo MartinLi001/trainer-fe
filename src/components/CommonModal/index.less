@@ -1,0 +1,37 @@
+.commonModalWrap {
+  :global(.ant-modal-header) {
+    min-height: 40px;
+    padding: 10px 24px;
+  }
+  :global(.ant-modal-title) {
+    color: #0e1e25;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    text-align: center;
+  }
+  :global(.ant-modal-close-x) {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+  :global(.ant-modal-body) {
+    padding: 24px 48px;
+  }
+  :global(.ant-modal-footer) {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 48px;
+    border-top: none;
+    > button {
+      padding: 6px 12px;
+      font-weight: 700;
+      line-height: 20px;
+      border-radius: 3px;
+
+      &:global(.ant-btn-primary) {
+        background-color: #2875d0;
+      }
+    }
+  }
+}

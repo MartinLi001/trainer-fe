@@ -1,0 +1,49 @@
+.information {
+  .textBlock {
+    &:not(:first-child) {
+      margin-top: 24px;
+      word-wrap: break-word;
+    }
+
+    .title {
+      margin-bottom: 4px;
+      color: #0e1e25;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .value {
+      max-height: 72px;
+      overflow: hidden;
+      overflow-y: auto;
+      color: #4a585f;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+
+  .textLine {
+    display: flex;
+    &:not(:first-child) {
+      margin-top: 24px;
+    }
+
+    .title {
+      color: #0e1e25;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .value {
+      gap: 10px;
+      align-items: center;
+      margin-left: 12px;
+      padding: 0 4px;
+      font-weight: 400;
+      font-size: 14px;
+      border-radius: 3px;
+    }
+  }
+}

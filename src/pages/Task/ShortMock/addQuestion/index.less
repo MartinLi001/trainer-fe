@@ -1,0 +1,218 @@
+.chooseQuestion {
+  display: flex;
+  margin-right: 60px;
+  padding: 0 20px;
+
+  .QuestionList {
+    width: 70%;
+    // padding: 20px 60px;
+    padding-right: 20px;
+
+    .QuestionListTag {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+
+      .QuestionListTagSearch {
+        display: flex;
+        padding-top: 26px;
+
+        .downList {
+          display: flex;
+        }
+
+        // @media screen and (max-width: 1580px) {
+        //   display: contents;
+        // }
+      }
+
+      .QuestionListSearch {
+        max-width: 240px;
+        margin-left: 40px;
+
+        span {
+          display: flex;
+          align-items: center;
+          color: #4a585f;
+          font-weight: 400;
+          font-size: 12px;
+          font-family: 'Mulish';
+          font-style: normal;
+          line-height: 16px;
+        }
+
+        :global(.ant-input-affix-wrapper) {
+          width: 240px;
+          height: 40px;
+          border: 2px solid #e0e0e0;
+          border-radius: 3px;
+        }
+      }
+    }
+
+    :global(.ant-table-tbody) {
+      :global(.ant-table-cell) {
+        padding: 6px;
+      }
+    }
+
+    .tagShow {
+      display: flex;
+      align-content: space-between;
+      height: auto;
+      margin-bottom: 20px;
+      overflow: hidden;
+
+      .tagShowNav {
+        width: 100%;
+
+        .tagShowList {
+          display: inline-block;
+          align-items: center;
+          height: 20px;
+          margin-top: 5px;
+          margin-left: 12px;
+          padding: 0 5px;
+          color: #4a585f;
+          text-align: center;
+          background: #f4f5f7;
+          border-radius: 3px;
+        }
+      }
+    }
+
+    .questionTable {
+      height: calc(100vh - 230px);
+      overflow-y: auto;
+      font-size: 14px;
+      :global(.ant-table-cell) {
+        .columnsTitle {
+          color: #0e1e25;
+          font-weight: 500;
+          font-size: 14px;
+          font-family: 'Mulish';
+          font-style: normal;
+          line-height: 23px;
+          cursor: pointer;
+        }
+
+        .columnsTags {
+          cursor: pointer;
+          @media screen and (max-width: 1200px) {
+            display: none;
+          }
+        }
+
+        .columnsCompany {
+          display: block;
+          max-width: 100px;
+          overflow: hidden;
+          color: #4a585f;
+          font-weight: 300;
+          font-size: 14px;
+          font-family: 'Mulish';
+          font-style: normal;
+          line-height: 23px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          cursor: pointer;
+
+          @media screen and (max-width: 1350px) {
+            display: none;
+          }
+        }
+        .opint {
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .chooseList {
+    width: 30%;
+    margin-top: 110px;
+
+    .chooseNumber {
+      color: #2875d0;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .chooseTable {
+      height: calc(100vh - 350px);
+      overflow-y: auto;
+    }
+
+    :global(.ant-table-cell) {
+      .columnsTitle {
+        display: flex;
+        justify-content: space-between;
+        color: #0e1e25;
+        font-weight: 500;
+        font-size: 14px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 23px;
+        cursor: pointer;
+
+        .Icon {
+          display: none;
+        }
+
+        &:hover {
+          .Icon {
+            display: block;
+            color: red;
+          }
+        }
+
+        .columnsTitleText {
+          max-width: 210px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .saveButton {
+      margin-top: 10px;
+      text-align: right;
+    }
+  }
+}
+
+:global(.row-dragging) {
+  color: #0e1e25;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: 'Mulish';
+  font-style: normal;
+  line-height: 23px;
+  background: #fafafa;
+  border: 1px solid #ccc;
+
+  .columnsTitle {
+    display: flex;
+    justify-content: space-between;
+    .Icon {
+      display: none;
+    }
+    .columnsTitleText {
+      max-width: 210px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+:global(.row-dragging td) {
+  padding: 16px;
+}
+
+:global(.row-dragging .drag-visible) {
+  visibility: visible;
+}

@@ -1,0 +1,54 @@
+.wrapper {
+  columns: 2;
+  column-gap: 24px;
+
+  .card {
+    display: inline-flex;
+    // flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 12px 24px;
+    background: #f8f9fc;
+    .nameBox {
+      width: 125px;
+      margin-right: 12px;
+      overflow: hidden;
+      color: #2875d0;
+      font-weight: 600;
+      font-size: 14px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      .name {
+        width: auto;
+      }
+    }
+    .avg {
+      margin-right: 2px;
+      color: #0e1e25;
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .avgNum {
+      color: #8fce28;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .scoreList {
+      display: flex;
+      margin-left: auto;
+      .order {
+        margin-right: 4px;
+        margin-left: 16px;
+        color: #4a585f;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .score {
+        color: #2875d0;
+        font-weight: 600;
+        font-size: 12px;
+      }
+    }
+  }
+}

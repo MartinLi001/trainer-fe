@@ -1,0 +1,107 @@
+.listItem {
+  display: flex;
+  //   gap: 56px;
+  padding: 12px 24px 0;
+  background: #f8f9fc;
+
+  .rankNum {
+    display: flex;
+    flex: 0 1 10%;
+    align-items: center;
+    color: #ffb121;
+    color: #95a5ac;
+    font-weight: 700;
+    font-size: 26px;
+
+    &.top {
+      color: #ffb121;
+    }
+  }
+
+  .userInfo {
+    display: flex;
+    flex: 0 1 25%;
+    gap: 16px;
+    align-items: center;
+
+    .userInfoRight {
+      display: flex;
+      flex-direction: column;
+
+      .userName {
+        margin-bottom: 11px;
+        color: #2875d0;
+        font-weight: 600;
+        font-size: 18px;
+        // white-space: nowrap;
+        mix-blend-mode: normal;
+      }
+
+      .scoreTitle {
+        margin-bottom: 8px;
+        color: #0e1e25;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .scoreValue {
+        color: #8fce28;
+        font-weight: 500;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .other {
+    max-width: 25%;
+
+    .title {
+      color: #0e1e25;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .list {
+      padding: 0;
+
+      &.score {
+        font-weight: 600;
+
+        > li {
+          color: #0e1e25;
+        }
+      }
+
+      > li {
+        height: 15px;
+        margin-top: 8px;
+        overflow: hidden;
+        color: #4a585f;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.tabContent {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+
+  .tabLabel {
+    margin-right: 25px;
+    color: #0e1e25;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .tabs {
+    align-items: center;
+    height: 40px;
+    overflow-x: auto;
+  }
+}

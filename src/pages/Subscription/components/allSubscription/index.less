@@ -1,0 +1,163 @@
+.allSubscription {
+  .searchFilter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // height: 86px;
+    .statusFilter {
+      margin-top: 15px; // 搜索input有margin-bottom15px，这里是为了中和
+    }
+  }
+
+  .selectList {
+    display: flex;
+    gap: 12px;
+    margin-top: 3px;
+  }
+
+  .selectList + .selectedBatches {
+    margin-top: 18px;
+  }
+  .selectedBatches {
+    display: inline-block;
+    padding: 2px 4px;
+    color: #4a585f;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    background-color: #f4f5f7;
+    border-radius: 3px;
+    .icon {
+      margin-left: 2px;
+      font-size: 12px;
+    }
+  }
+
+  .searchTable {
+    width: 100%;
+    margin-top: 20px;
+
+    .totalCount {
+      color: #2875d0;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .italicText {
+      font-style: italic;
+    }
+
+    :global(.ant-table-cell) {
+      align-items: center;
+      color: #4a585f;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      white-space: nowrap;
+      background-color: #fff;
+
+      .status {
+        padding: 0 4px;
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        background: #f4f5f7;
+        border-radius: 3px;
+        &.Active {
+          color: #76ac1e;
+          background: #f4fbea;
+        }
+        &.Inactive {
+          color: #4a585f;
+          background: #f4f5f7;
+        }
+      }
+
+      &::before {
+        width: 0 !important;
+      }
+
+      .tableName {
+        align-items: center;
+        color: #0e1e25;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .sortTitle {
+        // white-space: nowrap;
+        cursor: pointer;
+        .showSortIcon {
+          visibility: visible !important;
+        }
+
+        &:hover {
+          color: #28a0ce;
+
+          .hoverIcon {
+            visibility: visible !important;
+          }
+        }
+      }
+    }
+
+    :global(.ant-table-thead) {
+      :global(.ant-table-cell) {
+        font-weight: 700;
+      }
+    }
+
+    :global(.ant-table-tbody > tr > td) {
+      border-bottom: none; // 去除表格body中的边框
+    }
+
+    .rowShow {
+      &:nth-child(even of .rowShow) {
+        :global(.ant-table-cell) {
+          background: #f8f9fb !important;
+        }
+      }
+    }
+  }
+  .deleteModal {
+    .title {
+      color: #0e1e25;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    .bold {
+      color: #0e1e25;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .light {
+      color: #172b4d;
+      font-weight: 400;
+      font-size: 14px;
+    }
+    :global(.ant-modal-confirm-body
+        > .anticon
+        + .ant-modal-confirm-title
+        + .ant-modal-confirm-content) {
+      margin-left: 0;
+    }
+    :global(.ant-modal-confirm-btns) {
+      > button {
+        font-weight: 700;
+        border-radius: 3px;
+      }
+    }
+    .deleteButton {
+      color: #fff;
+      background-color: #ef6c6d;
+      border: none;
+    }
+  }
+  :global(.ant-dropdown),
+  :global(.ant-select-dropdown) {
+    z-index: 99 !important;
+  }
+}

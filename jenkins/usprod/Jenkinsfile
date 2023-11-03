@@ -1,0 +1,98 @@
+pipeline {
+    agent any
+    environment {
+        // git related
+        GIT_CREDENTIAL = 'zyu_git'
+        GIT_BRANCH = 'us-deploy'
+
+        // build related
+        CODE_ARTIFACT_CREDENTIAL = 'martin_code_artifact'
+        GIT_URL = "https://github.com/beaconfire-projects/seethingx-fe-trainer.git"
+        BUILD_ENV = 'production' // local, qa, production. Please ref to .umirc.xxx.ts
+
+        // upload related
+        S3_CREDENTIAL = 's3_prod'
+        S3_BUCKET = 'trainer.beaconfireinc.com'
+        DIST_ARCHIVE = "dist"
+    }
+    tools {
+        nodejs 'NodeJS 16.17.0'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([
+                    $class                           : 'GitSCM',
+                    branches                         : [[name: "*/${GIT_BRANCH}"]],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions                       : [],
+                    submoduleCfg                     : [],
+                    userRemoteConfigs                : [[credentialsId: "${GIT_CREDENTIAL}", url: "${GIT_URL}"]]
+                ])
+                echo 'Check out successfully!'
+            }
+        }
+        stage ('Prepare') {
+            steps {
+                echo 'Remove old awscli folder'
+                sh 'rm -rf aws'
+                echo 'Download and install new awscli'
+                sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
+                sh 'unzip -qq awscliv2.zip'
+                sh './aws/install --update'
+            }
+        }
+        stage('NPM Install') {
+            steps {
+                echo "start install"
+                withCredentials([usernamePassword(
+                    credentialsId: "${CODE_ARTIFACT_CREDENTIAL}",
+                    passwordVariable: 'AWS_SECRET_ACCESS_KEY',
+                    usernameVariable: 'AWS_ACCESS_KEY_ID'
+                )]) {
+
+
+                    script {
+                        AUTH_TOKEN = sh(
+                            returnStdout: true,
+                            script: 'aws codeartifact get-authorization-token \
+                            --domain beaconfire \
+                            --domain-owner 795824851990 \
+                            --region us-east-2 \
+                            --query authorizationToken \
+                            --output text \
+                            --duration-seconds 900'
+                        )
+                    }
+
+                    echo "Remove old .npmrc"
+                    sh 'rm -rf .npmrc'
+
+                    sh "echo 'registry=https://beaconfire-795824851990.d.codeartifact.us-east-2.amazonaws.com/npm/beaconfire-site/' >> .npmrc"
+                    sh "echo '//beaconfire-795824851990.d.codeartifact.us-east-2.amazonaws.com/npm/beaconfire-site/:always-auth=true' >> .npmrc"
+                    sh "echo '//beaconfire-795824851990.d.codeartifact.us-east-2.amazonaws.com/npm/beaconfire-site/:_authToken=${AUTH_TOKEN}' >> .npmrc"
+
+                    echo "Install npm packages"
+                    sh 'npm install --legacy-peer-deps'
+                    
+                }
+                echo "NPM Install successfully!"
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "npm run build:${BUILD_ENV}"
+                echo "Built successfully"
+            }
+        }
+        stage('Upload') {
+            steps {
+                withAWS(region:'us-east-2',credentials:"${S3_CREDENTIAL}") {
+                    
+                    echo "Upload files from working directory 'dist' in your project workspace"
+                    s3Upload(bucket:"${S3_BUCKET}", workingDir:"${DIST_ARCHIVE}", includePathPattern:'**/*');
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+.codeList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  min-height: 260px;
+  padding-top: 12px;
+  // padding-bottom: 12px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+
+  :global(.ant-tabs-nav-list) {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+  }
+
+  :global(.ant-tabs) {
+    width: 100%;
+    :global(.ant-tabs-tab) {
+      transform: translateY(1px);
+    }
+  }
+
+  :global(.ant-spin-nested-loading) {
+    width: 100%;
+  }
+
+  :global(.ant-tabs-nav-add) {
+    background-color: unset !important;
+    border: none !important;
+  }
+
+  .codeFileShow {
+    height: 260px;
+    :global(.cm-focused) {
+      outline: 0;
+    }
+  }
+}

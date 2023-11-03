@@ -1,0 +1,23 @@
+.alert {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+  max-width: 625px;
+  color: #0e1e25;
+  font-weight: 400;
+  font-size: 14px;
+  border: none;
+
+  :global(.ant-alert-message) {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  :global(.ant-alert-close-icon) {
+    align-self: center;
+    > span {
+      color: #0e1e25;
+      font-weight: 700;
+      font-size: 16px;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+.wrap {
+  //   > div {
+  //     margin-bottom: 24px;
+  //   }
+
+  .label {
+    margin-top: 24px;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .client {
+    // .select {
+    //   width: 400px;
+    //   height: 40px;
+    //   margin: 4px 0;
+    //   padding: 10px 12px;
+    //   color: #4a585f;
+    //   font-weight: 600;
+    //   background-color: #f8f9fc;
+    //   border-radius: 3px;
+    //   cursor: pointer;
+    // }
+
+    .selectedClient {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 4px 0;
+      > div {
+        display: inline-block;
+        padding: 2px 4px;
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        background-color: #f4f5f7;
+        border-radius: 100px;
+        .icon {
+          margin-left: 2px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .date {
+    .startDate {
+      display: inline-block;
+      margin-right: 24px;
+    }
+    .endDate {
+      display: inline-block;
+    }
+    .datePicker {
+      width: 250px;
+      color: #4a585f;
+      background-color: #f4f5f7;
+      border-color: #f4f5f7;
+      :global(.ant-picker-clear) {
+        background-color: #f4f5f7;
+      }
+      :global(.ant-picker-suffix) {
+        color: #4a585f;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.wrapper {
+  margin: 32px 36px;
+
+  .header {
+    position: relative;
+    display: inline-block;
+    padding: 8px 4px;
+    color: var(--base-tone-darkspace, #0e1e25);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px; /* 114.286% */
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #8fce28;
+      border-radius: 1px;
+      content: '';
+    }
+  }
+}

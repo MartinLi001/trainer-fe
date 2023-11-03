@@ -1,0 +1,144 @@
+.wrap {
+  display: grid;
+  grid-template-rows: auto calc(100vh - 320px);
+  grid-template-columns: auto 350px;
+  width: 100%;
+  margin-top: 36px;
+  color: #0e1e25;
+  column-gap: 16px;
+  row-gap: 12px;
+  .header {
+    .title {
+      font-weight: 600;
+      font-size: 20px;
+      .icon {
+        margin-right: 12px;
+        font-size: 15px;
+        vertical-align: 0;
+      }
+    }
+    .options {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 40px;
+      // .filter {}
+      .search {
+        .text {
+          color: #4a585f;
+          font-weight: 400;
+          font-size: 12px;
+        }
+        .input {
+          border-radius: 3px;
+        }
+      }
+    }
+    .selectedBatch {
+      height: 20px;
+      margin-top: 4px;
+      margin-right: 4px;
+      padding: 0 4px;
+      color: #4a585f;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      background: #f4f5f7;
+      border-radius: 100px;
+      .icon {
+        margin-left: 4px;
+        font-size: 12px;
+      }
+    }
+  }
+  .table {
+    grid-column-start: 1;
+    overflow: auto;
+    :global(.ant-table-thead > tr > th) {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-weight: 700;
+    }
+    :global(.ant-table-thead > tr > th::before) {
+      content: none !important; // 去除header中列之间的竖线
+    }
+    :global(.ant-table-row) {
+      // pointer-events: none;
+      > td {
+        border: none; // 去除行之间的分割线
+      }
+    }
+    :global(.ant-table-thead .ant-table-cell) {
+      background-color: #fff; // header背景色
+    }
+    .row {
+      &:nth-child(even) {
+        :global(.ant-table-cell) {
+          background: #f8f9fc;
+        }
+      }
+      &:nth-child(odd) {
+        :global(.ant-table-cell) {
+          background-color: #fff;
+        }
+      }
+    }
+    .heavyText {
+      color: #0e1e25;
+      font-weight: 600;
+    }
+  }
+  .selected {
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+    .list {
+      // max-height: 100%;
+      overflow: auto;
+      .card {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        padding: 8px 12px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+        transition: 0.5s;
+        .icon {
+          margin-right: 10px;
+        }
+        .text {
+          margin-right: 10px;
+        }
+        .delete {
+          display: none;
+          float: right;
+          margin-left: auto;
+          color: #f18283;
+          cursor: pointer;
+        }
+        &:hover {
+          background-color: #f8f9fc;
+          .delete {
+            display: inline-block;
+          }
+        }
+      }
+    }
+    .total {
+      margin: 12px 0 8px;
+      font-weight: 700;
+      font-size: 14px;
+      &.grey {
+        color: #8c8c8c;
+      }
+      &.blue {
+        color: #2875d0;
+      }
+    }
+    .buttons > *:last-child {
+      margin-left: 12px;
+    }
+  }
+}

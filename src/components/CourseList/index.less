@@ -1,0 +1,212 @@
+.taskList {
+  height: calc(100vh - 181px);
+  min-height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 24px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+
+  .listHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding-left: 32px;
+    font-weight: 700;
+    font-size: 16px;
+    background: #f8f9fc;
+    border-bottom: 1px solid #ddd;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .listContent {
+    flex: 1;
+    margin: 0 16px;
+
+    .contentItem {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      height: 82px;
+      margin: 8px 0;
+      padding: 8px 10px 8px 16px;
+      border-radius: 15px;
+      cursor: pointer;
+
+      &:hover {
+        background: #f8f9fc;
+      }
+
+      .contentLeft {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #4a585f;
+        font-size: 16px;
+
+        .contentTop {
+          display: flex;
+          align-items: center;
+          width: 50%;
+
+          .title {
+            min-width: 30px;
+            margin-right: 16px;
+            overflow: hidden;
+            font-weight: 500;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          .typeCommon {
+            display: flex;
+            align-items: center;
+            height: 20px;
+            padding: 0 4px;
+            font-weight: 400;
+            font-size: 14px;
+            font-style: normal;
+            border-radius: 3px;
+          }
+
+          .icon {
+            white-space: nowrap;
+
+            .lecture {
+              .typeCommon();
+
+              color: #2875d0;
+              border: 1px solid #2875d0;
+            }
+
+            .assignment {
+              .typeCommon();
+
+              color: #ffb121;
+              border: 1px solid #ffb121;
+            }
+
+            .codingMock {
+              .typeCommon();
+
+              color: #ef6c6d;
+              border: 1px solid #ef6c6d;
+            }
+
+            .project {
+              .typeCommon();
+
+              color: #8fce28;
+              border: 1px solid #8fce28;
+            }
+          }
+        }
+
+        .contentBottom {
+          max-width: 100px;
+          overflow: hidden;
+          font-weight: 300;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        @media (min-width: 1230px) {
+          .contentBottom {
+            max-width: 600px;
+          }
+        }
+
+        @media (max-width: 1230px) {
+          .contentBottom {
+            max-width: 500px;
+          }
+        }
+
+        @media (max-width: 1140px) {
+          .contentBottom {
+            max-width: 400px;
+          }
+        }
+
+        @media (max-width: 1040px) {
+          .contentBottom {
+            max-width: 200px;
+          }
+        }
+      }
+
+      .contentRight {
+        display: flex;
+        align-items: center;
+        width: 150px;
+
+        .status {
+          display: flex;
+          align-items: center;
+          width: 137px;
+          font-weight: 600;
+          font-size: 14px;
+          font-family: 'Mulish';
+          font-style: normal;
+          line-height: 23px;
+
+          &.locked {
+            color: #ef6c6d;
+          }
+
+          &.Unsubmitted {
+            color: #4a585f;
+          }
+
+          &.Late {
+            color: #ffb121;
+          }
+
+          &.Submitted {
+            color: #8fce28;
+          }
+        }
+
+        .img {
+          width: 14px;
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+}
+
+.previousArea {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 35px;
+  margin-bottom: 24px;
+
+  .previous {
+    height: 23px;
+    margin-right: 12px;
+    color: #ffb121;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: 'Mulish';
+    font-style: normal;
+    line-height: 23px;
+  }
+
+  .arrrow {
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+  }
+}

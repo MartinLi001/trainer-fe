@@ -1,0 +1,47 @@
+.Calendarmodule {
+  max-width: 385px;
+  // height: 350px;
+  margin-top: 13px;
+  padding: 36px 44px;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 15px;
+
+  .CalendarHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .buttonSWitch {
+      color: #0e1e25;
+      font-weight: 600;
+    }
+  }
+
+  .ant-picker-calendar {
+    height: 280px;
+    overflow: hidden;
+  }
+
+  .ant-picker-panel {
+    border-top: none !important;
+  }
+
+  .ant-picker-cell-selected {
+    background: #ffb121;
+    border-radius: 20px;
+
+    .ant-picker-calendar-date {
+      background: #ffb121 !important;
+    }
+  }
+
+  .ant-picker-calendar-date-value {
+    font-weight: 600;
+  }
+
+  .ant-picker-calendar-date-today::before {
+    border: 1px solid #ffb121 !important;
+  }
+}

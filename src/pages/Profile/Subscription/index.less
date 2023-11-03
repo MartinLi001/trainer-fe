@@ -1,0 +1,111 @@
+.subscriptWrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 50px;
+
+  .content {
+    width: 600px;
+    padding: 24px 24px 60px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 38px;
+      font-family: 'Mulish';
+      font-style: normal;
+
+      .label {
+        margin-bottom: 5px;
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: 'Mulish';
+        line-height: 18px;
+      }
+
+      .name {
+        display: flex;
+        align-items: center;
+        color: #0e1e25;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 23px;
+
+        .tag {
+          margin-left: 10px;
+          color: #ffb121;
+        }
+      }
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+
+      .list {
+        padding: 0;
+
+        > li {
+          margin-bottom: 14px;
+          color: #0e1e25;
+          font-size: 14px;
+          font-family: 'Mulish';
+          line-height: 18px;
+
+          .icon {
+            margin-right: 8px;
+            color: #8fce28;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .info {
+        max-width: 200px;
+        .client {
+          color: #4a585f;
+          font-weight: 400;
+          font-size: 14px;
+          font-family: 'Mulish';
+          font-style: normal;
+          line-height: 18px;
+        }
+
+        .tagWrap {
+          margin-top: 5px;
+          .tag {
+            margin-bottom: 10px;
+            color: #4a585f;
+            border-radius: 100px;
+          }
+        }
+
+        .timeWrap {
+          .label {
+            display: inline-block;
+            width: 40px;
+            color: #4a585f;
+            font-weight: 400;
+            font-size: 14px;
+            font-family: 'Mulish';
+            font-style: normal;
+            line-height: 18px;
+          }
+
+          .value {
+            margin-left: 6px;
+            color: #0e1e25;
+            font-weight: 400;
+            font-size: 15px;
+            font-family: 'Mulish';
+            font-style: normal;
+            line-height: 19px;
+          }
+        }
+      }
+    }
+  }
+}

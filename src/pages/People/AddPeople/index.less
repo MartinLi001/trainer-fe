@@ -1,0 +1,120 @@
+.AddPeoplePage {
+  min-height: calc(100vh - 116px); // header+title=56+60=116px
+  padding: 24px;
+  padding-top: 10px;
+  .SearchTitile {
+    max-width: 240px;
+  }
+
+  .century {
+    display: flex;
+    margin-top: 24px;
+
+    @media screen and (max-width: 1000px) {
+      display: contents;
+    }
+
+    .SearchList {
+      width: 50%;
+
+      @media screen and (max-width: 1000px) {
+        width: 100%;
+      }
+
+      .tableName {
+        color: #4a585f;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .NameShow {
+        color: #0e1e25;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .EmialShow {
+        color: #4a585f;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .TableChoose {
+        display: flex;
+        align-items: center;
+        width: 90px;
+        height: 24px;
+        padding: 3px 12px;
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.084px;
+        text-align: center;
+        background: #1d355e;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      .TableUnChoose {
+        display: flex;
+        align-items: center;
+        width: 74px;
+        height: 24px;
+        padding: 3px 12px;
+        color: #4a585f;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.084px;
+        text-align: center;
+        background: #f8f9fc;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+    }
+
+    .ChooseList {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 50%;
+      margin-left: 20px;
+
+      @media screen and (max-width: 1000px) {
+        width: 100%;
+        margin-top: 10px;
+        .buttonADD {
+          margin-top: 10px;
+        }
+      }
+
+      .SelectNumber {
+        color: #2875d0;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .NameShow {
+        color: #0e1e25;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .EmialShow {
+        color: #4a585f;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+      }
+      .buttonADD {
+        text-align: right;
+      }
+    }
+  }
+}

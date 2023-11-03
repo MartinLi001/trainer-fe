@@ -1,0 +1,32 @@
+.selectChoose {
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+  padding: 0;
+  background-color: #f5f6f8;
+  .selectChooseTag {
+    height: 40px;
+    padding: 10px 12px;
+    color: #4a585f;
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+}
+.dropContent {
+  width: 100%;
+  :global(.ant-checkbox-group) {
+    width: 100%;
+  }
+  .dropContentList {
+    width: 100%;
+    .dropContentListTitle {
+      width: 100%;
+      cursor: auto;
+      > * {
+        width: 100%;
+      }
+    }
+  }
+}

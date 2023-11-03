@@ -1,0 +1,66 @@
+.groupMemberList {
+  transition: 0.5s;
+
+  .unassigned {
+    min-height: 52px;
+    margin-bottom: 8px;
+    padding: 16px 0;
+    color: #1d355e;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    background-color: #fad764;
+  }
+
+  .collapse {
+    background-color: #fff;
+  }
+
+  .panel {
+    margin-bottom: 8px;
+    background-color: #f8f9fc;
+    border: 0;
+
+    :global(.ant-collapse-header) {
+      padding-bottom: 2px;
+    }
+    :global(.ant-collapse-content-box) {
+      padding-top: 2 !important;
+      padding-bottom: 2px !important;
+    }
+    :global(.ant-collapse-header-text) {
+      width: 100%;
+    }
+  }
+
+  .listBox {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .role {
+    display: inline-block;
+    margin-right: 10px;
+    color: #0e1e25;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .name {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 0 8px;
+    color: #4a585f;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    background: #f4f5f7;
+    border-radius: 3px;
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+  }
+}

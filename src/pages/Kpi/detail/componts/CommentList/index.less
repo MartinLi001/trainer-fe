@@ -1,0 +1,85 @@
+.commentList {
+  // max-width: 450px;
+  width: 100%;
+
+  .commentListTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #0e1e25;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .commentListShow {
+    max-height: 400px;
+    margin-top: 10px;
+    overflow-y: auto;
+  }
+}
+
+.commentContent {
+  margin-top: 18px;
+
+  .commentContentShow {
+    .title {
+      display: flex;
+      justify-content: space-between;
+
+      .byOther {
+        color: #0e1e25;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: right;
+      }
+
+      .commData {
+        color: #4a585f;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 15px;
+      }
+    }
+
+    .detail {
+      height: auto;
+      padding: 10px;
+      overflow: hidden;
+      // word-break: break-all;
+      // text-align: justify;
+      background: #f8f9fc;
+    }
+
+    .operation {
+      display: flex;
+      justify-content: right;
+      margin-right: 5px;
+    }
+  }
+
+  .editCommentShow {
+    .EditTitle {
+      align-items: center;
+      margin-bottom: 10px;
+      color: #0e1e25;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+    }
+    .commentSave {
+      display: flex;
+      justify-content: right;
+      margin-top: 18px;
+    }
+  }
+}
+
+.noData {
+  margin-top: 2px;
+  color: #4a585f;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}

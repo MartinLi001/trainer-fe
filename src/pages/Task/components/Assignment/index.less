@@ -1,0 +1,119 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin-top: 21px;
+  margin-left: 100px;
+  padding: 12px;
+
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    width: 100%;
+
+    .left {
+      width: 100%;
+      max-width: 650px;
+      margin-right: 22px;
+      margin-bottom: 22px;
+      .leftContent {
+        max-height: 475px;
+        padding: 16px 30px 19px 31px;
+        overflow: scroll;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+
+        .date {
+          display: flex;
+          justify-content: left;
+        }
+      }
+    }
+    .right {
+      .rightContent {
+        width: 100%;
+        min-width: 350px;
+        min-height: 208px;
+        padding: 24px 24px 0 24px;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .bottom {
+    flex: 1;
+    max-width: 1020px;
+    margin-top: 20px;
+    margin-bottom: 59px;
+
+    .bottomContent {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+      width: 100%;
+      padding: 16px 30px 19px 31px;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+
+      .left {
+        margin-right: 141px;
+        .textArea {
+          width: 378px;
+          height: 142px;
+          margin-bottom: 24px;
+        }
+        .button {
+          display: flex;
+          margin-left: 210px;
+        }
+      }
+
+      .right {
+        .rightTitle {
+          display: flex;
+          justify-content: space-between;
+          min-width: 366px;
+        }
+        .title {
+          display: flex;
+          justify-content: space-between;
+          min-width: 366px;
+          margin-bottom: 30px;
+        }
+        .allComments {
+          max-height: 300px;
+          margin-bottom: 20px;
+          overflow: scroll;
+        }
+
+        .add {
+          float: right;
+          margin-bottom: 10px;
+        }
+
+        .comment {
+          font-weight: 400;
+          font-size: 14px;
+          font-style: normal;
+          line-height: 22px;
+        }
+        .textArea {
+          margin-bottom: 10px;
+        }
+
+        .cancel {
+          margin-left: 280px;
+        }
+
+        .save {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+.wrapper {
+  color: #0e1e25;
+
+  .blue {
+    color: #2875d0;
+  }
+
+  .red {
+    color: red;
+  }
+
+  .subtitle {
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 23px;
+
+    &:not(:first-child) {
+      margin-top: 36px;
+    }
+  }
+
+  .nameList {
+    display: flex;
+    flex-wrap: wrap;
+
+    .traineeName {
+      min-width: 150px;
+      height: 32px;
+      margin-bottom: 10px;
+      padding: 0 10px;
+      font-weight: 700px;
+      font-size: 14px;
+      line-height: 32px;
+      text-align: center;
+      background: #f8f9fc;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      &.focus {
+        color: #fff;
+        background: #1d355e;
+      }
+    }
+  }
+
+  .gradingDetail {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    margin-top: 26px;
+    column-gap: 36px;
+
+    .right {
+      > *:first-child {
+        margin-bottom: 36px;
+      }
+    }
+
+    .link {
+      //   .blue();
+      font-size: 14px;
+      text-decoration: underline;
+    }
+
+    .scoreTitle {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .score {
+      display: flex;
+      align-items: center;
+
+      .input {
+        width: 162px;
+        height: 40px;
+        margin-right: 10px;
+        line-height: 40px;
+      }
+    }
+  }
+}

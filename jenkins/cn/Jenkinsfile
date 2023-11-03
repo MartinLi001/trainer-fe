@@ -1,0 +1,105 @@
+/* groovylint-disable LineLength */
+pipeline {
+    agent any
+    environment {
+        // git
+        GIT_CLASS = 'GitSCM'
+        GIT_DEPLOY_REF = '*/master'
+        GIT_DEPLOY_REPO_URL = 'https://gitee.com/seethingx/seethingx-docker-service-deployment.git'
+        GIT_CREDENTIALS_ID = 'SeeThingX'
+        // npm
+        NPM_REGISTRY = '//172.16.0.5:4873/'
+        // NPM_REGISTRY = '//npm.seething.com/'
+        // NPM_REGISTRY = '//registry.npm.taobao.org/'
+        // NPM_REGISTRY = '//registry.npmmirror.com/'
+        // NPM_REGISTRY = '//mirrors.cloud.tencent.com/npm/'
+        // NPM_REGISTRY = '//seethingx-npm.pkg.coding.net/seethingx-registry/npm/'
+        // NPM_REGISTRY = '//registry.npmjs.org/'
+        // NPM_REGISTRY = '//r.cnpmjs.org/'
+        NPM_CREDENTIALS_ID = 'SeeThingXNpmRegistryLAN'
+        NPM_EMAIL = 'devin@seethingx.com'
+        // docker
+        DOCKER_REGISTRY = 'dockerhub.qingcloud.com/seethingx'
+        DOCKER_CREDS = credentials('QingCloudDockerhub')
+        // project
+        PROJECT_PORT = 8089
+    }
+    stages {
+        stage('Build Project') {
+            steps {
+                echo 'Start Build Project ...'
+                // if need delete node_modules or install packages from remote, use this shell
+                sh('rm -rf dist node_modules package-lock.json src/.umi* build.env')
+                // sh('rm -rf dist src/.umi* build.env')
+                // NPM_REGISTRY Authentication
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: NPM_CREDENTIALS_ID,
+                        usernameVariable: 'NPM_CREDS_USR',
+                        passwordVariable: 'NPM_CREDS_PSW'
+                    )
+                ]) {
+                    // use local IP(172.16.0.5) or npm.seethingx.com registry
+                    sh("echo 'registry=http:$NPM_REGISTRY\nalways-auth=true\n$NPM_REGISTRY:username=$NPM_CREDS_USR\n$NPM_REGISTRY:_password=$NPM_CREDS_PSW\n$NPM_REGISTRY:email=$NPM_EMAIL' > .npmrc")
+                    // use codingnet registry
+                    // sh("echo 'registry=https:$NPM_REGISTRY\nalways-auth=true\n$NPM_REGISTRY:username=npm-1661431240772\n$NPM_REGISTRY:_password=MTViYTAwYTlhOWJkMDRkNmRmMDAzN2U0MTEwZWM5MGQwNmQ2MmY2ZQ==\n$NPM_REGISTRY:email=$NPM_EMAIL' > .npmrc")
+                    // use public registry
+                    // sh("echo 'registry=https:$NPM_REGISTRY\nalways-auth=true' > .npmrc")
+                }
+                sh('npm config get registry')
+                sh('npm install --legacy-peer-deps')
+                sh('npm run build:cn')
+                echo 'Build Project Success!'
+            }
+        }
+        stage('Build Docker Images') {
+            steps {
+                echo 'Start Build Docker Images ...'
+                script {
+                    PROJECT_NAME = sh(script: 'node -e "console.log(require(\'./package.json\').name);"', returnStdout: true).trim()
+                    PROJECT_VERSION = sh(script: 'node -e "console.log(require(\'./package.json\').version);"', returnStdout: true).trim()
+                    IMAGE_NAME = PROJECT_NAME + ':' + PROJECT_VERSION
+                }
+                sh("echo 'PROJECT_NAME=$PROJECT_NAME\nPROJECT_VERSION=$PROJECT_VERSION\nPROJECT_PORT=$PROJECT_PORT' > build.env")
+                sh('docker-compose --env-file build.env build')
+                echo "IMAGE_NAME is $IMAGE_NAME"
+                echo 'Build Docker Images Success!'
+            }
+        }
+        stage('Publish Docker Images') {
+            steps {
+                echo 'Start Publish Docker Images To Registry ...'
+                script {
+                    REMOTE_IMAGE_NAME = DOCKER_REGISTRY + '/' + IMAGE_NAME
+                }
+                echo "REMOTE_IMAGE_NAME is $REMOTE_IMAGE_NAME"
+
+                sh('docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW $DOCKER_REGISTRY')
+                sh("docker tag $IMAGE_NAME $REMOTE_IMAGE_NAME")
+                sh("docker push $REMOTE_IMAGE_NAME")
+                echo 'Publish Docker Images To Registry Success!'
+            }
+        }
+        stage('Deploy Project') {
+            steps {
+                echo 'Start Deploy Project ...'
+                checkout([
+                    $class: GIT_CLASS,
+                    branches: [[name: GIT_DEPLOY_REF]],
+                    userRemoteConfigs: [[
+                        url: GIT_DEPLOY_REPO_URL,
+                        credentialsId: GIT_CREDENTIALS_ID
+                    ]]
+                ])
+                sh('docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW $DOCKER_REGISTRY')
+                sh("docker pull $REMOTE_IMAGE_NAME")
+                sh('docker-compose -f seethingx-fe-trainer/docker-compose.yaml down')
+                sh('rm -rf ./seethingx-fe-trainer/.env')
+                sh("echo 'PROJECT_NAME=$PROJECT_NAME\nPROJECT_VERSION=$PROJECT_VERSION\nPROJECT_PORT=$PROJECT_PORT' > ./seethingx-fe-trainer/.env")
+                sh('docker-compose -f seethingx-fe-trainer/docker-compose.yaml up -d')
+                sh('docker image prune -f')
+                echo 'Deploy Project Success!'
+            }
+        }
+    }
+}

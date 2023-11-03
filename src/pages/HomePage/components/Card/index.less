@@ -1,0 +1,33 @@
+.Cardlist {
+  height: 180px;
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 26px 4px rgba(16, 30, 115, 0.06);
+  mix-blend-mode: normal;
+  > :hover {
+    border-radius: 20px;
+    box-shadow: 0 0 4px 4px rgba(14, 30, 37, 0.15);
+  }
+  .CardContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding-top: 18px;
+    cursor: pointer;
+    .CardTitle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 24px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 30px;
+    }
+    .CardPicture {
+      text-align: center;
+    }
+  }
+}

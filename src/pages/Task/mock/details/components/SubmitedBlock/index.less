@@ -1,0 +1,43 @@
+.radioContent {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    width: 160px;
+    height: 32px;
+    margin-top: 7px;
+    margin-right: 9px;
+    color: #4a585f;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 32px;
+    text-align: center;
+    background: #f8f9fc;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &.graded {
+      color: #4a585f;
+      background: #e9f5d4;
+    }
+
+    &.selected {
+      color: #fff;
+      background: #1d355e;
+    }
+  }
+
+  // &.Unsubmitted > li {
+  //   cursor: default;
+  // }
+}
+
+.gradingBox {
+  .gradingContent {
+    padding: 24px 24px 0 24px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+}

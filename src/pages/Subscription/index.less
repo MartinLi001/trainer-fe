@@ -1,0 +1,32 @@
+.subscription {
+  min-height: calc(100vh - 56px); // header = 56px
+  padding: 32px;
+
+  .subscriptionTitle {
+    display: flex;
+    align-items: center;
+    color: #4a585f;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .subscriptionTab {
+    height: 33px;
+    margin-top: 14px;
+    color: #42526e;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+  }
+  .subscriptionSearch {
+    margin-top: 10px;
+  }
+  :global(.ant-notification) {
+    position: fixed;
+    // left: 188px !important;
+    z-index: 990; // modal z-index = 1000
+  }
+}

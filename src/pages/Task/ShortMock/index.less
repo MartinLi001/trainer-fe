@@ -1,0 +1,239 @@
+.shortAnswerMock {
+  // max-width: 1100px;
+  padding: 22px 30px 50px;
+
+  .shortAnswerMockTop {
+    display: flex;
+
+    @media screen and (max-width: 950px) {
+      display: contents;
+    }
+
+    .shortAnswerMockTopLeft {
+      flex: 1;
+      // width: 50%;
+      height: 100%;
+
+      @media screen and (max-width: 950px) {
+        width: 100%;
+      }
+
+      .shortAnswerMockTopLeftContent {
+        padding: 0 24px;
+        padding-bottom: 30px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+
+        .textBlock {
+          margin-top: 24px;
+
+          .title {
+            margin-bottom: 4px;
+            color: #0e1e25;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+          }
+
+          .value {
+            max-height: 72px;
+            overflow: hidden;
+            overflow-y: auto;
+            color: #4a585f;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            word-break: break-all;
+          }
+        }
+
+        .textLine {
+          display: flex;
+          margin-top: 24px;
+
+          .title {
+            color: #0e1e25;
+            font-weight: 600;
+            font-size: 14px;
+          }
+
+          .value {
+            gap: 10px;
+            align-items: center;
+            margin-left: 12px;
+            padding: 0 4px;
+            font-weight: 400;
+            font-size: 14px;
+            // line-height: 18px;
+            border-radius: 3px;
+          }
+        }
+      }
+    }
+
+    .shortAnswerMockTopRight {
+      width: 50%;
+      height: 100%;
+      margin-left: 20px;
+
+      @media screen and (max-width: 950px) {
+        width: 100%;
+        margin-top: 24px;
+        margin-left: 0;
+      }
+      .icon {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .shortAnswerMockSummary {
+    margin-top: 35px;
+
+    .shortAnswerMockSummaryContent {
+      padding: 24px 24px 8px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+  }
+
+  .shortAnswerMockTable {
+    margin-top: 35px;
+
+    .shortAnswerMockTableContent {
+      position: relative;
+      padding: 28px 32px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+
+      // :global(.ant-table-cell) {
+      //   // text-align: center;
+      // }
+
+      .tableTitle {
+        display: flex;
+        align-items: center;
+        color: #4a585f;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .tableName {
+        align-items: center;
+        height: 32px;
+        padding: 6px 0;
+        color: #4a585f;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        background: #f8f9fc;
+        border-radius: 3px;
+      }
+
+      .submittedName {
+        background: #76ac1e;
+        cursor: pointer;
+      }
+
+      .showName {
+        color: #fff;
+        background: #1d355e;
+      }
+
+      .Unsubmitted {
+        display: flex;
+        align-items: center;
+        color: #f14d4f;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 19px;
+      }
+
+      .tableResources {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 19px;
+      }
+
+      .tableComments {
+        align-items: center;
+        color: #2875d0;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+      }
+
+      .shortAnswerMockTableContentDetail {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 22px;
+
+        .detailsLeft {
+          width: 505px;
+          margin-top: 20;
+          // height: 285px;
+          // background-color: #76AC1E;
+
+          .detailsLeftName {
+            color: #0e1e25;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 23px;
+
+            .detailsLeftNamePeople {
+              color: #2875d0;
+              font-weight: 700;
+            }
+          }
+
+          .detailsLeftResource {
+            margin-top: 15px;
+
+            .resourcesName {
+              color: #0e1e25;
+              font-weight: 600;
+              font-size: 14px;
+              line-height: 18px;
+            }
+
+            .resourceList {
+              // max-height: 500px;
+              // overflow-y: auto;
+              margin-bottom: 32px;
+
+              .resourceListData {
+                margin-top: -32px;
+                color: #4a585f;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 19px;
+                text-align: right;
+              }
+            }
+          }
+
+          .detailsScore {
+            height: 60px;
+            margin-bottom: 20px;
+          }
+
+          .backButton {
+            position: absolute;
+            bottom: 10px;
+          }
+        }
+
+        .detailsRight {
+          width: 100%;
+          max-width: 505px;
+          margin-top: 20px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

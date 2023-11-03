@@ -1,0 +1,82 @@
+.PageHome {
+  max-width: 1050px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  .PageHomeContent {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    padding: 24px 24px 20px 34px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 26px 4px rgba(16, 30, 115, 0.06);
+    mix-blend-mode: normal;
+    @media screen and (max-width: 1050px) {
+      display: inline-block;
+      width: 100%;
+    }
+    .PageTask {
+      width: 100%;
+      max-width: 580px;
+      margin-right: 10px;
+      // height: 420px;
+      // @media screen and (max-width: 1250px) {
+      //   width: 100%;
+      // }
+      .PageTaskTitle {
+        color: #0e1e25;
+        font-weight: 700;
+        font-size: 22px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 28px;
+      }
+      .PageTaskTnoitle {
+        color: #8fce28;
+        font-weight: 700;
+        font-size: 22px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 28px;
+      }
+      .PageTaskSlect {
+        margin-top: 12px;
+        margin-left: 200px;
+        .PageTaskSlectTitle {
+          color: #0e1e25;
+          font-weight: 600;
+          font-size: 16px;
+          font-family: 'Mulish';
+          font-style: normal;
+          line-height: 22px;
+        }
+        .PageTaskSlectList {
+          margin-left: 27px;
+          border-radius: 2px;
+        }
+      }
+      .PageTaskListBatch {
+        max-height: 400px;
+        padding-right: 32px;
+        overflow-x: auto;
+      }
+    }
+    .PageCalend {
+      // width: 40%;
+      margin-top: 10px;
+
+      .PageCalendTitle {
+        margin-bottom: 13px;
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 16px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 20px;
+      }
+    }
+  }
+}

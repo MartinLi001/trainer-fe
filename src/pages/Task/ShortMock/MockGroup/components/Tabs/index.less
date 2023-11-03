@@ -1,0 +1,25 @@
+.list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    height: 33px;
+    margin: 0 6px;
+    padding: 0 4px;
+    color: #42526e;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 33px;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &.selected {
+      color: #0e1e25;
+      font-weight: 500;
+      border-bottom: 2px solid #8fce28;
+      border-bottom-right-radius: 1px;
+      border-bottom-left-radius: 1px;
+    }
+  }
+}

@@ -1,0 +1,89 @@
+.wrap {
+  padding: 0 24px;
+  color: #0e1e25;
+  font-family: 'Mulish';
+
+  .question {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .tip {
+    margin-top: 24px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .task {
+    width: 461px;
+    height: 143px;
+    margin-top: 24px;
+    border: 1px solid rgba(221, 221, 221, 0.8);
+    border-radius: 10px;
+
+    .head {
+      height: 39px;
+      padding-left: 36px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 39px;
+      background: #f8f9fc;
+      border-bottom: 1px solid #ddd;
+      border-radius: 10px 10px 0 0;
+    }
+    .body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-height: 85px;
+      padding: 24px 36px;
+      overflow-y: auto;
+      color: #4a585f;
+
+      .title {
+        display: flex;
+        align-items: center;
+
+        .name {
+          margin-right: 15px;
+          font-weight: 700;
+          font-size: 18px;
+        }
+
+        .icon {
+          display: flex;
+          align-items: center;
+          height: 20px;
+          padding: 0 4px;
+          color: #2875d0;
+          font-weight: 400;
+          font-size: 14px;
+          border: 1px solid #2875d0;
+          border-radius: 3px;
+
+          &.Lecture {
+            color: #2875d0;
+            border-color: #2875d0;
+          }
+          &.Assignment {
+            color: #ffb121;
+            border-color: #ffb121;
+          }
+          &.Mock {
+            color: #ef6c6d;
+            border-color: #ef6c6d;
+          }
+          &.Project {
+            color: #8fce28;
+            border-color: #8fce28;
+          }
+        }
+      }
+
+      .content {
+        font-weight: 400;
+        font-size: 18px;
+      }
+    }
+  }
+}

@@ -1,0 +1,214 @@
+.QuestionList {
+  min-height: calc(100vh - 128px); // header+title margin+title= 56 + 12 + 60 = 128px
+  padding: 20px 60px;
+  .QuestionList-Head {
+    display: flex;
+    justify-content: space-between;
+
+    .QuestionList-Search {
+      margin-left: 40px;
+
+      span {
+        display: flex;
+        align-items: center;
+        color: #4a585f;
+        font-weight: 400;
+        font-size: 12px;
+        font-family: 'Mulish';
+        font-style: normal;
+        line-height: 16px;
+      }
+
+      .ant-input-affix-wrapper {
+        width: 240px;
+        height: 40px;
+        border: 2px solid #e0e0e0;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .QuestionList-Tag {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    .QuestionList-Tag-Search {
+      display: flex;
+    }
+    .QuestionList-Tag-Button {
+      .QuestionList-Tag-add {
+        // background: #fad764;
+        border-radius: 100px;
+      }
+    }
+  }
+
+  .ant-table-thead {
+    .ant-table-cell {
+      color: #0e1e25;
+      font-weight: 400;
+      font-size: 18px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 23px;
+    }
+  }
+
+  .tagShow {
+    display: flex;
+    align-content: space-between;
+    height: auto;
+    margin-bottom: 10px;
+    overflow: hidden;
+
+    .tagShow-nav {
+      width: 100%;
+
+      .tagShow-list {
+        display: inline-block;
+        align-items: center;
+        height: 20px;
+        margin-top: 5px;
+        margin-left: 12px;
+        padding: 0 5px;
+        color: #4a585f;
+        text-align: center;
+        background: #f4f5f7;
+        border-radius: 3px;
+      }
+      .Clear_ALl {
+        margin-right: 10px;
+        margin-left: 10px;
+        color: #2875d0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .ant-table-cell {
+    background-color: #fff;
+
+    .columns-title {
+      color: #0e1e25;
+      font-weight: 500;
+      font-size: 18px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 23px;
+      cursor: pointer;
+    }
+
+    .columns-tags {
+      // text-align: center;
+    }
+
+    .columns-Company {
+      display: block;
+      max-width: 200px;
+      overflow: hidden;
+      color: #4a585f;
+      font-weight: 300;
+      font-size: 18px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 23px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .colums-frequency {
+      text-align: center;
+    }
+
+    .title-Sort {
+      cursor: pointer;
+      .hoverIcon {
+        display: none;
+      }
+
+      &:hover {
+        color: #28a0ce;
+
+        .hoverIcon {
+          display: inline;
+        }
+      }
+    }
+  }
+}
+
+.page422 {
+  position: absolute;
+  top: 65px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  background: rgba(14, 30, 37, 0.5);
+  backdrop-filter: blur(10px);
+
+  .subscriptDialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 652px;
+    height: 398px;
+    background: #fff;
+    transform: translate(-50%, -50%);
+
+    .subscriptDialog-hearder {
+      margin-top: 50px;
+      padding: 0 80px;
+      color: #0e1e25;
+      font-weight: 600;
+      font-size: 25px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 31px;
+      mix-blend-mode: normal;
+    }
+
+    .subscriptDialog-content {
+      width: 403px;
+      margin-top: 30px;
+      margin-left: 80px;
+      color: #4a585f;
+      font-weight: 600;
+      font-size: 18px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 23px;
+    }
+
+    > img {
+      padding: 0 160px;
+    }
+  }
+}
+.QuestionTitle {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-right: 60px;
+  .QuestionList-Search {
+    margin-left: 40px;
+
+    span {
+      display: flex;
+      align-items: center;
+      color: #4a585f;
+      font-weight: 400;
+      font-size: 12px;
+      font-family: 'Mulish';
+      font-style: normal;
+      line-height: 16px;
+    }
+
+    .ant-input-affix-wrapper {
+      width: 240px;
+      height: 40px;
+      border: 2px solid #e0e0e0;
+      border-radius: 3px;
+    }
+  }
+}
