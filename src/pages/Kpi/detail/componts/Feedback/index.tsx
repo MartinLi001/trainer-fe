@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import styles from './index.less';
 import CardTitle from '@/components/CardTitle';
-import { Col, Dropdown, Menu, message, Modal, Row, Spin } from 'antd';
-import { MoreOutlined, PlusOutlined } from '@ant-design/icons';
-import FeedBackModal from '../FeedBackModal';
-import FeedBackDetail from '../FeedBackDetail';
-import { addSummary, updateSummary, deleteSummary } from '@/services/kpi';
-import { FeedbackType } from '../../typeList';
-import { date2desc } from '@/utils';
-import moment from 'moment';
 import Empty from '@/components/KpiEmpty';
+import { addSummary, deleteSummary, updateSummary } from '@/services/kpi';
+import { date2desc } from '@/utils';
+import { MoreOutlined, PlusOutlined } from '@ant-design/icons';
+import { Col, Dropdown, Menu, Modal, Row, Spin, message } from 'antd';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
+import { useModel } from 'umi';
+import { FeedbackType } from '../../typeList';
+import FeedBackDetail from '../FeedBackDetail';
+import FeedBackModal from '../FeedBackModal';
+import styles from './index.less';
 
 interface Props {
   list: FeedbackType[];
@@ -18,11 +19,12 @@ interface Props {
   getData: () => void;
 }
 
-export default function Feedback({ list, traineeId, getData }: Props) {
+export default function Feedback({ list, traineeId, getData, batchId }: Props) {
+  const { initialState } = useModel('@@initialState');
+  const userId = initialState?.userId;
   const [loading, setLoading] = useState<boolean>(true);
   const [openModal, setOpenModal] = useState(false);
   const [modalValue, setModalValue] = useState<FeedbackType>({} as FeedbackType);
-  const userId = localStorage.getItem('userId') as string;
   const [dataList, setDataList] = useState<FeedbackType[]>();
 
   useEffect(() => {
@@ -43,6 +45,7 @@ export default function Feedback({ list, traineeId, getData }: Props) {
   const editOrSaveFeed = (data: FeedbackType) => {
     const dataValue = {
       userId: traineeId,
+      batchId,
       summary: { ...data },
     };
     if (data.summaryId) {
@@ -86,6 +89,7 @@ export default function Feedback({ list, traineeId, getData }: Props) {
         const submitData = {
           userId: traineeId,
           summaryId: value.feedbackId,
+          batchId,
         };
         deleteSummary(submitData)
           .then(() => {

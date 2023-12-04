@@ -35,6 +35,11 @@ export function previewTemp(data: previewType) {
 }
 
 //codeFile
+// * - 0 sample-solution
+// * - 1 Dependency-file
+// * - 2 input parse function
+// * - 3 output parse function
+// * - 4 assert parse function
 export const getCodeFile = (questionId: string, language: string, type: number) => {
   return request.get(
     `/coder/api/v1/questions/${questionId}/coders/mirror?language=${language}&type=${type}`,

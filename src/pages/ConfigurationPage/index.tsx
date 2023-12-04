@@ -3,12 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.less';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { AuButton, AuInput, AuSelect } from '@aurora-ui-kit/core';
-import DndComponentProvider, { DragDropCard } from '@/components/DndContainer';
-import { cloneDeep } from 'lodash';
 import OutPutList from './components/outPutLit';
 
 import { getCoderSpec, saveCodeerSpec } from '@/services/coder';
 import IconFont from '@/components/IconFont';
+import { SortItemDndKit, SortListDndKit } from './components/dnd';
 interface CorderType {
   questionId: string;
   onChange?: (value: boolean) => void;
@@ -45,7 +44,6 @@ const Configuration: React.FC<CorderType> = ({ questionId, onChange }: CorderTyp
       });
     });
     let a = tempOut.find((ite) => ite.value === form.getFieldValue('outputFrom'));
-    console.log('%cindex.tsx line:48 a', 'color: #007acc;', a);
     if (!a) {
       form.setFieldValue('outputFrom', null);
     }
@@ -121,6 +119,9 @@ const Configuration: React.FC<CorderType> = ({ questionId, onChange }: CorderTyp
       </div>
     );
   };
+  const onDragEnd = (list, ids: string[]) => {
+    form.setFieldValue('inputParams', list);
+  };
   return (
     <Spin spinning={loading}>
       <Form
@@ -150,72 +151,73 @@ const Configuration: React.FC<CorderType> = ({ questionId, onChange }: CorderTyp
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
               <Col span={12}>
                 {' '}
-                <DndComponentProvider>
-                  <Form.List name="inputParams">
-                    {(fields, { add, remove }) => (
-                      <>
-                        <div className={styles.formTitleDiv}>Input Parameters</div>
-                        {fields.map((field, index) => (
-                          <DragDropCard
-                            key={index + '-card'}
-                            index={index}
-                            item={field}
-                            moveClassName={styles.moveClassName}
-                            moveCard={(dragIndex, hoverIndex) => {
-                              let group = form.getFieldValue('inputParams');
-                              const dragCard = group[dragIndex];
-                              const backupList = cloneDeep(group);
-                              backupList.splice(dragIndex, 1);
-                              backupList.splice(hoverIndex, 0, dragCard);
-                              form.setFieldValue('inputParams', backupList);
-                            }}
-                          >
-                            <Space key={field.key} align="center" className={styles.cardDndShow}>
-                              <Form.Item>
-                                <IconFont type="icon-a-Iconsdrag" style={{ cursor: 'move' }} />
-                              </Form.Item>
-                              <Form.Item
-                                {...field}
-                                name={[field.name, 'inputName']}
-                                rules={[
-                                  // {
-                                  //   required: true,
-                                  //   message: 'not empty',
-                                  // },
-                                  {
-                                    validator: (_, value) =>
-                                      /^[_a-zA-Z][0-9a-zA-Z_$]*/.test(value)
-                                        ? Promise.resolve()
-                                        : Promise.reject(new Error('The variable name is invalid')),
-                                  },
-                                ]}
-                                // initialValue={100}
-                              >
-                                <Input addonBefore="Name" />
-                              </Form.Item>
-
-                              <Form.Item>
-                                <span
-                                  onClick={() => remove(field.name)}
-                                  className={styles.formListIcon}
+                <Form.List name="inputParams">
+                  {(fields, { add, remove }) => (
+                    <>
+                      <div className={styles.formTitleDiv}>Input Parameters</div>
+                      <SortListDndKit list={inputParamsList} onDragEnd={onDragEnd} idKey={'sbId'}>
+                        {fields.map((field, index) => {
+                          const temp = form.getFieldValue('inputParams');
+                          let id = temp[index]?.sbId || '';
+                          return (
+                            <SortItemDndKit key={id} id={id}>
+                              <div>
+                                <Space
+                                  key={field.key}
+                                  align="center"
+                                  className={styles.cardDndShow}
                                 >
-                                  <CloseOutlined style={{ cursor: 'pointer' }} />
-                                </span>
-                              </Form.Item>
-                            </Space>
-                          </DragDropCard>
-                        ))}
-                        <AuButton
-                          onClick={() => add({ parseType: 1, sbId: JSON.stringify(Date.now()) })}
-                          type="link"
-                          className={styles.formInputAddButton}
-                        >
-                          <PlusOutlined /> Add
-                        </AuButton>
-                      </>
-                    )}
-                  </Form.List>
-                </DndComponentProvider>
+                                  <Form.Item>
+                                    <IconFont type="icon-a-Iconsdrag" style={{ cursor: 'move' }} />
+                                  </Form.Item>
+
+                                  <Form.Item
+                                    {...field}
+                                    name={[field.name, 'inputName']}
+                                    rules={[
+                                      // {
+                                      //   required: true,
+                                      //   message: 'not empty',
+                                      // },
+                                      {
+                                        validator: (_, value) =>
+                                          /^[_a-zA-Z][0-9a-zA-Z_$]*/.test(value)
+                                            ? Promise.resolve()
+                                            : Promise.reject(
+                                                new Error('The variable name is invalid'),
+                                              ),
+                                      },
+                                    ]}
+                                    // initialValue={100}
+                                  >
+                                    <Input addonBefore="Name" />
+                                  </Form.Item>
+
+                                  <Form.Item>
+                                    <span
+                                      onClick={() => remove(field.name)}
+                                      className={styles.formListIcon}
+                                    >
+                                      <CloseOutlined style={{ cursor: 'pointer' }} />
+                                    </span>
+                                  </Form.Item>
+                                </Space>
+                              </div>
+                            </SortItemDndKit>
+                          );
+                        })}
+                      </SortListDndKit>
+
+                      <AuButton
+                        onClick={() => add({ parseType: 1, sbId: JSON.stringify(Date.now()) })}
+                        type="link"
+                        className={styles.formInputAddButton}
+                      >
+                        <PlusOutlined /> Add
+                      </AuButton>
+                    </>
+                  )}
+                </Form.List>
               </Col>
               <Col span={12}>
                 <Form.Item label="Output Parameters" name="output">
@@ -342,6 +344,7 @@ const Configuration: React.FC<CorderType> = ({ questionId, onChange }: CorderTyp
                     label: item.label,
                   }))}
                   hideMessage
+                  placeholder="please choose your output"
                   // value={item.parseType}
                   style={{ width: '480px' }}
                   // onChange={(e) => onChangeInputCase({ ...item, parseType: e }, index)}

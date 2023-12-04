@@ -7,7 +7,7 @@ import type { SearchType } from '../../pages/Question/typeList';
  * 获取问题列表
  */
 export function QuestionList(data: SearchType) {
-  return request.post(`/questions/api/v1/search`, {
+  return request.post(`/questions/api/v2/trainer/search`, {
     data,
   });
 }
@@ -15,28 +15,28 @@ export function QuestionList(data: SearchType) {
  * 获取question列表头部标签
  */
 export function getTopicsList() {
-  return request.get(`/questions/api/v1/topics`);
+  return request.get(`/questions/api/v2/trainer/topics`);
 }
 
 /**
  * 获取question列表头部标签
  */
 export function getClients() {
-  return request.get(`/questions/api/v1/clients`);
+  return request.get(`/questions/api/v2/trainer/clients`);
 }
 
 /**
  * 获取question列表头部标签
  */
 export function getTags() {
-  return request.get(`/questions/api/v1/tags`);
+  return request.get(`/questions/api/v2/trainer/tags`);
 }
 
 /**
  * 获取question列表头部标签
  */
 export function getClientsSearch(data?: object) {
-  return request.post(`/questions/api/v1/clients`, {
+  return request.post(`/questions/api/v2/trainer/clients`, {
     data,
   });
 }
@@ -45,7 +45,7 @@ export function getClientsSearch(data?: object) {
  * 获取question列表头部标签
  */
 export function getTagsSearch(data?: object) {
-  return request.post(`/questions/api/v1/tags`, {
+  return request.post(`/questions/api/v2/trainer/tags`, {
     data,
   });
 }
@@ -54,21 +54,21 @@ export function getTagsSearch(data?: object) {
  * 获取questionDetail信息
  */
 export function getQuestionDetail(data: string) {
-  return request.get(`/questions/api/v1/search/${data}`);
+  return request.get(`/questions/api/v2/trainer/search/${data}`);
 }
 
 /**
  * 获取blob文件，富文本编辑器回显在用
  */
 export function getFile(questionId: string, fileId: string) {
-  return request.get(`/questions/api/v1/file/${questionId}/${fileId}`);
+  return request.get(`/questions/api/v2/trainer/file/${questionId}/${fileId}`);
 }
 
 /**
  * 获取资源id
  */
 export function generateResource(fileName: string) {
-  return request.get(`/questions/api/v1/resource/generate/${fileName}`, {
+  return request.get(`/questions/api/v2/trainer/resource/generate/${fileName}`, {
     headers: {
       'request-type': 'command',
     },
@@ -79,7 +79,7 @@ export function generateResource(fileName: string) {
  * 新建question
  */
 export function CreateQuestion(data: any) {
-  return request.post('/questions/api/v1/create', {
+  return request.post('/questions/api/v2/trainer/create', {
     data,
     requestType: 'form',
     headers: {
@@ -91,7 +91,7 @@ export function CreateQuestion(data: any) {
  * 更新question
  */
 export function UpdateQuestion(data: any) {
-  return request.put('/questions/api/v1/update', {
+  return request.put('/questions/api/v2/trainer/update', {
     data,
     requestType: 'form',
     headers: {
@@ -105,7 +105,7 @@ export function UpdateQuestion(data: any) {
  */
 
 export const removeQuesiton = (data: any) => {
-  return request.delete('/questions/api/v1/remove', {
+  return request.delete('/questions/api/v2/trainer/remove', {
     data,
     headers: {
       'request-type': 'command',
@@ -117,7 +117,7 @@ export const removeQuesiton = (data: any) => {
  * 更新short answer mock的questions列表，用于排序和删除，老接口，应该有可替代的方案？
  */
 export const saveAndDeleteQuestions = (data: any) => {
-  return request.put('/batch/api/v1/mock/question/update', {
+  return request.put('/batch/api/v2/trainer/mock/question/update', {
     data,
     headers: {
       'request-type': 'command',
@@ -127,7 +127,7 @@ export const saveAndDeleteQuestions = (data: any) => {
 
 // 好像没用？
 export function getSubscription(data?: object) {
-  return request.get(`/question/api/v1/question-subscription`, {
+  return request.get(`/question/api/v2/trainer/question-subscription`, {
     data,
     // headers: {
     //   'request-type': 'command',
@@ -136,7 +136,7 @@ export function getSubscription(data?: object) {
 }
 
 export function getHistorySubscription(data?: object) {
-  return request.post(`/questions/api/v1/question-subscription-history/search`, {
+  return request.post(`/questions/api/v2/trainer/question-subscription-history/search`, {
     data,
   });
 }
@@ -145,7 +145,7 @@ export function getHistorySubscription(data?: object) {
  * 创建订阅
  */
 export const createSubscription = (data: any) => {
-  return request.post('/questions/api/v1/question-subscription', {
+  return request.post('/questions/api/v2/trainer/question-subscription', {
     data,
     headers: {
       'request-type': 'command',
@@ -157,7 +157,7 @@ export const createSubscription = (data: any) => {
  * 更新订阅
  */
 export const updateSubscription = (data: any) => {
-  return request.patch('/questions/api/v1/question-subscription', {
+  return request.patch('/questions/api/v2/trainer/question-subscription', {
     data,
     headers: {
       'request-type': 'command',
@@ -169,7 +169,7 @@ export const updateSubscription = (data: any) => {
  * 删除订阅
  */
 export const deleteSubscription = (data: any) => {
-  return request.delete('/questions/api/v1/question-subscription', {
+  return request.delete('/questions/api/v2/trainer/question-subscription', {
     data,
     headers: {
       'request-type': 'command',
@@ -181,14 +181,14 @@ export const deleteSubscription = (data: any) => {
  * 获取单个订阅详情
  */
 export const findSubscriptionById = (id: any) => {
-  return request.get(`/question/api/v1/question-subscription?userId=${id}`);
+  return request.get(`/question/api/v2/trainer/question-subscription?userId=${id}`);
 };
 
 /**
  * This API is used to search question-subscriptions by providing searching criterias.
  */
 export function searchSubscriptions(data: object) {
-  return request.post(`/questions/api/v1/question-subscription/search`, {
+  return request.post(`/questions/api/v2/trainer/question-subscription/search`, {
     data,
   });
 }
@@ -197,7 +197,7 @@ export function searchSubscriptions(data: object) {
  * 获取订阅config
  */
 export const getSubscriptionConfig = () => {
-  return request.post(`/questions/api/v1/config`);
+  return request.post(`/questions/api/v2/trainer/config`);
 };
 
 /**
@@ -246,34 +246,37 @@ export const createClient = (data: { name: string }) => {
 /**
  * 删除Topic
  */
-export const removeTopic = (data: any) => {
+export const removeTopic = (data: any, options?: any) => {
   return request.delete('/questions/api/v1/topic/remove', {
     data,
     headers: {
       'request-type': 'command',
     },
+    ...options
   });
 };
 
 /**
  * 删除Tag
  */
-export const removeTag = (data: any) => {
+export const removeTag = (data: any, options?: any) => {
   return request.delete('/questions/api/v1/tag/remove', {
     data,
     headers: {
       'request-type': 'command',
     },
+    ...options,
   });
 };
 
 /**
  * 删除Tag
  */
-export const removeClient = (clientId: string) => {
-  return request.delete(`/subscriptions/api/v1/clients/${clientId}`, {
+export const removeClient = (id: string, options?: any) => {
+  return request.delete(`/subscriptions/api/v1/clients/${id}`, {
     headers: {
       'request-type': 'command',
     },
+    ...options,
   });
 };

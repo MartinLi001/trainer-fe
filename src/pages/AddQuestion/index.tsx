@@ -254,7 +254,13 @@ const AddQuestion: React.FC<AddQuestionProps> = ({ detailReducersList, dispatch 
         formData.append('attachments', file as RcFile);
       });
     }
-    if (desQuill.file || saQuill.file) formData.append('images', desQuill.file ?? saQuill.file);
+    console.log(desQuill.file, saQuill.file);
+    desQuill.file?.forEach((file: RcFile) => {
+      formData.append('images', file);
+    });
+    saQuill.file?.forEach((file: RcFile) => {
+      formData.append('images', file);
+    });
 
     formData.append('question', JSON.stringify({ ...values }));
     setLoadingButton(true);
@@ -354,16 +360,18 @@ const AddQuestion: React.FC<AddQuestionProps> = ({ detailReducersList, dispatch 
 
             <Form.Item label="Attachment" name="file">
               <div className={style.ColdingMockuplad}>
-                {type == 'edit' && questionData?.resources && questionData.resources?.length > 0 && (
-                  <div className={style.downloadFile}>
-                    <UploadPreviewQues
-                      questionId={questionData.questionId}
-                      data={questionData.resources || []}
-                      downIcon={true}
-                      onRemove={removeAttachment}
-                      exceptList={removeIds}
-                    />
-                    {/* {questionData.resources?.map((ite) => {
+                {type == 'edit' &&
+                  questionData?.resources &&
+                  questionData.resources?.length > 0 && (
+                    <div className={style.downloadFile}>
+                      <UploadPreviewQues
+                        questionId={questionData.questionId}
+                        data={questionData.resources || []}
+                        downIcon={true}
+                        onRemove={removeAttachment}
+                        exceptList={removeIds}
+                      />
+                      {/* {questionData.resources?.map((ite) => {
                       return (
                         <SeeButton
                           icon={<DownloadOutlined />}
@@ -377,8 +385,8 @@ const AddQuestion: React.FC<AddQuestionProps> = ({ detailReducersList, dispatch 
                         </SeeButton>
                       );
                     })} */}
-                  </div>
-                )}
+                    </div>
+                  )}
                 <UploadPreview data={fileList} onRemove={ref.current?.onRemove} />
                 <DetailsUpload ref={ref} beforeUpload={beforeUpload} accept={'.zip,.pdf'} />
               </div>

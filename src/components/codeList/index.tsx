@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Badge, Input, Modal, Spin, Tabs, message } from 'antd';
+import { Badge, Input, InputRef, Modal, Spin, Tabs, message } from 'antd';
 
 import CodeMirrorCom from '@/components/CodeMirror6';
 import { AuInput } from '@aurora-ui-kit/core';
 import { getCodeFile, updateCodeFile, deleteCodeFile, addCodeFile } from '@/services/coder';
 import styles from './index.less';
 import IconFont from '../IconFont';
+import EmptyCode from '../emptyCodeShow';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
@@ -44,17 +45,19 @@ function CodeList({
   const newTabIndex = useRef(0);
   const [codeShow, setCodeShow] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const myInput = useRef<InputRef>(null);
   const onChangeTabs = (newActiveKey: string) => {
-    setActiveKey(newActiveKey);
+    setActiveKey(parseInt(newActiveKey));
   };
 
-  useEffect(() => {
+  const getCodeFileList = () => {
     getCodeFile(addProps.questionId, addProps.language, addProps.type).then((res) => {
-      console.log('%cindex.tsx line:57 res', 'color: #007acc;', res);
       setCodeList(res);
       setActiveKey(res[0].id);
     });
+  };
+  useEffect(() => {
+    getCodeFileList();
   }, []);
 
   const add = () => {
@@ -68,19 +71,21 @@ function CodeList({
     addCodeFile({
       ...addProps,
       fileName: `newFile${numberFile}`,
-    }).then((res) => {
-      console.log('%cindex.tsx line:61 res', 'color: #007acc;', res);
-      const newPanes = [...codeList];
-      newPanes.push({
-        fileName: `newFile${numberFile}`,
-        fileContent: '',
-        id: res,
-        nameChange: false,
+    })
+      .then((res) => {
+        const newPanes = [...codeList];
+        newPanes.push({
+          fileName: `newFile${numberFile}`,
+          fileContent: '',
+          id: res,
+          nameChange: false,
+        });
+        setCodeList(newPanes);
+        setActiveKey(res);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      setCodeList(newPanes);
-      setActiveKey(res);
-      setLoading(false);
-    });
   };
 
   useEffect(() => {
@@ -106,29 +111,31 @@ function CodeList({
       cancelText: 'Cancel',
       onOk() {
         setLoading(true);
-        deleteCodeFile({ questionId: addProps.questionId, id: targetKey }).then((res) => {
-          let newActiveKey = activeKey;
-          let lastIndex = -1;
-          codeList.forEach((item, i) => {
-            if (item.id === targetKey) {
-              lastIndex = i - 1;
+        return deleteCodeFile({ questionId: addProps.questionId, id: targetKey })
+          .then((res) => {
+            let newActiveKey = activeKey;
+            let lastIndex = -1;
+            codeList.forEach((item, i) => {
+              if (item.id === targetKey) {
+                lastIndex = i - 1;
+              }
+            });
+            const newPanes = codeList.filter((item) => item.id !== targetKey);
+            if (newPanes.length && newActiveKey === targetKey) {
+              if (lastIndex >= 0) {
+                newActiveKey = newPanes[lastIndex].id;
+              } else {
+                newActiveKey = newPanes[0].id;
+              }
             }
+            /// delete targetKey
+            setCodeList(newPanes);
+            setActiveKey(newActiveKey);
+            setLoading(false);
+          })
+          .finally(() => {
+            setLoading(false);
           });
-          const newPanes = codeList.filter((item) => item.id !== targetKey);
-          if (newPanes.length && newActiveKey === targetKey) {
-            if (lastIndex >= 0) {
-              newActiveKey = newPanes[lastIndex].id;
-            } else {
-              newActiveKey = newPanes[0].id;
-            }
-          }
-          /// delete targetKey
-          setCodeList(newPanes);
-          setActiveKey(newActiveKey);
-          setLoading(false);
-        }).finally(()=>{
-          setLoading(false)
-        })
       },
       onCancel() {
         console.log('Cancel');
@@ -155,14 +162,19 @@ function CodeList({
       let newPanes = codeList.map((item) => {
         if (item.id === activeKey) {
           item.nameChange = true;
+        } else {
+          item.nameChange = false;
         }
         return item;
       });
       setCodeList(newPanes);
+      setTimeout(() => {
+        myInput.current.focus();
+      });
     }
   };
   const saveName = (e: any, code: tabCodeListTyep) => {
-    if (e.target.value == '') {
+    if (e.target.value == '' || e.target.value == code.fileName) {
       let newPanes = codeList.map((item) => {
         if (item.id === code.id) {
           item.nameChange = false;
@@ -191,7 +203,6 @@ function CodeList({
     setCodeList(newPanes);
   };
   const onChangeCode = (value: string, code: tabCodeListTyep) => {
-    console.log('%cindex.tsx line:144 codeList', 'color: #007acc;', codeList);
     let newPanes = codeList.map((item) => {
       if (item.id === code.id) {
         item.nameChange = false;
@@ -200,7 +211,6 @@ function CodeList({
       }
       return item;
     });
-    console.log('%cindex.tsx line:152 newPanes', 'color: #007acc;', newPanes);
     setCodeList(newPanes);
   };
   const autoSave = (value: string) => {
@@ -226,49 +236,66 @@ function CodeList({
   return (
     <div className={styles.codeList}>
       <Spin spinning={loading}>
-        <Tabs
-          type="editable-card"
-          onChange={onChangeTabs}
-          activeKey={activeKey}
-          onEdit={onEdit}
-          items={(codeList || []).map((ite) => {
-            return {
-              label: (
-                <>
-                  {ite.nameChange ? (
-                    <Input defaultValue={ite.fileName} onBlur={(e) => saveName(e, ite)} />
-                  ) : (
-                    <div onClick={() => changeName(ite)}>
-                      {/* {ite.fileName} */}
-                      <span className={styles.CodeFileName}>
+        {codeList.length > 0 ? (
+          <Tabs
+            type="editable-card"
+            onChange={onChangeTabs}
+            activeKey={activeKey}
+            onEdit={onEdit}
+            items={(codeList || []).map((ite) => {
+              return {
+                label: (
+                  <>
+                    {ite.nameChange ? (
+                      <Input
+                        defaultValue={ite.fileName}
+                        onBlur={(e) => saveName(e, ite)}
+                        style={{ width: '100px' }}
+                        ref={myInput}
+                      />
+                    ) : (
+                      <div onClick={() => changeName(ite)} className={styles.codeTabs}>
                         <Badge
                           dot={true}
-                          offset={[8, 12]}
+                          offset={[12, 12]}
                           color={ite.isEditing ? '#FF4D4F' : '#52C41A'}
                         >
-                          {ite.fileName}
+                          <span
+                            className={`${
+                              activeKey == ite.id ? styles.tabsNameChoose : styles.tabsName
+                            }`}
+                          >
+                            {ite.fileName}
+                          </span>
                         </Badge>
-                      </span>
-                    </div>
-                  )}
-                </>
-              ),
-              key: ite.id,
-              children: (
-                <div className={styles.codeFileShow}>
-                  {codeShow && (
-                    <CodeMirrorCom
-                      language={language}
-                      codeValue={ite.fileContent}
-                      onChange={(value: string) => onChangeCode(value, ite)}
-                      autoSaveCode={autoSave}
-                    />
-                  )}
-                </div>
-              ),
-            };
-          })}
-        />
+                      </div>
+                    )}
+                  </>
+                ),
+                key: ite.id,
+                children: (
+                  <div className={styles.codeFileShow}>
+                    {codeShow && (
+                      <CodeMirrorCom
+                        language={language}
+                        codeValue={ite.fileContent}
+                        onChange={(value: string) => onChangeCode(value, ite)}
+                        autoSaveCode={autoSave}
+                      />
+                    )}
+                  </div>
+                ),
+              };
+            })}
+          />
+        ) : (
+          <EmptyCode
+            type={addProps.type}
+            addFile={() => {
+              add();
+            }}
+          />
+        )}
       </Spin>
     </div>
   );

@@ -13,6 +13,7 @@ import { date2desc } from '@/utils';
 import TagShow from '@/components/TagShow';
 import moment from 'moment';
 import { getUserAvatar } from '@/services/user';
+import { useModel } from 'umi';
 
 export interface userShowDrawer {
   user: PeopleType;
@@ -23,26 +24,28 @@ export interface userShowDrawer {
 }
 function DrawerShow({ user, batch, visible, onClose, getData }: userShowDrawer) {
   const [data, setData] = useState<PeopleType>({} as PeopleType);
-  const userId = localStorage.getItem('userId') as string;
+  const { initialState } = useModel('@@initialState');
+  const userId = initialState?.userId;
   const [modalValue, setModalValue] = useState<FeedbackType>({} as FeedbackType);
   const [openModal, setOpenModal] = useState(false);
-  const [subscriptions, setSubscrioptions] = useState<SubscriptionsType[]>();
+  // const [subscriptions, setSubscrioptions] = useState<SubscriptionsType[]>();
   const [avatarSrc, setAvatar] = useState<string>();
 
   useEffect(() => {
     setData(user || ({} as PeopleType));
-    getSubscription(user.userId).then((res) => {
-      setSubscrioptions(res);
-    });
-    getUserAvatar(user.userId).then((avatar: Blob) =>
-      setAvatar(URL.createObjectURL(avatar) as string),
-    );
+    // getSubscription(user.userId).then((res) => {
+    //   setSubscrioptions(res);
+    // });
+    // getUserAvatar(user.userId).then((avatar: Blob) =>
+    //   setAvatar(URL.createObjectURL(avatar) as string),
+    // );
   }, [user]);
 
   const editOrSaveFeed = (dataFeed: FeedbackType) => {
     const dataValue = {
       userId: data.userId,
       summary: { ...dataFeed },
+      batchId: batch.batchId,
     };
     if (dataFeed.summaryId) {
       updateSummary(dataValue).then(() => {
@@ -72,7 +75,7 @@ function DrawerShow({ user, batch, visible, onClose, getData }: userShowDrawer) 
   };
   const deleteFeed = (value: FeedbackType) => {
     Modal.confirm({
-      title: 'Delete FeedBacl',
+      title: 'Delete Feedback',
       content: (
         <div>
           <p style={{ fontSize: 16, fontWeight: 600, lineHeight: '26px' }}>
@@ -87,6 +90,7 @@ function DrawerShow({ user, batch, visible, onClose, getData }: userShowDrawer) 
       onOk() {
         const submitData = {
           userId: data.userId,
+          batchId: batch.batchId,
           summaryId: value.summaryId,
         };
         deleteSummary(submitData).then(() => {
@@ -136,7 +140,7 @@ function DrawerShow({ user, batch, visible, onClose, getData }: userShowDrawer) 
                     verticalAlign: 'middle',
                   }}
                   src={avatarSrc}
-                  // src="https://joeschmoe.io/api/v1/random"
+                  // src="https://joeschmoe.io/api/v2/trainer/random"
                 >
                   {/* {data?.firstName?.slice(0, 1).toUpperCase()} */}
                 </Avatar>
@@ -165,7 +169,7 @@ function DrawerShow({ user, batch, visible, onClose, getData }: userShowDrawer) 
             </div>
           </div>
           <div className={style.showContent}>
-            {subscriptions && subscriptions.length > 0 && (
+            {/* {subscriptions && subscriptions.length > 0 && (
               <div className={style.Subscriptions}>
                 <CardTitle
                   title={'Subscriptions'}
@@ -192,7 +196,7 @@ function DrawerShow({ user, batch, visible, onClose, getData }: userShowDrawer) 
                   );
                 })}
               </div>
-            )}
+            )} */}
             <div className={style.drawerSummaries}>
               <CardTitle
                 title={'Recent Feedback'}

@@ -55,12 +55,14 @@ export type TagsType = {
  */
 export type usersSearchResultUserType = {
   userId: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   preferredName: string;
   email: string;
   tags?: TagsType[];
-  batchAddedDate: string;
+  batchId?: string;
+  batchName?: string;
+  batchStartDate: string;
 };
 /**
  * 添加订阅选择学员的表格中每行数据

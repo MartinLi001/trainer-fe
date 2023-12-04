@@ -10,9 +10,9 @@ import { useThrottleEffect } from 'ahooks';
 export default function Stats(props: any) {
   const [avatarSrc, setAvatar] = useState<string>();
   const getAvatar = (userId: string) => {
-    getUserAvatar(userId)
-      .then((avatar: Blob) => setAvatar(URL.createObjectURL(avatar) as string))
-      .catch(() => {});
+    // getUserAvatar(userId)
+    //   .then((avatar: Blob) => setAvatar(URL.createObjectURL(avatar) as string))
+    //   .catch(() => {});
   };
 
   useThrottleEffect(

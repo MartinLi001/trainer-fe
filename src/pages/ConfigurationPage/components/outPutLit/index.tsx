@@ -31,11 +31,11 @@ function OutPutList({ onChange, value }: { onChange?: (value: boolean) => void; 
         onClick={() => ChangeValue()}
         disabled={checked}
         variant="gray"
-        prefix={<PlusOutlined />}
+        // prefix={<PlusOutlined />}
         className={styles.addButton}
         shape="round"
       >
-        Add
+       <PlusOutlined /> Add
       </AuButton>
     </div>
   );

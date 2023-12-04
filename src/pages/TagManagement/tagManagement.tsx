@@ -51,7 +51,7 @@ export default function TagManagement() {
 
   const onRemoveTopic = useCallback(
     (id: string) =>
-      removeTopic({ questionTopicId: id }).then(() => {
+      removeTopic({ questionTopicId: id }, { noErrorMessage: true }).then(() => {
         setTopics((old) => old.filter((i) => i.id !== id));
       }),
     [],
@@ -59,13 +59,17 @@ export default function TagManagement() {
 
   const onRemoveTag = useCallback(
     (id: string) =>
-      removeTag({ questionTagId: id }).then(() => setTags((old) => old.filter((i) => i.id !== id))),
+      removeTag({ questionTagId: id }, { noErrorMessage: true }).then(() =>
+        setTags((old) => old.filter((i) => i.id !== id)),
+      ),
     [],
   );
 
   const onRemoveClient = useCallback(
     (id: string) =>
-      removeClient(id).then(() => setClients((old) => old.filter((i) => i.id !== id))),
+      removeClient(id, { noErrorMessage: true }).then(() =>
+        setClients((old) => old.filter((i) => i.id !== id)),
+      ),
     [],
   );
 

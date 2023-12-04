@@ -27,6 +27,7 @@ import { ErrorPage403 } from '@/components/ErrorPage';
 
 import route from '../config/routes';
 import { useSize, useThrottleEffect } from 'ahooks';
+import { getMyBatches } from './services/batch';
 
 interface InitialStateType {
   route: IRoute;
@@ -37,31 +38,36 @@ interface InitialStateType {
   firstName: string;
   avatar: string | Blob;
   userInfo: RegisterUserInfo;
+  userBatch: any;
 }
 
 export async function getInitialState(): Promise<InitialStateType> {
   try {
-    if (window.__POWERED_BY_QIANKUN__) {
-      return {} as InitialStateType;
+    // if (window.__POWERED_BY_QIANKUN__) {
+    //   return {} as InitialStateType;
+    // }
+    if (window.location.pathname.endsWith('/callback')) {
+      return {} as any;
     }
 
-    const userInfo = await getUserInfo();
+    const [userInfo, userBatch] = await Promise.all([getUserInfo(), getMyBatches()]);
 
-    if (userInfo.status === 'Added') {
-      history.push('/register');
-    }
+    // if (userInfo.status === 'Added') {
+    //   history.push('/register');
+    // }
 
     localStorage.setItem('userInfo', JSON.stringify(userInfo || '{}'));
     localStorage.setItem('userId', userInfo.userId);
 
-    const productList = await getProductList();
+    // const productList = await getProductList();
 
-    const systemAccess = await getSystemAccess();
+    // const systemAccess = await getSystemAccess();
 
     return {
       ...userInfo,
-      ...productList,
-      ...systemAccess,
+      userBatch,
+      // ...productList,
+      // ...systemAccess,
       route,
       collapsed: false,
     } as InitialStateType;
@@ -73,13 +79,13 @@ export async function getInitialState(): Promise<InitialStateType> {
 export function patchRoutes() {}
 
 export async function render(oldRender: any) {
-  if (!window.__POWERED_BY_QIANKUN__) {
-    await getSsoToken();
+  // if (!window.__POWERED_BY_QIANKUN__) {
+  // await getSsoToken();
 
-    if (await checkIsLogin()) {
-      oldRender();
-    }
-  }
+  // if (await checkIsLogin()) {
+  //   oldRender();
+  // }
+  // }
   oldRender();
 }
 
@@ -154,15 +160,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState }: { initialState: an
     waterMarkProps: {
       content: initialState?.firstName,
     },
-    onPageChange: (routeItem: IRoute) => {
-      if (
-        routeItem.pathname === '/register' &&
-        localStorage.userInfo &&
-        JSON.parse(localStorage.userInfo).status === 'Enrolled'
-      ) {
-        history.push('/');
-      }
-    },
+    // onPageChange: (routeItem: IRoute) => {
+    //   if (
+    //     routeItem.pathname === '/register' &&
+    //     localStorage.userInfo &&
+    //     JSON.parse(localStorage.userInfo).status === 'Enrolled'
+    //   ) {
+    //     history.push('/');
+    //   }
+    // },
 
     unAccessible: <ErrorPage403 />,
     ...initialState?.settings,
@@ -206,7 +212,6 @@ export const dva = {
         storage,
         blacklist: [],
       };
-      console.log('=======reducer');
       return persistReducer(persistConfig, reducer);
     },
   },

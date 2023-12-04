@@ -22,7 +22,7 @@ import UnlockModal from '@/pages/MyBatch/components/UnlockModal';
 import LockTaskModal from '@/components/lockTask';
 import Assignment from '../Assignment';
 import AssignmentGrading from '../Assignment/components/Grading';
-import { useSelector } from 'umi';
+import { useModel, useSelector } from 'umi';
 import moment from 'moment';
 import { cloneDeep } from 'lodash';
 
@@ -32,6 +32,7 @@ interface Props {
 }
 
 export default function Project(props: Props) {
+  const { initialState } = useModel('@@initialState');
   const { taskId, pageHeaderItems } = props;
   const [switchToAssignment, setSwitchToAssignment] = useState(false); //是否用Assignment的样子显示
   const [taskData, setTaskData] = useState<any>({});
@@ -55,7 +56,7 @@ export default function Project(props: Props) {
 
   const { Batch } = useSelector((state) => state) as any;
   const isBatchTrainer = useMemo(
-    () => Batch?.data?.trainers?.some((i: any) => i.userId === localStorage.userId),
+    () => Batch?.data?.trainers?.some((i: any) => i.userId === initialState?.userId),
     [Batch],
   );
 

@@ -5,6 +5,7 @@ import IconFont from '@/components/IconFont';
 import SeeButton from '@/components/SeeButton';
 import { date2desc } from '@/utils';
 import { Input } from 'antd';
+import { useModel } from 'umi';
 const { TextArea } = Input;
 
 interface ScoreProps {
@@ -16,9 +17,10 @@ interface ScoreProps {
   onDelete?: (value: string) => void;
 }
 const CommentTitle = ({ value, type, onCommentChange, edit, editChange, onDelete }: ScoreProps) => {
+  const { initialState } = useModel('@@initialState');
   const [editing, setEditing] = useState(false);
   const [content, setContent] = useState<string>('');
-  const userId = localStorage.getItem('userId') as string;
+  const { userId } = initialState || {};
 
   useEffect(() => {
     setEditing(value ? false : true);

@@ -63,7 +63,7 @@ function SubmitedBlock(
     if (submitTrainees.length && Object.keys(selectUser).length && Object.keys(results).length) {
       const userResult = results[selectUser?.userId];
       const { language = '', content = '' } = userResult?.userAnswer ?? {};
-      codeRef.current?.setOption(languageList[language]);
+      codeRef.current?.setOption(language);
       codeRef.current?.setValue(content);
       return;
     }

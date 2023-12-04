@@ -3,22 +3,75 @@
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
-  min-height: 260px;
-  padding-top: 12px;
-  // padding-bottom: 12px;
-  overflow: hidden;
-  border: 1px solid #ddd;
   border-radius: 12px;
-
-  :global(.ant-tabs-nav-list) {
-    width: 100%;
-    border-bottom: 1px solid #eee;
-  }
+  border: 1px solid #DDD;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 100%;
 
   :global(.ant-tabs) {
     width: 100%;
-    :global(.ant-tabs-tab) {
-      transform: translateY(1px);
+
+    :global(.ant-tabs-nav-wrap) {
+      margin-left: 12px;
+
+
+
+
+      .codeTabs {
+        display: flex;
+        // padding: 3px 12px 3px 16px;
+        align-items: center;
+        margin-right: 8px;
+
+        .tabsName {
+          color: var(--text-4, #4E5969) !important;
+          font-family: PingFang SC;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 22px;
+        }
+
+        .tabsNameChoose {
+          color: var(--unnamed, #165DFF) !important;
+          font-family: PingFang SC;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 22px;
+
+        }
+
+      }
+
+      :global(.ant-tabs-nav-add) {
+        border: 0;
+        background-color: #fff;
+        font-size: 10px;
+      }
+
+      :global(.ant-tabs-tab-remove) {
+        margin-top: 4px;
+      }
+
+
+    }
+
+    // :global(.ant-tabs-nav-wrap.ant-tabs-nav-wrap-ping-right) {
+    //   :global(.ant-tabs-tab-active) {
+    //     width: auto;
+    //     min-width: 150px;
+    //   }
+    // }
+
+    :global(.ant-tabs-nav-operations) {
+
+      :global(.ant-tabs-nav-add) {
+        border: 0;
+        background-color: #fff;
+        font-size: 10px;
+      }
     }
   }
 
@@ -26,15 +79,9 @@
     width: 100%;
   }
 
-  :global(.ant-tabs-nav-add) {
-    background-color: unset !important;
-    border: none !important;
-  }
+
 
   .codeFileShow {
-    height: 260px;
-    :global(.cm-focused) {
-      outline: 0;
-    }
+    height: 200px;
   }
 }

@@ -1,5 +1,5 @@
 import { Skeleton } from 'antd';
-// import { RunStatus } from '../../constant';
+import { RunStatus } from '@/constants';
 import styles from './index.less';
 
 export default function RunResult({ loading, data }: any) {
@@ -11,8 +11,8 @@ export default function RunResult({ loading, data }: any) {
             <>
               <span className={styles.block}>
                 <span className={`${styles.label} ${styles[`status-${data?.statusCode}`]}`}>
-                  {/* {RunStatus[data?.statusCode] ?? 'N/A'} */}
-                  {data?.statusMessage ?? 'N/A'}
+                  {RunStatus[data?.statusCode] ?? 'N/A'}
+                  {/* {data?.statusMessage ?? 'N/A'} */}
                 </span>
               </span>
               <span className={styles.block}>

@@ -7,7 +7,7 @@ import { request } from '@/utils';
  * 更新用户信息
  */
 export function submitShortResult(data: any) {
-  return request.put('/batch/api/v1/mock/short/result/submit', {
+  return request.put('/batch/api/v2/trainer/mock/short/result/submit', {
     data,
     headers: {
       'request-type': 'command',
@@ -19,7 +19,7 @@ export function submitShortResult(data: any) {
  * 更新用户信息
  */
 export function submitCodingResult(data: any) {
-  return request.put('/batch/api/v1/mock/coding/result/submit', {
+  return request.put('/batch/api/v2/trainer/mock/coding/result/submit', {
     data,
     requestType: 'form',
     headers: {
@@ -32,7 +32,7 @@ export function submitCodingResult(data: any) {
  * 更新mock group(创建、编辑普通组、创建、编辑补考组、创建、编辑一对一组)
  */
 export function updateMockGroups(data: any) {
-  return request.put('/batch/api/v1/mock/short/groups/update', {
+  return request.put('/batch/api/v2/trainer/mock/short/groups/update', {
     data,
     headers: {
       'request-type': 'command',
@@ -44,7 +44,7 @@ export function updateMockGroups(data: any) {
 //  * 更新mock Individual group
 //  */
 // export function updateMockIndividualGroups(data: any) {
-//   return request.put('/batch/api/v1/mock/short/group/update', {
+//   return request.put('/batch/api/v2/trainer/mock/short/group/update', {
 //     data,
 //     headers: {
 //       'request-type': 'command',
@@ -56,7 +56,7 @@ export function updateMockGroups(data: any) {
  * mock创建补考组
  */
 export function updateMockMackupGroups(data: any) {
-  return request.post('/batch/api/v1/mock/short/groups/update', {
+  return request.post('/batch/api/v2/trainer/mock/short/groups/update', {
     data,
     headers: {
       'request-type': 'command',
@@ -68,7 +68,7 @@ export function updateMockMackupGroups(data: any) {
  * 更新coding mock status
  */
 export function updateMockStatus(data: any) {
-  return request.put('/batch/api/v1/mock/coding/update', {
+  return request.put('/batch/api/v2/trainer/mock/coding/update', {
     data,
     headers: {
       'request-type': 'command',

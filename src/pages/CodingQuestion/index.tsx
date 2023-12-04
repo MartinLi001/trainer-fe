@@ -287,7 +287,12 @@ const Question: React.FC<QuestionProps> = ({ moduleSearchList, dispatch }) => {
       cancelButtonProps: { style: { borderRadius: 3 } },
       onOk() {
         return removeQuesiton({ questionId: id }).then(() => {
-          getQuestionList(SearchList);
+          const refreshParam = SearchList;
+          if (SearchDataList?.length === 1) {
+            refreshParam.pageNum = SearchList.pageNum ? SearchList.pageNum - 1 : 0;
+            setSearchList(refreshParam);
+          }
+          getQuestionList(refreshParam);
           message.success('delete Success!');
         });
       },

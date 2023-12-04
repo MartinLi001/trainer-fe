@@ -2,7 +2,7 @@ import { getKpiSummary } from '@/services/kpi';
 import { useRequest } from 'ahooks';
 import { Modal, Spin, Tabs } from 'antd';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation, useSelector } from 'umi';
+import { useLocation, useModel, useSelector } from 'umi';
 import styles from './index.less';
 import AssignmentKpi from './summary/AssignmentKpi';
 import MockKpi from './summary/MockKpi';
@@ -15,6 +15,7 @@ interface Props {
   setTipsType: (v: any) => void;
 }
 export default function Kpi(props: Props) {
+  const { initialState } = useModel('@@initialState');
   const { batchId, setTipsType } = props;
   const [activeKey, setActiveKey] = useState('Overall');
   const [kpiSummaryData, setKpiSummaryData] = useState<KPI.Summary>({
@@ -32,7 +33,7 @@ export default function Kpi(props: Props) {
   });
   const { Batch } = useSelector((state) => state) as any;
   const isBatchTrainer = useMemo(
-    () => !!Batch?.data?.trainers?.some((i: any) => i.userId === localStorage.userId),
+    () => !!Batch?.data?.trainers?.some((i: any) => i.userId === initialState?.userId),
     [Batch],
   );
   const { pathname } = useLocation();

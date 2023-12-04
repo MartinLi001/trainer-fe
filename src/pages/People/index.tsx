@@ -45,9 +45,15 @@ function People({ data, callBack }: ComPropsType) {
       setLoading(true);
       getUserList({ idList: ids })
         .then((res) => {
-          const len = data?.trainers.length;
-          const tempee = res.splice(0, len);
-          const temper = res.splice(res.lenth - len);
+          const trainerIds = data?.trainers.map((item: { userId: string }) => {
+            return item.userId;
+          });
+          const tempee = res.filter((item: { userId: any; }) => {
+            return trainerIds.includes(item.userId);
+          });
+          const temper = res.filter((item: { userId: any; }) => {
+            return !trainerIds.includes(item.userId);
+          });
           setTrainers(tempee);
           setTrainees(temper);
         })

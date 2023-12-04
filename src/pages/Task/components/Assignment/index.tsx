@@ -7,7 +7,7 @@ import type { RcFile } from 'antd/lib/upload';
 import DetailsCardItem from '@/components/DetailsCardItem';
 import { Empty, Input, message, Radio, Spin } from 'antd';
 import moment from 'moment';
-import { connect } from 'umi';
+import { connect, useModel } from 'umi';
 import { useDebounceFn } from 'ahooks';
 import type { RadioChangeEvent, UploadFile } from 'antd';
 import Comment from '@/components/Comment';
@@ -36,8 +36,9 @@ const Assignment: React.FC<AssignmentProps> = ({
   type = 'Assignment',
   loading,
 }) => {
+  const { initialState } = useModel('@@initialState');
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const userInfo = JSON.parse(localStorage.userInfo ?? '{}');
+  const userInfo = initialState;
   const firstName = userInfo?.firstName;
   const [LeftcommentInput, setLeftCommentInput] = useState<string>('');
   const [RightcommentInput, setRightCommentInput] = useState<string>('');
@@ -59,7 +60,7 @@ const Assignment: React.FC<AssignmentProps> = ({
       const params = {
         batchId: data.batchId,
         taskId: data.taskId,
-        userId: userInfo.userId,
+        userId: userInfo?.userId,
         content: RightcommentInput,
       };
       try {

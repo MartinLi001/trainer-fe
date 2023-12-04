@@ -22,7 +22,7 @@ podTemplate() {
                     echo 'Start to build project ...'
                     sh('git rev-parse --abbrev-ref HEAD > GIT_BRANCH')
                     sh('git rev-parse --short=8  HEAD > GIT_COMMIT')
-                    sh('git submodule update')
+                    sh('git submodule update --init')
                     sh('mkdir -p ~/.npm/${JOB_NAME%%_*}/node_modules && chown -R 1000.1000 ~/.npm/${JOB_NAME%%_*}')
                     sh('rsync -au ~/.npm/${JOB_NAME%%_*}/node_modules ./')
                     sh('npm install --legacy-peer-deps')

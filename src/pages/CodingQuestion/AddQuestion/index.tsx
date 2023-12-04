@@ -345,7 +345,16 @@ const AddQuestion: React.FC<AddQuestionProps> = ({
             <Form.Item
               label="Description"
               name="description"
-              rules={[{ required: true, message: 'Please input your Description!' }]}
+              rules={[
+                {
+                  validator: () => {
+                    const content = QuillRef.current?.getContent()?.renderedContent;
+                    if (content === null || content === '<p><br></p>')
+                      return Promise.reject(new Error('Please input your Description!'));
+                    else return Promise.resolve();
+                  },
+                },
+              ]}
             >
               <Quill
                 ref={QuillRef}
@@ -494,7 +503,16 @@ const AddQuestion: React.FC<AddQuestionProps> = ({
             <Form.Item
               label="sampleAnswer"
               name="sampleAnswer"
-              rules={[{ required: true, message: 'Please input your sampleAnswer!' }]}
+              rules={[
+                {
+                  validator: () => {
+                    const content = QuillRefanswer.current?.getContent()?.renderedContent;
+                    if (content === null || content === '<p><br></p>')
+                      return Promise.reject(new Error('Please input your sampleAnswer!'));
+                    else return Promise.resolve();
+                  },
+                },
+              ]}
             >
               <Quill
                 ref={QuillRefanswer}

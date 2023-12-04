@@ -320,7 +320,14 @@ function MyBatch({ dispatch, data: batchDetailData, loading: getDetailLoading }:
   );
 
   const Right = useMemo(() => {
-    if (batchList?.batchIds?.length && !batchDetailData.tasks.length) {
+    const typeConfig = typeConfigList.find((item) => item.key === selectKey);
+    if (selectKey === 'People')
+      return typeConfig?.component({
+        data: batchDetailData,
+        callBack: getBatchDetailsFun,
+      });
+
+    if (!batchDetailData.tasks?.length) {
       return (
         <div
           style={{
@@ -349,12 +356,6 @@ function MyBatch({ dispatch, data: batchDetailData, loading: getDetailLoading }:
         </div>
       );
     }
-    const typeConfig = typeConfigList.find((item) => item.key === selectKey);
-    if (selectKey === 'People')
-      return typeConfig?.component({
-        data: batchDetailData,
-        callBack: getBatchDetailsFun,
-      });
 
     const { tasks = [] } = batchDetailData ?? {};
     if (selectKey === 'all') return typeConfig?.component({ data: tasks, sort: sortKey });

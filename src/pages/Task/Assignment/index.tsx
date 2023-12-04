@@ -40,7 +40,7 @@ import { useRequest } from 'ahooks';
 import LockTaskModal from '@/components/lockTask';
 import AssRefersh from '@/assets/AssRefersh.svg';
 import moment from 'moment';
-import { useSelector } from 'umi';
+import { useModel, useSelector } from 'umi';
 import { cloneDeep } from 'lodash';
 
 // import AssignmentGrading from './components/Grading';
@@ -81,6 +81,7 @@ const ScoreTitle = ({ value, onTitleChange, changeShow }: ScoreProps) => {
         <InputNumber
           min={1}
           max={5}
+          placeholder="0.0-5.0"
           defaultValue={editingTitle}
           stringMode
           step={0.1}
@@ -93,6 +94,7 @@ const ScoreTitle = ({ value, onTitleChange, changeShow }: ScoreProps) => {
   );
 };
 const Assignment: React.FC<AssignmentProps> = ({ taskId, pageHeaderItems }) => {
+  const { initialState } = useModel('@@initialState');
   const [data, setData] = useState<AssignmentType>({} as AssignmentType);
   const [tableData, setTableData] = useState<SubmissionItem[]>([]);
   const [showType, setShowType] = useState<boolean>(true);
@@ -112,7 +114,7 @@ const Assignment: React.FC<AssignmentProps> = ({ taskId, pageHeaderItems }) => {
   });
   const { Batch } = useSelector((state) => state) as any;
   const isBatchTrainer = useMemo(
-    () => Batch?.data?.trainers?.some((i: any) => i.userId === localStorage.userId),
+    () => Batch?.data?.trainers?.some((i: any) => i.userId === initialState?.userId),
     [Batch],
   );
 
@@ -131,8 +133,7 @@ const Assignment: React.FC<AssignmentProps> = ({ taskId, pageHeaderItems }) => {
   }, []);
 
   const onChangeSorce = (value: string, userId: string) => {
-    let inValue = Number(value).toFixed(1);
-    if (Number(value) > 5) inValue = '5';
+    const inValue = Math.max(Math.min(Number(value) || 0, 5), 0).toFixed(1);
     const tarchData = {
       batchId: data.batchId,
       grade: inValue,
@@ -259,7 +260,7 @@ const Assignment: React.FC<AssignmentProps> = ({ taskId, pageHeaderItems }) => {
       width: 120,
       render: (text, item) => (
         <ScoreTitle
-          value={item.grade ?? '0.0-5.0'}
+          value={item.grade}
           onTitleChange={(e) => onChangeSorce(e, item.userId)}
           changeShow={isBatchTrainer}
         />
@@ -338,17 +339,15 @@ const Assignment: React.FC<AssignmentProps> = ({ taskId, pageHeaderItems }) => {
     };
     //#region 即时更新
     const newData = cloneDeep(data);
+    const newComment = {
+      content: value,
+      commentBy: initialState?.userId,
+      commentDateTime: moment(),
+      commentId: moment().toString(),
+    } as any;
     newData.submissions?.some((item) => {
       if (item.userId === listData.userId) {
-        item.comments = [
-          ...(item.comments ?? []),
-          {
-            content: value,
-            commentBy: localStorage.userId,
-            commentDateTime: moment(),
-            commentId: moment().toString(),
-          } as any,
-        ];
+        item.comments = [...(item.comments ?? []), newComment];
         setListData(item);
         return true;
       }
@@ -357,8 +356,9 @@ const Assignment: React.FC<AssignmentProps> = ({ taskId, pageHeaderItems }) => {
     setData(newData);
     setTableData(newData.submissions || []);
     //#endregion
-    commentAdd(subData).then(() => {
+    commentAdd(subData).then(({ commentId }) => {
       message.success('add seccess');
+      newComment.commentId = commentId;
       // getAssignmentData(listData.userId);
     });
   };

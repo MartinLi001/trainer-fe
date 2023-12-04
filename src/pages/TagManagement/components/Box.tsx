@@ -7,7 +7,7 @@ import {
   SearchOutlined,
   WarningFilled,
 } from '@ant-design/icons';
-import { Input, Modal, Spin } from 'antd';
+import { Input, Modal, Spin, message } from 'antd';
 import SeeButton from '@/components/SeeButton';
 import { useDebounceFn } from 'ahooks';
 import SectionMessage from '@/components/SectionMessage';
@@ -42,17 +42,21 @@ export default function Box({ type, initFunc, list, icon, clickCreate, onRemove,
     });
   }, [initFunc]);
 
-  function deleteError() {
-    SectionMessage({
-      type: 'error',
-      title: 'Couldn’t delete the tag',
-      description: "We're having some trouble deleting the tag. Refresh the page and try again.",
-      descriptionExtra: (
-        <a style={{ fontSize: 14 }} onClick={() => window.location.reload()}>
-          Refresh
-        </a>
-      ),
-    });
+  function deleteError(error: any) {
+    if (error?.serviceStatus?.errorMessage === 'Aggregate not found') {
+      message.error('This data doesn’t exist. Please refresh the page and try again!');
+    } else {
+      SectionMessage({
+        type: 'error',
+        title: 'Couldn’t delete the tag',
+        description: "We're having some trouble deleting the tag. Refresh the page and try again.",
+        descriptionExtra: (
+          <a style={{ fontSize: 14 }} onClick={() => window.location.reload()}>
+            Refresh
+          </a>
+        ),
+      });
+    }
   }
 
   function onClickRemove(data: TagManagementI.TagItemI) {
@@ -77,7 +81,7 @@ export default function Box({ type, initFunc, list, icon, clickCreate, onRemove,
         return onRemove?.(data.id)
           ?.then(() => setRemoving(false))
           .catch((err) => {
-            deleteError();
+            deleteError(err);
             return Promise.reject(err);
           });
       },

@@ -12,6 +12,7 @@ import CommentList from '../CommentList';
 import styles from './index.less';
 import { cloneDeep } from 'lodash';
 import moment from 'moment';
+import { useModel } from 'umi';
 
 interface Props {
   reload: (userId: string, callback: any) => void;
@@ -76,6 +77,7 @@ export default function AssignmentGrading({
   setData,
   setTableData,
 }: Props) {
+  const { initialState } = useModel('@@initialState');
   const [showType, setShowType] = useState<boolean>(true);
   const [listData, setListData] = useState<SubmissionItem>({} as SubmissionItem);
   const [form] = Form.useForm();
@@ -132,17 +134,15 @@ export default function AssignmentGrading({
     };
     //#region 即时更新
     const newData = cloneDeep(data);
+    const newComment = {
+      content: value,
+      commentBy: initialState?.userId,
+      commentDateTime: moment(),
+      commentId: moment().toString(),
+    } as any;
     newData.submissions?.some((item) => {
       if (item.userId === listData.userId) {
-        item.comments = [
-          ...(item.comments ?? []),
-          {
-            content: value,
-            commentBy: localStorage.userId,
-            commentDateTime: moment(),
-            commentId: moment().toString(),
-          } as any,
-        ];
+        item.comments = [...(item.comments ?? []), newComment];
         setListData(item);
         return true;
       }
@@ -151,8 +151,9 @@ export default function AssignmentGrading({
     setData(newData);
     setTableData(newData.submissions || []);
     //#endregion
-    commentAdd(subData).then(() => {
+    commentAdd(subData).then(({commentId}) => {
       message.success('add seccess');
+      newComment.commentId = commentId;
       //   getAssignmentData(listData.userId);
       // reload?.(listData.userId, setListData);
     });

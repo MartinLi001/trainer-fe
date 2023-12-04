@@ -3,7 +3,7 @@
 import { request } from '@/utils';
 
 export function saveGrade(data: any) {
-  return request.put('/batch/api/v1/assignment/mark', {
+  return request.put('/batch/api/v2/trainer/assignment/mark', {
     data,
     headers: {
       'request-type': 'command',
@@ -12,7 +12,7 @@ export function saveGrade(data: any) {
 }
 
 export const deleteResource = (data: any) => {
-  return request.delete('/batch/api/v1/task/resource/remove', {
+  return request.delete('/batch/api/v2/trainer/task/resource/remove', {
     data,
     headers: {
       'request-type': 'command',
@@ -21,7 +21,7 @@ export const deleteResource = (data: any) => {
 };
 
 export function commentAdd(data: any) {
-  return request.post('/batch/api/v1/assignment/comment/add', {
+  return request.post('/batch/api/v2/trainer/assignment/comment/add', {
     data,
     headers: {
       'request-type': 'command',
@@ -30,7 +30,7 @@ export function commentAdd(data: any) {
 }
 
 export function commentUpdate(data: any) {
-  return request.put('/batch/api/v1/assignment/comment/update', {
+  return request.put('/batch/api/v2/trainer/assignment/comment/update', {
     data,
     headers: {
       'request-type': 'command',
@@ -39,7 +39,7 @@ export function commentUpdate(data: any) {
 }
 
 export const commentDelete = (data: any) => {
-  return request.delete('/batch/api/v1/assignment/comment/remove', {
+  return request.delete('/batch/api/v2/trainer/assignment/comment/remove', {
     data,
     headers: {
       'request-type': 'command',
@@ -48,7 +48,7 @@ export const commentDelete = (data: any) => {
 };
 
 export function ResourceAdd(data: any) {
-  return request.post('/batch/api/v1/task/resource/add', {
+  return request.post('/batch/api/v2/trainer/task/resource/add', {
     data,
     requestType: 'form',
     headers: {
@@ -59,7 +59,7 @@ export function ResourceAdd(data: any) {
 }
 
 export function UpdateAssignment(data: any) {
-  return request.put('/batch/api/v1/assignment/update', {
+  return request.put('/batch/api/v2/trainer/assignment/update', {
     data,
     headers: {
       'request-type': 'command',
@@ -68,7 +68,7 @@ export function UpdateAssignment(data: any) {
 }
 
 export function mockCommentUpdate(data: any) {
-  return request.put('/batch/api/v1/mock/comment/update', {
+  return request.put('/batch/api/v2/trainer/mock/comment/update', {
     data,
     headers: {
       'request-type': 'command',

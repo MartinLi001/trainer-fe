@@ -3,6 +3,10 @@
 import { request } from '@/utils';
 import type { SearchType } from '../../pages/Question/typeList';
 
+export function getCodingLanguage() {
+  return request.get(`/coder/api/v1/language`);
+}
+
 /**
  * ?
  */

@@ -32,6 +32,7 @@ export default function Submission({
   const { id: questionId } = useParams<{ id: string }>();
 
   const [source, setSource] = useState(['all']);
+  const [currentSubmissionId, setCurrentSubmissionId] = useState('');
 
   const columns: any = [
     {
@@ -103,6 +104,11 @@ export default function Submission({
               Runtime Error
             </AuTag>
           ),
+          '0': (
+            <AuTag type="contained" theme="red">
+              System Error
+            </AuTag>
+          ),
         };
         return Status[value];
       },
@@ -139,9 +145,11 @@ export default function Submission({
     rowHoverable: true,
     complex: true,
     pagination: false,
+    defaultPageSize: 110000,
     onRow: ({ submissionId }: any) => {
       return {
         onClick: () => {
+          setCurrentSubmissionId(submissionId);
           onRowClick(submissionId);
         },
       };
@@ -188,6 +196,9 @@ export default function Submission({
           dataSource={data?.list ?? []}
           {...config}
           loading={loading}
+          rowClassName={(record) =>
+            record.submissionId === currentSubmissionId ? 'selectRowStyle' : ''
+          }
         />
 
         <div style={{ display: 'flex', justifyContent: 'center', margin: 20 }}>

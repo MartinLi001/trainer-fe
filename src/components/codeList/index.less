@@ -7,14 +7,67 @@
   border: 1px solid #DDD;
   padding-top: 12px;
   padding-bottom: 12px;
+  height: 100%;
 
   :global(.ant-tabs) {
     width: 100%;
+
+    :global(.ant-tabs-nav-wrap) {
+      margin-left: 12px;
+
+      .codeTabs {
+        display: flex;
+        // padding: 3px 12px 3px 16px;
+        align-items: center;
+        margin-right: 8px;
+
+        .tabsName {
+          color: var(--text-4, #4E5969) !important;
+          font-family: PingFang SC;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 22px;
+        }
+
+        .tabsNameChoose {
+          color: var(--unnamed, #165DFF) !important;
+          font-family: PingFang SC;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 22px;
+
+        }
+      }
+
+      :global(.ant-tabs-nav-add) {
+        border: 0;
+        background-color: #fff;
+        font-size: 10px;
+      }
+
+      :global(.ant-tabs-tab-remove) {
+        margin-top: 4px;
+      }
+
+    }
+
+    :global(.ant-tabs-nav-operations) {
+
+      :global(.ant-tabs-nav-add) {
+        border: 0;
+        background-color: #fff;
+        font-size: 10px;
+      }
+    }
   }
 
   :global(.ant-spin-nested-loading) {
     width: 100%;
   }
+
+
 
   .codeFileShow {
     height: 200px;

@@ -1,4 +1,4 @@
-import { useParams, history, connect } from 'umi';
+import { useParams, history, connect, useModel } from 'umi';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Col, message, Row, Select, Spin } from 'antd';
@@ -25,6 +25,7 @@ import { cloneDeep } from 'lodash';
 // };
 
 function GroupDetail({ data: batchDetails }: { data: API.AllBatchType }) {
+  const { initialState } = useModel('@@initialState');
   const { taskId, groupId } = useParams<{ taskId: string; groupId: string }>();
   const [activeQuestionId, setActiveQuestionId] = useState('');
   const [assignSelectKey, setAssignSelectKey] = useState('all');
@@ -356,7 +357,7 @@ function GroupDetail({ data: batchDetails }: { data: API.AllBatchType }) {
   };
 
   const renderHeaderExtraButton = () => {
-    if ((host as attendantsType)?.userId === localStorage.userId) {
+    if ((host as attendantsType)?.userId === initialState?.userId) {
       if (status === EnumMockStatus.Created)
         return (
           <SeeButton
@@ -474,7 +475,7 @@ function GroupDetail({ data: batchDetails }: { data: API.AllBatchType }) {
               <SubmitedBlock
                 ref={QuestionListBlockRef}
                 disabled={
-                  (currentMockGroup?.host as attendantsType)?.userId !== localStorage.userId
+                  (currentMockGroup?.host as attendantsType)?.userId !== initialState?.userId
                 }
                 selectUser={
                   Object.keys(selectUser).length > 0
@@ -504,7 +505,7 @@ function GroupDetail({ data: batchDetails }: { data: API.AllBatchType }) {
             <></>
           ) : isOneOnOne ? (
             <GradeFormUnAvalible
-              disabled={(currentMockGroup?.host as attendantsType)?.userId !== localStorage.userId}
+              disabled={(currentMockGroup?.host as attendantsType)?.userId !== initialState?.userId}
               loading={putMockResultLoading}
               selectUser={trainees[0] ?? {}}
               results={currentQuestion?.results ?? {}}
@@ -515,7 +516,7 @@ function GroupDetail({ data: batchDetails }: { data: API.AllBatchType }) {
             !makeStatusIsUnavailable && (
               <GradeFormAvalible
                 disabled={
-                  (currentMockGroup?.host as attendantsType)?.userId !== localStorage.userId
+                  (currentMockGroup?.host as attendantsType)?.userId !== initialState?.userId
                 }
                 loading={putMockResultLoading}
                 dataSource={gradingData}
@@ -534,13 +535,13 @@ function GroupDetail({ data: batchDetails }: { data: API.AllBatchType }) {
                       firstName: firstname,
                       lastName: lastname,
                       preferredName,
-                    } = JSON.parse(localStorage.userInfo ?? '{}');
+                    } = initialState ?? {};
                     return {
                       ...dataItem,
                       comment: {
                         ...(originData.comment ?? {}),
                         ...(dataItem.comment ?? {}),
-                        commentBy: localStorage.userId,
+                        commentBy: initialState?.userId,
                         commentDateTime: moment().utc().format(),
                         firstname,
                         lastname,

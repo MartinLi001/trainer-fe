@@ -3,6 +3,7 @@ import request from './http';
 import qiankunActions from './qiankunActions';
 import moment from 'moment';
 import { attendantsType } from '@/pages/Task/ShortMock/typeList';
+import { APP_NAME } from './constant';
 
 const logout = () => {
   localStorage.removeItem('token');
@@ -23,7 +24,13 @@ const getUrlSearch = (name: string, url?: string) => {
 };
 
 const clearToken = () => {
-  localStorage.clear();
+  const orgId = localStorage.getItem('orgId');
+  localStorage.removeItem(`token|${orgId}`);
+  localStorage.removeItem(`idToken|${orgId}`);
+  localStorage.removeItem(`token|${APP_NAME}|${orgId}`);
+  localStorage.removeItem(`idToken|${APP_NAME}|${orgId}`);
+  localStorage.removeItem('orgId');
+  localStorage.removeItem(`orgId|${APP_NAME}`);
 };
 
 const checkIsLogin = () => {

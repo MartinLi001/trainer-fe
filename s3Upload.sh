@@ -18,9 +18,28 @@ if [[ "$(cat GIT_BRANCH)" == "dev" ]];then
     fi
 fi
 
+if [[ "$(cat GIT_BRANCH)" == "dev-old" ]];then
+    aws s3 sync dist/ s3://${JOB_DOMAIN}-v1-dev.beaconfireinc.com/
+    if [[ $? -eq 0 ]];then
+        echo "$JOB_NAME had already deployed"
+    else
+        echo "$JOB_NAME failed to be deployed"
+        exit 1
+    fi
+fi
 
-if [[ "$(cat GIT_BRANCH)" == "release" || "$(cat GIT_BRANCH)" == "qa" ]];then
+if [[ "$(cat GIT_BRANCH)" == "qa" ]];then
     aws s3 sync dist/ s3://${JOB_DOMAIN}-qa.beaconfireinc.com/
+    if [[ $? -eq 0 ]];then
+        echo "$JOB_NAME had already deployed"
+    else
+        echo "$JOB_NAME failed to be deployed"
+        exit 1
+    fi
+fi
+
+if [[ "$(cat GIT_BRANCH)" == "qa-old" ]];then
+    aws s3 sync dist/ s3://${JOB_DOMAIN}-v1-qa.beaconfireinc.com/
     if [[ $? -eq 0 ]];then
         echo "$JOB_NAME had already deployed"
     else

@@ -48,7 +48,17 @@ export default function SettingTestCase({ questionId, gotoConfiguration }: Setti
     (id) => deleteTestCase({ questionId, id }),
     {
       manual: true,
-      onSuccess: refreshList,
+      onSuccess: () => {
+        if (testCases?.list?.length === 1) {
+          getList({
+            questionId: questionId,
+            pageSize: testCases?.pageSize,
+            page: ~~testCases?.page - 1 || 1,
+          });
+        } else {
+          refreshList();
+        }
+      },
     },
   );
 
@@ -106,6 +116,7 @@ export default function SettingTestCase({ questionId, gotoConfiguration }: Setti
     {
       title: 'Actions',
       key: 'action',
+      align: 'right',
       render: (_: any, record: TestCaseListType) => (
         <Dropdown overlay={actionMenu(record)} trigger={['click']} placement="bottomRight">
           <span style={{ marginLeft: 20 }} onClick={(e) => e.preventDefault()}>
@@ -120,10 +131,12 @@ export default function SettingTestCase({ questionId, gotoConfiguration }: Setti
     return (
       <>
         <AuTable
+          complex
           dataSource={testCases?.list || []}
           displayColumns={columns}
           loading={getListLoading || deleteTestCaseLoading}
           pagination={false}
+          defaultPageSize={100} // pageSizeOptions最大pageSize
         />
         {!!testCases?.total && (
           <Pagination
@@ -139,6 +152,7 @@ export default function SettingTestCase({ questionId, gotoConfiguration }: Setti
             current={testCases?.page ?? 1}
             pageSize={testCases?.pageSize ?? 10}
             total={testCases?.total ?? 0}
+            pageSizeOptions={[10, 20, 50, 100]}
           />
         )}
       </>

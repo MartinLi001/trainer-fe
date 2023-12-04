@@ -1,4 +1,4 @@
-import { BatchState, connect, ConnectProps, useParams } from 'umi';
+import { BatchState, connect, ConnectProps, useModel, useParams } from 'umi';
 import { Col, message, Row } from 'antd';
 import { useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
@@ -22,6 +22,7 @@ interface KpiProps extends ConnectProps {
 }
 
 function Kpi({ batchData }: KpiProps) {
+  const { initialState } = useModel('@@initialState');
   const { batchId, traineeId } = useParams<any>();
   const [data, setData] = useState<KpiType>({} as KpiType);
   const [xAxisData, setXAxisData] = useState<number[]>();
@@ -65,7 +66,7 @@ function Kpi({ batchData }: KpiProps) {
   });
 
   const trainerHasPromise = batchData.trainers?.some(
-    (trainer: any) => trainer.userId === localStorage.userId,
+    (trainer: any) => trainer.userId === initialState?.userId,
   );
 
   return (

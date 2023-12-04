@@ -1,7 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import style from './index.less';
 import { history, useLocation } from 'umi';
-import { getSearchUser, trainerAdd, traineeAdd } from '@/services/people';
+import {
+  trainerAdd,
+  traineeAdd,
+  searchTrainers,
+  searchTrainees,
+} from '@/services/people';
 import { message, Table } from 'antd';
 import { useParams } from 'umi';
 import SearchInput from '@/components/SearchInput';
@@ -45,7 +50,7 @@ function AddPeople({ data: batchDetailData }: MyBatchProps) {
     pageSize: 100,
     sortCriteria: null,
     status: '',
-    tags: [{ name: 'role', value: type }],
+    // tags: [{ name: 'role', value: type }],
   } as searchdataType;
 
   const onChangePage = (page: number, pageSize: number, name?: string) => {
@@ -57,10 +62,12 @@ function AddPeople({ data: batchDetailData }: MyBatchProps) {
     searchdata.pageSize = pageSize;
     // searchdata.searchContent = name || null;
     searchdata.searchContent = name ?? searchContent; // 传了就用传的,不传就用旧的
-    getSearchUser(searchdata).then((res: any) => {
-      setData(res.users);
-      setTotal(res.totalUserFound);
-    });
+    (type === 'Trainee' ? searchTrainees(searchdata) : searchTrainers(searchdata)).then(
+      (res: any) => {
+        setData(res.users);
+        setTotal(res.totalUserFound);
+      },
+    );
   };
   useEffect(() => {
     if (type == 'Trainee') {

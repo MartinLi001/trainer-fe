@@ -1,7 +1,7 @@
 import { useRequest } from 'ahooks';
 import { Col, message, Modal, Row, Spin } from 'antd';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { MockState, ConnectProps, Loading, connect, Dispatch, BatchState } from 'umi';
+import { MockState, ConnectProps, Loading, connect, Dispatch, BatchState, useModel } from 'umi';
 import { TaskResponse } from '../typeList';
 import { questionType } from '@/pages/Task/mock/typeList';
 
@@ -32,6 +32,7 @@ interface ShortMockProps extends ConnectProps {
 }
 
 function CodingMockDetails({ codingMockData, batchData, loading, dispatch }: ShortMockProps) {
+  const { initialState } = useModel('@@initialState');
   const codeRef = useRef<any>();
   const FixedWidgetRef = useRef<any>();
   const [activeQuestionId, setActiveQuestionId] = useState(codingMockData?.questionOrders?.[0]);
@@ -75,7 +76,7 @@ function CodingMockDetails({ codingMockData, batchData, loading, dispatch }: Sho
   };
 
   const trainerHasPromise = batchData.trainers?.some(
-    (trainer: any) => trainer.userId === localStorage.userId,
+    (trainer: any) => trainer.userId === initialState?.userId,
   );
 
   const getValues = async (callBack: any) => {
@@ -121,12 +122,12 @@ function CodingMockDetails({ codingMockData, batchData, loading, dispatch }: Sho
       {}) as any;
   }, [activeTraineeId, activeQuestionId, codingMockData]);
 
-  // useEffect(() => {
-  //   const { userAnswer } = currentTrainee ?? {};
-  //   console.log(userAnswer?.content,'=====userAnswer?.content')
-  //   codeRef.current?.setValue(userAnswer?.content ?? '');
-  //   codeRef.current?.setOption(LanguageConfig[userAnswer?.language ?? 'Java']);
-  // }, [codingMockData, activeQuestionId, currentTrainee]);
+  useEffect(() => {
+    const { userAnswer } = currentTrainee ?? {};
+    console.log(userAnswer?.content,'=====userAnswer?.content')
+    codeRef.current?.setValue(userAnswer?.content ?? '');
+    codeRef.current?.setOption(userAnswer?.language ?? 'Java');
+  }, [codingMockData, activeQuestionId, currentTrainee]);
 
   const [submitTrainees, unsubmitTrainees] = useMemo(() => {
     if (!currentQuestion) return [[], []];

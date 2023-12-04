@@ -63,7 +63,7 @@ export default function Summary({ data }: any) {
       <div className={styles.bottom}>
         <div className={styles.block}>
           <span className={styles.name}>Pass Rate</span>
-          <span className={styles.value}>{data?.passRate >= 0 ? `${data.passRate}%` : 'N/A'}</span>
+          <span className={styles.value}>{Number.isFinite(data?.passRate) ? `${data.passRate}%` : 'N/A'}</span>
         </div>
         <div className={styles.block}>
           <span className={styles.name}>Success / Submission</span>

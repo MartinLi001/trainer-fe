@@ -3,24 +3,24 @@
 import { request } from '@/utils';
 
 export const getMyBatches = () => {
-  return request.get(`/batch/api/v1/trainer-batches`);
+  return request.get(`/batch/api/v2/trainer/trainer-batches`);
 };
 
 export const getBatchDetails = (batchId: string) => {
-  return request.get(`/batch/api/v1/${batchId}`);
+  return request.get(`/batch/api/v2/trainer/${batchId}`);
 };
 
 /**
  * 获取batch category列表
  */
 export function getAllCategory() {
-  return request.get('/batch/api/v1/category');
+  return request.get('/batch/api/v2/trainer/category');
 }
 /**
  * 创建batch category
  */
 export function createCategory(data: API.CategoryType) {
-  return request.post('/batch/api/v1/category/create', {
+  return request.post('/batch/api/v2/trainer/category/create', {
     data,
     headers: {
       'request-type': 'command',
@@ -31,7 +31,7 @@ export function createCategory(data: API.CategoryType) {
  * 更新batch category
  */
 export function updateCategory(data: API.CategoryType) {
-  return request.put('/batch/api/v1/category/update', {
+  return request.put('/batch/api/v2/trainer/category/update', {
     data,
     headers: {
       'request-type': 'command',
@@ -48,7 +48,7 @@ export function getBatchesByCategoryId({
   categoryId: string;
   isTemplate: boolean;
 }) {
-  return request.get(`/batch/api/v1/batches/${categoryId}?isTemplate=${isTemplate}`);
+  return request.get(`/batch/api/v2/trainer/batches/${categoryId}?isTemplate=${isTemplate}`);
 }
 
 /**
@@ -59,7 +59,7 @@ export function batchCopy(data: {
   originalBatchId: string;
   confirmOverwrite: boolean;
 }) {
-  return request.put('/batch/api/v1/copy', {
+  return request.put('/batch/api/v2/trainer/copy', {
     data,
     headers: {
       'request-type': 'command',
@@ -71,14 +71,14 @@ export function batchCopy(data: {
  * 获取trainer 所有 batches
  */
 export function getTrainerBatches() {
-  return request.get('/batch/api/v1/trainer-batches');
+  return request.get('/batch/api/v2/trainer/trainer-batches');
 }
 
 /**
  * 创建batch
  */
 export function createBatch(data: API.AllBatchType & { batchCategoryId: string }) {
-  return request.post('/batch/api/v1/create', {
+  return request.post('/batch/api/v2/trainer/create', {
     data,
     headers: {
       'request-type': 'command',
@@ -90,7 +90,7 @@ export function createBatch(data: API.AllBatchType & { batchCategoryId: string }
  * 以template作为模版创建batch
  */
 export function createBatchByTemplate(data: API.AllBatchType & { batchCategoryId: string }) {
-  return request.post('/batch/api/v1/template/create', {
+  return request.post('/batch/api/v2/trainer/template/create', {
     data,
     headers: {
       'request-type': 'command',
@@ -102,7 +102,7 @@ export function createBatchByTemplate(data: API.AllBatchType & { batchCategoryId
  * 更新batch
  */
 export function updateBatch(data: API.AllBatchType) {
-  return request.put('/batch/api/v1/update', {
+  return request.put('/batch/api/v2/trainer/update', {
     data,
     headers: {
       'request-type': 'command',
@@ -114,7 +114,7 @@ export function updateBatch(data: API.AllBatchType) {
  * 更新batch active状态
  */
 export function updateBatchActive(data: API.AllBatchType) {
-  return request.put('/batch/api/v1/batch', {
+  return request.put('/batch/api/v2/trainer/batch', {
     data,
     headers: {
       'request-type': 'command',
@@ -126,7 +126,7 @@ export function updateBatchActive(data: API.AllBatchType) {
  * 删除batch下的task
  */
 export function deleteTask(data: Partial<API.TaskType>) {
-  return request.delete('/batch/api/v1/task/remove', {
+  return request.delete('/batch/api/v2/trainer/task/remove', {
     data,
     headers: {
       'request-type': 'command',
@@ -138,7 +138,7 @@ export function deleteTask(data: Partial<API.TaskType>) {
  * unlock batch下的task
  */
 export function unlockTask(data: Partial<API.TaskType>) {
-  return request.put('/batch/api/v1/task/unlock', {
+  return request.put('/batch/api/v2/trainer/task/unlock', {
     data,
     headers: {
       'request-type': 'command',
@@ -150,7 +150,7 @@ export function unlockTask(data: Partial<API.TaskType>) {
  * reopenList
  */
 export function reopenList(data: Partial<API.TaskType>) {
-  return request.put('/batch/api/v1/mock/reopen', {
+  return request.put('/batch/api/v2/trainer/mock/reopen', {
     data,
     headers: {
       'request-type': 'command',
@@ -162,7 +162,7 @@ export function reopenList(data: Partial<API.TaskType>) {
  * lockTask
  */
 export function lockTask(data: Partial<API.TaskType>) {
-  return request.put('/batch/api/v1/task/lock', {
+  return request.put('/batch/api/v2/trainer/task/lock', {
     data,
     headers: {
       'request-type': 'command',
@@ -176,7 +176,7 @@ export function addTask(data: API.TaskType) {
   let type = data.type.toLocaleLowerCase();
   if (type.includes('short')) type = 'mock/short';
   if (type.includes('coding')) type = 'mock/coding';
-  return request.post(`/batch/api/v1/${type}/add`, {
+  return request.post(`/batch/api/v2/trainer/${type}/add`, {
     data,
     headers: {
       'request-type': 'command',
@@ -192,7 +192,7 @@ export function updateTask(data: API.TaskType) {
   if (type.includes('project')) type = 'assignment';
   if (type.includes('short')) type = 'mock/short';
   if (type.includes('coding')) type = 'mock/coding';
-  return request.put(`/batch/api/v1/${type}/update`, {
+  return request.put(`/batch/api/v2/trainer/${type}/update`, {
     data,
     headers: {
       'request-type': 'command',
@@ -204,14 +204,14 @@ export function updateTask(data: API.TaskType) {
  * 获取ShortMock 详情
  */
 export function getShortMockDetail(taskId: string) {
-  return request.get(`/batch/api/v1/task/${taskId}`);
+  return request.get(`/batch/api/v2/trainer/task/${taskId}`);
 }
 
 /**
  * 教师评分
  */
 export function putMockResult(data: any) {
-  return request.put(`/batch/api/v1/mock/result`, {
+  return request.put(`/batch/api/v2/trainer/mock/result`, {
     data,
     headers: {
       'request-type': 'command',
@@ -223,7 +223,7 @@ export function putMockResult(data: any) {
  * 修改mockGroup
  */
 export function updateMockGroup(data: any) {
-  return request.put(`/batch/api/v1/mock/short/group/update`, {
+  return request.put(`/batch/api/v2/trainer/mock/short/group/update`, {
     data,
     headers: {
       'request-type': 'command',
@@ -235,7 +235,7 @@ export function updateMockGroup(data: any) {
  * 修改updateMockShort
  */
 export function updateMockShort(data: any) {
-  return request.put(`/batch/api/v1/mock/short/update`, {
+  return request.put(`/batch/api/v2/trainer/mock/short/update`, {
     data,
     headers: {
       'request-type': 'command',

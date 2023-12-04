@@ -7,6 +7,7 @@ import CommentList from '../Assignment/components/CommentList';
 import { addGroupComment, removeGroupComment, updateGroupComment } from '@/services/project';
 import { cloneDeep } from 'lodash';
 import moment from 'moment';
+import { useModel } from 'umi';
 
 interface Props {
   setTaskData: React.Dispatch<React.SetStateAction<any>>;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export default function ProjectGrading(props: Props) {
+  const { initialState } = useModel('@@initialState');
   const {
     setTaskData,
     setProjectGroups,
@@ -126,7 +128,7 @@ export default function ProjectGrading(props: Props) {
       taskId: taskData.taskId,
       projectGroupId: focusGroup.projectGroupId,
       content: content,
-    }).then(() => {
+    }).then(({ feedback: { commentId } }) => {
       message.success('success');
       // reloadData?.();
       const newGroups = cloneDeep(projectGroups);
@@ -136,9 +138,9 @@ export default function ProjectGrading(props: Props) {
             ...(group.comments ?? []),
             {
               content: content,
-              commentBy: localStorage.userId,
+              commentBy: initialState?.userId,
               commentDateTime: moment(),
-              commentId: moment().toString(),
+              commentId,
             } as any,
           ];
           return true;

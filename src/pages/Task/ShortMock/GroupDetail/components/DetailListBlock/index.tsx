@@ -39,7 +39,7 @@ export default function DetailListBlock({
   useEffect(() => {
     if (isOneOnOne) {
       const { content = '', language = 'Java' } = userAnswer;
-      codeRef.current?.setOption(LanguageConfig[language]);
+      codeRef.current?.setOption(language);
       codeRef.current?.setValue(content);
     }
   }, [userAnswer]);

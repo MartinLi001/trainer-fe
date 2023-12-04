@@ -1,7 +1,7 @@
 import { message, notification } from 'antd';
 import type { ArgsProps } from 'antd/es/notification';
 import { checkIsLogin, clearToken, toLogin } from '@/utils';
-import { isProd } from '@/utils/constant';
+import { APP_NAME, isProd } from '@/utils/constant';
 import { extend } from 'umi-request';
 notification.config({ maxCount: 1 });
 const errorHandler = async (error: any) => {
@@ -26,7 +26,8 @@ const errorHandler = async (error: any) => {
           duration: 2,
           onClose() {
             clearToken();
-            toLogin();
+            localStorage.setItem('prevUrl', window.location.href);
+            window.location.href = message;
           },
         };
         break;
@@ -44,21 +45,22 @@ const errorHandler = async (error: any) => {
         break;
     }
 
-    if (!window.__POWERED_BY_QIANKUN__) {
-      notification.error(noticeConfig);
-    }
+    // if (!window.__POWERED_BY_QIANKUN__) {
+    notification.error(noticeConfig);
+    // }
 
-    if (!(await checkIsLogin())) {
-      notification.error({
-        description: '网络异常，无法连接服务器或代理（地址）等异常',
-        message: '网络异常',
-      });
-    }
+    // if (!(await checkIsLogin())) {
+    //   notification.error({
+    //     description: '网络异常，无法连接服务器或代理（地址）等异常',
+    //     message: '网络异常',
+    //   });
+    // }
   }
   return Promise.reject(error);
 };
 const request = extend({
-  prefix: isProd ? process.env.API_BASE_URL : process.env.API_PREFIX,
+  prefix: process.env.API_BASE_URL,
+  // prefix: isProd ? process.env.API_BASE_URL : process.env.API_PREFIX,
   timeout: 30000,
   headers: {
     'request-type': 'query',
@@ -70,12 +72,15 @@ const request = extend({
 
 // 可以在里面对url、option中的参数进行进一步处理
 request.interceptors.request.use((url: string, options: any) => {
-  if (!window.__POWERED_BY_QIANKUN__) {
-    checkIsLogin();
-  }
+  // if (!window.__POWERED_BY_QIANKUN__) {
+  //   checkIsLogin();
+  // }
   const { headers = {} } = options || {};
+  const token = window.__POWERED_BY_QIANKUN__
+    ? localStorage.getItem(`token|${APP_NAME}|${localStorage.getItem(`orgId|${APP_NAME}`)}`)
+    : localStorage.getItem(`token|${localStorage.getItem('orgId')}`);
   const tokenHeaders = {
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
+    Authorization: `Bearer ${token}`,
     ...headers,
   };
 
@@ -119,12 +124,13 @@ request.interceptors.response.use(async (response, option): Promise<any> => {
 
   return new Promise((resolve, reject) => {
     const { error, errorCode, serviceStatus, code, message: errorMessage } = result;
+    const { noErrorMessage } = option;
     if (code || error || errorCode || (serviceStatus && !serviceStatus.success)) {
-      if (code && errorMessage) {
+      if (code && errorMessage && !noErrorMessage) {
         message.error(errorMessage);
       }
 
-      if (serviceStatus?.errorMessage) {
+      if (serviceStatus?.errorMessage && !noErrorMessage) {
         message.error(serviceStatus.errorMessage);
       }
 

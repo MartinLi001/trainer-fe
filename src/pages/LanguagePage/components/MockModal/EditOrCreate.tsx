@@ -17,7 +17,7 @@ const runShowList = {
   120: <IconFont type="icon-a-iconerror" style={{ color: '#DE350B' }} />,
   130: <IconFont type="icon-check-circle" style={{ color: '#DE350B' }} />,
 };
-import { AuSelect } from '@aurora-ui-kit/core';
+import { AuInput, AuSelect } from '@aurora-ui-kit/core';
 import { useRequest } from 'ahooks';
 import {
   OutputParam,
@@ -96,7 +96,7 @@ export default function TestCaseMockModal({ data, open, onCancel }: CollectionCr
               {runShowList[110]}Rejected
               <div className={styles.Rejected}>
                 Actual Output
-                <p>{result.results.result}</p>
+                <p>{result.results[0].result}</p>
               </div>
             </div>
           )}
@@ -125,120 +125,135 @@ export default function TestCaseMockModal({ data, open, onCancel }: CollectionCr
         runTestCase();
       }}
     >
-      <Spin spinning={false}>
-        <Form form={form} layout="vertical" name="form" initialValues={{ inputs: [], expect: '' }}>
-          <div className={styles.inputTitle}>Input</div>
-          {data?.inputParams?.length
-            ? data?.inputParams?.map((input, i) => {
-                if (input.parseType == 1 || input.parseType == 2) {
-                  return (
-                    <>
-                      <Form.Item
-                        key={input.inputName}
-                        name={['inputParams', i, 'content']}
-                        noStyle={!input.inputName}
-                        rules={[
-                          { required: true, message: 'not empty' },
-                          {
-                            type: 'string',
-                            max: 40,
-                            message: 'The value cannot exceed 40 characters',
-                          },
-                        ]}
-                      >
-                        <Input addonBefore={input.inputName} />
-                      </Form.Item>
-                      <Form.Item
-                        key={input.id + `${i}-parseType`}
-                        name={['inputParams', i, 'parseType']}
-                        hidden
-                      >
-                        <Input />
-                      </Form.Item>
-                      <Form.Item
-                        key={input.id + `${i}-inputName`}
-                        name={['inputParams', i, 'inputName']}
-                        hidden
-                      >
-                        <Input />
-                      </Form.Item>
-                      <Form.Item key={input.id + `${i}-id`} name={['inputParams', i, 'id']} hidden>
-                        <Input />
-                      </Form.Item>
-                    </>
-                  );
-                } else {
-                  return (
-                    <>
-                      <Form.Item
-                        key={input.inputName}
-                        name={['inputParams', i, 'content']}
-                        // noStyle={!input.inputName}
-                        rules={[
-                          { required: true, message: 'not empty' },
-                          {
-                            type: 'string',
-                            max: 40,
-                            message: 'The value cannot exceed 40 characters',
-                          },
-                        ]}
-                      >
-                        <Input />
-                      </Form.Item>
-                      <Form.Item
-                        key={input.id + `${i}-parseType`}
-                        name={['inputParams', i, 'parseType']}
-                        hidden
-                      >
-                        <Input />
-                      </Form.Item>
-                      <Form.Item
-                        key={input.id + `${i}-inputName`}
-                        name={['inputParams', i, 'inputName']}
-                        hidden
-                      >
-                        <Input />
-                      </Form.Item>
-                      <Form.Item key={input.id + `${i}-id`} name={['inputParams', i, 'id']} hidden>
-                        <Input />
-                      </Form.Item>
-                    </>
-                  );
-                }
-              })
-            : ''}
-          <div className={styles.outPutTitle}>output</div>
-          <Form.Item
-            name="expect"
-            rules={[
-              { required: true, message: 'not empty' },
-              {
-                type: 'string',
-                max: 40,
-                message: 'The value cannot exceed 40 characters',
-              },
-            ]}
+      <div className={styles.formSHow}>
+        <Spin spinning={false}>
+          <Form
+            form={form}
+            layout="vertical"
+            name="form"
+            initialValues={{ inputs: [], expect: '' }}
           >
-            <Input addonBefore="expect" />
-          </Form.Item>
-          <div className={styles.SolutionTitle}>Select Sample Solution</div>
+            <div className={styles.inputTitle}>Input</div>
+            {data?.inputParams?.length
+              ? data?.inputParams?.map((input, i) => {
+                  if (input.parseType == 1 || input.parseType == 2) {
+                    return (
+                      <>
+                        <Form.Item
+                          key={input.inputName}
+                          name={['inputParams', i, 'content']}
+                          noStyle={!input.inputName}
+                          rules={[
+                            { required: true, message: 'not empty' },
+                            {
+                              type: 'string',
+                              max: 40,
+                              message: 'The value cannot exceed 40 characters',
+                            },
+                          ]}
+                        >
+                          <Input addonBefore={input.inputName} />
+                        </Form.Item>
+                        <Form.Item
+                          key={input.id + `${i}-parseType`}
+                          name={['inputParams', i, 'parseType']}
+                          hidden
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item
+                          key={input.id + `${i}-inputName`}
+                          name={['inputParams', i, 'inputName']}
+                          hidden
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item
+                          key={input.id + `${i}-id`}
+                          name={['inputParams', i, 'id']}
+                          hidden
+                        >
+                          <Input />
+                        </Form.Item>
+                      </>
+                    );
+                  } else {
+                    return (
+                      <>
+                        <Form.Item
+                          key={input.inputName}
+                          name={['inputParams', i, 'content']}
+                          // noStyle={!input.inputName}
+                          rules={[
+                            { required: true, message: 'not empty' },
+                            {
+                              type: 'string',
+                              max: 40,
+                              message: 'The value cannot exceed 40 characters',
+                            },
+                          ]}
+                        >
+                          <AuInput hideMessage/>
+                        </Form.Item>
+                        <Form.Item
+                          key={input.id + `${i}-parseType`}
+                          name={['inputParams', i, 'parseType']}
+                          hidden
+                        >
+                          <AuInput />
+                        </Form.Item>
+                        <Form.Item
+                          key={input.id + `${i}-inputName`}
+                          name={['inputParams', i, 'inputName']}
+                          hidden
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item
+                          key={input.id + `${i}-id`}
+                          name={['inputParams', i, 'id']}
+                          hidden
+                        >
+                          <AuInput />
+                        </Form.Item>
+                      </>
+                    );
+                  }
+                })
+              : ''}
+            <div className={styles.outPutTitle}>Output</div>
+            <Form.Item
+              name="expect"
+              rules={[
+                { required: true, message: 'not empty' },
+                {
+                  type: 'string',
+                  max: 40,
+                  message: 'The value cannot exceed 40 characters',
+                },
+              ]}
+            >
+              <Input addonBefore="expect" />
+            </Form.Item>
+            <div className={styles.SolutionTitle}>Select Sample Solution</div>
 
-          <Form.Item
-            name="sampleSolutionId"
-            rules={[{ required: true, message: 'please choose one' }]}
-          >
-            <AuSelect
-              options={sampleSolutionList?.map((item) => ({
-                value: item.id,
-                label: item.fileName,
-              }))}
-              hideMessage
-              placeholder="select a sample solution"
-            ></AuSelect>
-          </Form.Item>
-        </Form>
-        {resultShow && renderRun()}
-      </Spin>
+            <Form.Item
+              name="sampleSolutionId"
+              rules={[{ required: true, message: 'please choose one' }]}
+            >
+              <AuSelect
+                options={sampleSolutionList?.map((item) => ({
+                  value: item.id,
+                  label: item.fileName,
+                }))}
+                hideMessage
+                placeholder="select a sample solution"
+              ></AuSelect>
+            </Form.Item>
+          </Form>
+          {resultShow && renderRun()}
+        </Spin>
+      </div>
     </CommonModal>
   );
 }

@@ -36,4 +36,11 @@ declare namespace API {
       isSubmitted: boolean;
     };
   };
+
+  type Token = {
+    code: string;
+    state: string;
+    redirectUri: string;
+    orgId: string;
+  };
 }

@@ -28,9 +28,8 @@ export default function TestCaseForm(params: TestCaseFormParams) {
         ? data?.inputs?.map((input, i) => (
             <>
               <Form.Item
-                key={input.inputName}
+                key={input.id + `${i}-content`}
                 name={['inputs', i, 'content']}
-                noStyle={!input.inputName}
                 rules={[
                   { required: true, message: 'not empty' },
                   {

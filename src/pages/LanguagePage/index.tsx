@@ -18,8 +18,8 @@ import {
 } from '@/services/coder';
 import { TestCaseType } from '@/services/coder/type';
 import TestCaseMockModal from './components/MockModal/EditOrCreate';
-import Codeeditor from '@/assets/Codeeditor.png';
 import IconFont from '@/components/IconFont';
+import EmptyCode from '@/components/emptyCodeShow';
 interface CorderType {
   questionId: string;
   onChange?: (value: boolean) => void;
@@ -114,7 +114,6 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
   };
   useEffect(() => {
     if (language) {
-      console.log('%cindex.tsx line:107 language', 'color: #007acc;', language);
       getSolutionTempData();
     }
   }, [language]);
@@ -152,7 +151,6 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
   const onChangeAssertFunction = (value: string) => {
     let temp = { ...assertFunctionShow };
     temp.fileContent = value;
-    console.log('%cindex.tsx line:139 value', 'color: #007acc;', value);
     setAssertFunctionShow(temp);
   };
 
@@ -168,16 +166,17 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
       assertFun: assertFunctionShow,
       expect: '',
     };
-    console.log('%cindex.tsx line:148 data', 'color: #007acc;', data);
     setTestCaseData({ ...data });
     setTestCaseVisible(true);
   };
 
   const functionShowChange = (data: functionType) => {
+    if(!data.fileName){
+      return
+    }
     setFunctionShow(data);
   };
   const onChangefunctionShow = (value: string) => {
-    console.log('%cindex.tsx line:162 functionShow', 'color: #007acc;', functionShow);
     if (functionShow.type && functionShow.type == 3) {
       let temp = testOutputList;
       temp.map((ite) => {
@@ -196,7 +195,6 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
         }
         return ite;
       });
-      console.log('%cindex.tsx line:185 temp', 'color: #007acc;', temp);
       setTestInputList([...temp]);
     }
   };
@@ -205,7 +203,6 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
       <LanguageChoose
         questionId={questionId}
         onChange={(e) => {
-          console.log('%cindex.tsx line:208 e', 'color: #007acc;', e);
           setLanguage(e);
           setLoading(false);
         }}
@@ -271,8 +268,9 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
                       <Form.Item label="Dependency Class" name="dependencyPreparationIds">
                         <Select
                           mode="multiple"
+                          showArrow
                           allowClear
-                          style={{ width: '50%' }}
+                          style={{ width: '60%' }}
                           placeholder="select dependency"
                           options={dependencyList.map((item) => ({
                             label: item.fileName,
@@ -332,16 +330,16 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
               'Sample Solution',
               'Sample solutions will be used to validate test case parsers below; they can also be made available to trainees if needed.',
             )}
-            <div className={styles.SolutionTemplateContent}>
-              <div className={styles.SolutionTemplateCode}>
-                <CodeList
-                  changeNameFlag={false}
-                  language="java"
-                  addProps={{ questionId, language, type: 0 }}
-                  lastFileNumber={1}
-                />
-              </div>
+            {/* <div className={styles.SolutionTemplateContent}> */}
+            <div className={styles.SolutionTemplateCode}>
+              <CodeList
+                changeNameFlag={false}
+                language="java"
+                addProps={{ questionId, language, type: 0 }}
+                lastFileNumber={1}
+              />
             </div>
+            {/* </div> */}
           </div>
           <div className={styles.TestCaseParser}>
             {renderTitle(
@@ -353,7 +351,7 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
                 <Row gutter={26}>
                   <Col span={12}>
                     <div className={styles.inputList}>
-                      <div className={styles.inputListTitle}>Inout Params</div>
+                      <div className={styles.inputListTitle}>Input Parameters</div>
                       <div className={styles.InoutListShow}>
                         {testInputList.map((item, index) => {
                           if (item.parseType == 0) {
@@ -428,7 +426,7 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
                       </div>
                     </div>
                     <div className={styles.outpu}>
-                      <div className={styles.outpuShow}>Outpu Params</div>
+                      <div className={styles.outpuShow}>Output Parameters</div>
                       <div className={styles.outPutCont}>
                         <Row gutter={{ xs: 8, sm: 12, md: 12, lg: 12 }}>
                           <Col span={20}>
@@ -465,9 +463,7 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
                           }}
                         />
                       ) : (
-                        <div>
-                          <img src={Codeeditor} width={'100%'} height={'100%'} />
-                        </div>
+                        <EmptyCode type={2} />
                       )}
                     </div>
                   </Col>
@@ -501,9 +497,11 @@ const Language: React.FC<CorderType> = ({ questionId, onChange }: CorderType) =>
       ) : (
         !loading && (
           <div className={styles.emptyPage}>
-            <IconFont type="icon-a-Iconscode" style={{ fontSize: 40 }} />
+            <IconFont type="icon-a-IconsJavascript" style={{ fontSize: 40 }} />
+            <div className={styles.emptyTitle}>Select a Language to Start</div>
             <div className={styles.emptyPageContent}>
               Click “+” to add an language and configure its Solution Template and Test Case Parser.
+              d
             </div>
           </div>
         )

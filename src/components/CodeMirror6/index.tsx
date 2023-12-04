@@ -8,6 +8,9 @@ import { EditorView } from '@codemirror/view';
 import { csharp } from '@replit/codemirror-lang-csharp';
 import { useDebounceEffect } from 'ahooks';
 import { whiteLight } from '@uiw/codemirror-theme-white';
+import { solarizedLight, solarizedDark } from '@uiw/codemirror-theme-solarized';
+import { highlightActiveLine } from '@uiw/react-codemirror';
+
 import './index.less';
 
 const langConfigMap = {
@@ -27,7 +30,7 @@ interface CodeType extends ReactCodeMirrorProps {
 function CodeMirrorCom({
   height = '100%',
   language = 'js',
-  codeValue,
+  codeValue = '',
   onChange,
   autoSaveCode,
   ...restProps
@@ -62,7 +65,7 @@ function CodeMirrorCom({
   return (
     <CodeMirror
       value={codeValue}
-      theme={whiteLight}
+      // theme={solarizedLight}
       extensions={[langConfigMap[language], EditorView.lineWrapping]}
       onChange={onChangeCode}
       // onFocus={() => setEditFlag(true)}

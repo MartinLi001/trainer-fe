@@ -15,13 +15,13 @@ const { API_BASE_URL, API_PREFIX } = EnvConfig[(UMI_ENV as string) || 'dev'];
 
 console.log(EnvConfig[(UMI_ENV as string) || 'dev'], '=====');
 export default {
-  dev: {
-    [`${API_PREFIX}`]: {
-      target: API_BASE_URL,
-      pathRewrite: { [`^${API_PREFIX}`]: '' },
-      changeOrigin: true,
-    },
-  },
+  // dev: {
+  //   [`${API_PREFIX}`]: {
+  //     target: API_BASE_URL,
+  //     pathRewrite: { [`^${API_PREFIX}`]: '' },
+  //     changeOrigin: true,
+  //   },
+  // },
   qa: {
     [`${API_PREFIX}`]: {
       target: API_BASE_URL,

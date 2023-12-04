@@ -26,7 +26,7 @@ import { sql } from '@codemirror/lang-sql';
 import { swift } from '@codemirror/legacy-modes/mode/swift';
 import { kotlin } from '@codemirror/legacy-modes/mode/clike';
 import { StreamLanguage } from '@codemirror/language';
-import { solarizedLight, solarizedDark } from '@uiw/codemirror-theme-solarized';
+import { dracula } from '@uiw/codemirror-theme-dracula';
 
 import React from 'react';
 
@@ -108,7 +108,7 @@ function CodeMirrorCom(
   return (
     <CodeMirror
       value={code}
-      theme={solarizedDark}
+      theme={dracula}
       extensions={[langConfigMap[languageShow], EditorView.lineWrapping]}
       onChange={onChangeCode}
       height={`${height}px`}

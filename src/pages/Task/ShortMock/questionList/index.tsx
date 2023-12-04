@@ -8,7 +8,7 @@ import { PauseOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { Modal } from 'antd';
 import { saveAndDeleteQuestions } from '@/services/question';
-import { history, useDispatch, useLocation, useSelector } from 'umi';
+import { history, useDispatch, useLocation, useModel, useSelector } from 'umi';
 import { cloneDeep } from 'lodash';
 import QuestionDrawer from './QuestionDrawer';
 
@@ -20,6 +20,7 @@ import QuestionDrawer from './QuestionDrawer';
 //   taskId: string;
 // }
 export default function QuestionList() {
+  const { initialState } = useModel('@@initialState');
   const { pathname } = useLocation();
   // const {
   //   data,
@@ -38,7 +39,7 @@ export default function QuestionList() {
     },
   } = useSelector((state) => state) as any;
   const isBatchTrainer = useMemo(
-    () => Batch?.data?.trainers?.some((i: any) => i.userId === localStorage.userId),
+    () => Batch?.data?.trainers?.some((i: any) => i.userId === initialState?.userId),
     [Batch],
   );
   const [questionEditting, setquestionEditting] = useState(false); // 是否正在编辑

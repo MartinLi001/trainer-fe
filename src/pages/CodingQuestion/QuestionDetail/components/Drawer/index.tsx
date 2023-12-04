@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { Avatar, Drawer, Spin } from 'antd';
 import { AuTag } from '@aurora-ui-kit/core';
-import RunResult from '../RunResultBlock';
+import { RunResult } from '@/components/IDE';
 import styles from './index.less';
 import { useEffect } from 'react';
 

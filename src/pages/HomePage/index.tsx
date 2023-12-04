@@ -11,8 +11,9 @@ import { useModel } from 'umi';
 import { Select, Spin } from 'antd';
 const { Option } = Select;
 const HomePage: React.FC = () => {
-  const { data = {}, loading } = useModel('useBatch');
-  const tasks = (data?.tasks as valuesType[]) || [];
+  // const { data = {}, loading } = useModel('useBatch');
+  // const tasks = (data?.tasks as valuesType[]) || [];
+  const tasks: valuesType[] = [];
   const [valueShow, setValueShow] = useState<boolean>(false);
   const [dataList, setDataList] = useState<valuesType[]>([]);
 
@@ -35,16 +36,16 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     setValueShow(true);
     chooseCalend(getNowFormatDate());
-  }, [data]);
+  }, []);
 
-  const BlankPageFlag = !Object.keys(data).length;
+  const BlankPageFlag = true;
 
-  if (loading)
-    return (
-      <Spin
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}
-      />
-    );
+  // if (loading)
+  //   return (
+  //     <Spin
+  //       style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}
+  //     />
+  //   );
 
   return (
     <>

@@ -3,6 +3,7 @@ import style from './index.less';
 import { commentsType, personType } from '../../typeList';
 import { date2desc } from '@/utils';
 import moment from 'moment';
+import { useModel } from 'umi';
 
 export interface CommentListType {
   dataList: commentsType[];
@@ -22,7 +23,8 @@ function ShowCommentList({
   peopleList,
   editKey,
 }: CommentListType) {
-  const userId = localStorage.getItem('userId') as string;
+  const { initialState } = useModel('@@initialState');
+  const userId = initialState?.userId;
   const [list, setList] = useState<commentsType[]>([]);
 
   useEffect(() => {

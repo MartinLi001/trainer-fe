@@ -38,7 +38,7 @@ export default [
     name: 'coding',
     icon: 'icon-a-Iconscode',
     access: 'checkAccessFun',
-    accessKey: 'trainingTrainerCoderPuzzleManagement',
+    accessKey: 'api:question::List',
     routes: [
       { path: '/coding', component: './CodingQuestion/index' },
       { path: '/coding/coder', component: './CoderSetting' },
@@ -56,7 +56,7 @@ export default [
 
     icon: 'icon-question-answer-line',
     access: 'checkAccessFun',
-    accessKey: 'trainingTrainerQuestionManagement',
+    accessKey: 'api:question::List',
     routes: [
       { path: '/question', component: './Question/index' },
       { path: '/question/questionadd/:id', component: './AddQuestion/index' },
@@ -71,7 +71,7 @@ export default [
     name: 'myBatch',
     icon: 'HeartOutlined',
     access: 'checkAccessFun',
-    accessKey: 'trainingTrainerBatchManagement',
+    accessKey: 'api:batch::List',
     hideChildrenInMenu: true,
     routes: [
       {
@@ -88,7 +88,7 @@ export default [
     name: 'allBatch',
     icon: 'icon-computer-line',
     access: 'checkAccessFun',
-    accessKey: 'trainingTrainerBatchManagement',
+    accessKey: 'api:category::List',
     routes: [
       { path: '/Category', component: './AllBatch/Category' },
       {
@@ -117,7 +117,7 @@ export default [
     icon: 'icon-file-zip-line',
     access: 'checkAccessFun',
     breadcrumbName: 'Subscription Management',
-    accessKey: 'trainingTrainerBatchManagement',
+    accessKey: 'api:question-subscription::List',
     routes: [
       { path: '/Subscription', component: './Subscription' },
       {
@@ -156,13 +156,13 @@ export default [
     //   },
     // ],
   },
-  {
-    path: '/register',
-    name: 'register',
-    component: './Register',
-    layout: false,
-    hideInMenu: true,
-  },
+  // {
+  //   path: '/register',
+  //   name: 'register',
+  //   component: './Register',
+  //   layout: false,
+  //   hideInMenu: true,
+  // },
   // {
   //   path: '/coder',
   //   name: 'coder',
@@ -173,8 +173,18 @@ export default [
   {
     path: '/problems/:questionId/:activeKey',
     component: './IDE',
+    access: 'checkAccessFun',
+    accessKey: 'trainingTrainerCoderPuzzleManagement',
     layout: false,
   },
+  {
+    name: 'Callback',
+    path: '/callback',
+    component: './Callback',
+    layout: false,
+    hideInMenu: true,
+  },
+  
   {
     path: '/',
     redirect: '/summary',

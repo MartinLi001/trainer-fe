@@ -1,21 +1,21 @@
 import IconFont from '@/components/IconFont';
-import { getSearchUser } from '@/services/people';
-import { CloseOutlined, SolutionOutlined } from '@ant-design/icons';
-import { Input, message, Table } from 'antd';
-import type { ColumnsType } from 'antd/lib/table';
-import React, { useMemo, useState } from 'react';
-import styles from './index.less';
-import cx from 'classnames';
 import SeeButton from '@/components/SeeButton';
-import BatchCascader, { SelectedBatchType } from '../BatchCascader';
+import { searchUsers } from '@/services/people';
+import { CloseOutlined, SolutionOutlined } from '@ant-design/icons';
+import { useRequest } from 'ahooks';
+import { Input, Table, message } from 'antd';
+import type { ColumnsType } from 'antd/lib/table';
+import cx from 'classnames';
+import { cloneDeep } from 'lodash';
+import moment from 'moment';
+import { useMemo, useState } from 'react';
 import type {
-  addSubscriptionUsersTableRowType,
   SelectedUserType,
+  addSubscriptionUsersTableRowType,
   usersSearchResultUserType,
 } from '../../typeList';
-import { useRequest } from 'ahooks';
-import moment from 'moment';
-import { cloneDeep } from 'lodash';
+import BatchCascader, { SelectedBatchType } from '../BatchCascader';
+import styles from './index.less';
 
 interface Props {
   initUsers: SelectedUserType[];
@@ -28,18 +28,17 @@ export default function AddSubscriptionUsers({ initUsers, confirmToBack }: Props
   // const [searchText, setSearchText] = useState('');
   const { data: UserResult, loading: tableLoading } = useRequest(
     () =>
-      getSearchUser({
-        status: '',
-        clients: [],
-        tags: [{ name: 'role', value: 'Trainee' }].concat(
-          selectedBatches?.options?.map((i) => ({ name: 'batchName', value: i.name })) || [],
-        ),
-        accountIds: [],
-        listInactive: false,
+      searchUsers({
+        // status: '',
+        batchId: selectedBatches?.options?.[0]?.batchId,
+        // tags: selectedBatches?.options?.map((i) => ({ name: 'batchName', value: i.name })) || [],
+        // accountIds: [],
+        // listInactive: false,
         pageNum: 0,
         // pageSize: Infinity, // todo
-        companies: [],
+        // companies: [],
         searchContent: searchInputValue,
+        userGroup: 'trainees',
       }),
     {
       refreshDeps: [selectedBatches, searchInputValue],
@@ -54,13 +53,13 @@ export default function AddSubscriptionUsers({ initUsers, confirmToBack }: Props
       (item: usersSearchResultUserType) => ({
         key: item.userId,
         userId: item.userId,
-        firstName: item.firstName,
-        lastName: item.lastName,
+        firstName: item.firstname,
+        lastName: item.lastname,
         preferredName: item.preferredName,
         email: item.email,
-        batchId: item.tags?.find((tag) => tag.name === 'batchId')?.value,
-        batchName: item.tags?.find((tag) => tag.name === 'batchName')?.value,
-        batchAddedDate: item.batchAddedDate,
+        batchId: item.email,
+        batchName: item.batchName,
+        batchStartDate: item.batchStartDate,
       }),
     );
     return data || [];
@@ -88,7 +87,7 @@ export default function AddSubscriptionUsers({ initUsers, confirmToBack }: Props
       title: 'Batch',
     },
     {
-      dataIndex: 'batchAddedDate',
+      dataIndex: 'batchStartDate',
       title: 'Batch Start',
       render(text) {
         if (text) return moment(text).format('MM-DD-YYYY');

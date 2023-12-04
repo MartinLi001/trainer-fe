@@ -42,8 +42,8 @@ function CodeFileTypeShow({ data, onChange }: CodeFileTypeShow) {
   return (
     <div className={styles.CodeFile}>
       <span className={styles.CodeFileName}>
-        <Badge dot={true} offset={[8, 12]} color={editFlag ? '#FF4D4F' : '#52C41A'}>
-          {data.fileName}
+        <Badge dot={true} offset={[12, 12]} color={editFlag ? '#FF4D4F' : '#52C41A'}>
+          <span className={styles.fileName}>{data.fileName}</span>
         </Badge>
       </span>
       {codeShow && (

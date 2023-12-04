@@ -7,3 +7,10 @@ export const FrequencyConfig = {
   Medium: MediumIcon,
   High: HighIcon,
 };
+
+export const RunStatus = {
+  100: 'Passed',
+  110: 'Rejected',
+  120: 'Complier Error',
+  130: 'Runtime Error',
+};

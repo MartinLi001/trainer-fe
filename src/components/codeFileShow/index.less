@@ -1,41 +1,32 @@
 .CodeFile {
-  padding: 24px 0;
+  padding: 12px 0;
   border-radius: 12px;
   border: 1px solid #DDD;
-  height: 100%;
+  height: 80%;
 
   .CodeFileName {
-    display: flex;
-    padding: 3px 12px 3px 16px;
+    padding: 3px 24px 3px 16px;
     align-items: center;
     gap: 8px;
-    max-width: 200px;
+    margin-left: 12px;
     border-radius: 2px 2px 0px 0px;
     border-top: 1px solid var(--line-2, #E5E6EB);
     border-right: 1px solid var(--line-2, #E5E6EB);
     border-left: 1px solid var(--line-2, #E5E6EB);
     background: var(--fill-1, #FFF);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-left: 15px;
 
-
+    .fileName {
+      color: var(--unnamed, #165DFF);
+      font-family: PingFang SC;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 22px;
+    }
   }
-
-  .CodeFileName::after {
-    content: '';
-    // display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 100px;
-    background: var(--hit-box, rgba(255, 255, 255, 0.00));
-  }
-
 
   .CodeShow {
-    border-top: 2px solid #E0E0E0;
-    max-height: 300px;
-    overflow-y: auto;
+    padding: 1px;
+    height: 94%;
   }
 }

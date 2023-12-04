@@ -1,9 +1,10 @@
 import React from 'react';
 import Welcome from '@/assets/Welcome.svg';
 import style from './index.less';
+import { useModel } from 'umi';
 const BlankPage: React.FC = () => {
-  const userInfo = JSON.parse(localStorage.getItem(['userInfo']) || '{}');
-  const userName = userInfo.firstName + ' ' + userInfo.lastName;
+  const { initialState } = useModel('@@initialState');
+  const userName = initialState?.firstName + ' ' + initialState?.lastName;
   return (
     <div className={style.BlankPage}>
       <div className={style.BlankPageTitle}>Hello!</div>

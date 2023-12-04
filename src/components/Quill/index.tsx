@@ -170,7 +170,7 @@ function QuillCom(props: any, ref: any) {
 
     // 得到编辑器最终生成的HTML代码和上传图片的资源
     return {
-      file: newAddResourceList.current?.[0]?.file,
+      file: newAddResourceList.current?.map(({ file }: NewAddResourceListProps) => file) || [],
       renderedContent: reactQuillInstance.current.root.innerHTML,
       removedResourceIds: allOriginResourceId.current.filter(
         (resourceId: string) => !finalImageIds.includes(resourceId),

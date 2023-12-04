@@ -5,8 +5,8 @@ export interface PeopleType {
   createdDateTime: string;
   company: any;
   email?: string;
-  firstName?: string;
-  lastName?: string;
+  firstname?: string;
+  lastname?: string;
   status: string;
   tag: any[];
   tags?: { name: string; value: string }[];
@@ -14,6 +14,8 @@ export interface PeopleType {
   avatar: string;
   phone?: string;
   summaries?: summare[];
+  batchId?: string;
+  batchName?: string;
 }
 
 export interface SubscriptionsType {
@@ -57,5 +59,5 @@ export interface searchdataType {
   pageSize: number;
   sortCriteria: string | null;
   status: string;
-  tags: any;
+  // tags: any;
 }
